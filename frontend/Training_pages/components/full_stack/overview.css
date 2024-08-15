@@ -1,0 +1,26 @@
+.overview{
+    box-shadow: 0px 0px 30px rgba(225,225,225,1);
+    border-radius: 20px;
+}
+
+
+  
+  .top {
+    background: linear-gradient(135deg, #F5CF6B 30%, #17212E  20%);
+    color: white;
+    position: relative;
+  }
+  
+  
+  .image{
+    width: 260px;
+    height: 270px;
+  }
+  
+ 
+
+
+.question{
+    
+    border: 2px solid #F5CF6B;
+}
