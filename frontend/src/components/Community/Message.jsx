@@ -6,8 +6,10 @@ import { FaUserGroup } from "react-icons/fa6";
 
 import { IoPeopleSharp } from "react-icons/io5";
 import { FcManager } from "react-icons/fc";
-import profile from "./profile.webp";
-import profile2 from "./profile2.jpg"
+/* import profile from "./profile.webp"; */
+import profile from "../../assets/profile.webp"
+/* import profile2 from "./profile2.jpg" */
+import profile2 from "../../assets/profile2.jpg"
 import { IoIosSend } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { FaImage } from "react-icons/fa6";

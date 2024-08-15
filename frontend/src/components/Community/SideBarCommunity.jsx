@@ -6,7 +6,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
-import logo from "./logoo.jpg";
+import logo from "../../assets/logoo.jpg";
 
 
 import "./SideBarCommunity.css";

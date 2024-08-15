@@ -3,7 +3,8 @@ import "./Comments.css";
 import { CgProfile } from "react-icons/cg";
 import { FcManager } from "react-icons/fc";
 import { IoClose } from "react-icons/io5";
-import profile from "./profile.webp";
+/* import profile from "./profile.webp"; */
+import profile from "../../assets/profile.webp"
 function Share({ isOpen, onClose }) {
   const userNotify = [
     {

@@ -1,6 +1,6 @@
 .middle{
     
-  background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("./community.jpeg");
+  background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("../../assets/community.jpeg");
   height: 350px;
   width:100%;
   background-position: center;

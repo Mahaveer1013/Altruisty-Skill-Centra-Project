@@ -4,7 +4,8 @@ import { LuFiles } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import "./TeamChat.css";
 import { IoIosSend } from "react-icons/io";
-import profile from "./profile.webp";
+/* import profile from "./profile.webp"; */
+import profile from "../../assets/profile.webp"
 function TeamChat({ teamChat, closeTeamChat }) {
   const [message,setMessage]=useState("");
   const[messageSent,setMessageSent]=useState(false);
