@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&display=swap');
+
+
+
+
+
+
+
+
+.bgcolor{
+  /* background-color:hsla(268,0%,100%,1); */
+background-color: white ;
+ /* radial-gradient(at 76% 28%, hsla(0,0%,100%,0.6) 0px, transparent 50%),
+radial-gradient(at 70% 72%, hsla(0,0%,100%,0.3) 0px, transparent 50%),
+radial-gradient(at 21% 63%, hsla(0,0%,100%,0.4) 0px, transparent 50%),
+radial-gradient(at 0% 3%, hsla(341,0%,100%,1) 0px, transparent 50%),
+radial-gradient(at 35% 48%, hsla(235,0%,100%,1) 0px, transparent 50%),
+radial-gradient(at 42% 69%, hsla(101,47%,48%,0.9) 0px, transparent 50%),
+radial-gradient(at 10% 63%, hsla(316,0%,100%,1) 0px, transparent 50%),
+radial-gradient(at 40% 2%, hsla(36,84%,59%,0.9) 0px, transparent 50%),
+radial-gradient(at 1% 35%, hsla(203,73%,56%,0.7) 0px, transparent 50%),
+radial-gradient(at 79% 50%, hsla(203,73%,56%,0.5) 0px, transparent 50%);  */
+background-size: cover;
+background-repeat:no-repeat;
+background-attachment: fixed;
+}
+
+.statbox{
+  @apply relative w-[400px] h-[215px] bg-[#fff2fb4c] rounded-[15px] font-sans text-xl overflow-hidden p-10 border border-solid border-black mt-6;
+}
+.statboxmin{
+  @apply relative w-[300px] h-[155px] bg-[#fff2fb4c] rounded-[15px] font-sans text-xl overflow-hidden p-6 border border-solid border-black mt-6;
+}
+.mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+  background-color: white;
+}
+
+.mobile-menu-open {
+  transform: translateX(0);
+}
+
+.mobile-menu-closed {
+  transform: translateX(100%);
+}
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 60px;
+  height: 60px;
+  
+  animation: spin 2s linear infinite;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+body,html{
+  background-size: 100vw 100vh;
+}
+
+/* Custom styles for mobile sidebar */
+.slick-slide>div{
+  margin: 0 10px;
+}
+
+
+/* Traning.js */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s forwards;
+}
