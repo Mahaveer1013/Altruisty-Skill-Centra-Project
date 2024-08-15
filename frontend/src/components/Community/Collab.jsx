@@ -1,7 +1,6 @@
 import React from 'react'
 import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
 import collab from "../../assets/colloborate.webp"
 import {Link } from "react-router-dom"
 function Collab() {

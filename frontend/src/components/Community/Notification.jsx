@@ -4,8 +4,9 @@ import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FcManager } from "react-icons/fc";
-/* import profile from "./profile.webp"; */
-import profile from "../../assets/profile.webp"
+import profile from "../../assets/profile.webp";
+
+
 function Notification() {
   const userNotify = [
     {

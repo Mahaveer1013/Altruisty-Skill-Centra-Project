@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { LuFiles } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import "./Certificate.css";
 import { IoIosSend } from "react-icons/io";
-/* 
-import profile from "./profile.webp"; */
 import profile from "../../assets/profile.webp"
 import { FaUpload } from "react-icons/fa6";
 

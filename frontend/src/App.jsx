@@ -1,17 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import { useLocation, Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from "./components/AuthContext"
 import { useState, useEffect } from 'react';
 import NavbarTemp from './UIcomp/NavbarTemp';
-
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import SkillCentreNavbar from './UIcomp/SkillCentreNavbar';
 import SkillCentre from './pages/SkillCentre';
 import SkillCentreLogin from './pages/SkillCentreLogin';
 import SkillCentreTake from './pages/SkillCentreTake';
-
 import Message from './components/Community/Message';
 import Community from './components/Community/Community';
 import Collab from "./components/Community/Collab";
@@ -40,11 +37,11 @@ function Main({ user }) {
     '/skill_center/CodeEditor/'
   ].includes(location.pathname);
 
-  const PrivateRoute = ({ element, ...rest }) => {
+  const PrivateRoute = ({ children, ...rest }) => {
     const { isLoggedIn } = useAuth();
     return isLoggedIn ? (
       <>
-        {element}
+        {children}
       </>
     ) : (
       <Navigate to="/SkillCentreLogin" />
@@ -52,28 +49,29 @@ function Main({ user }) {
   }
   return (
     <>
-      {!isSkillCentreLoginRoute && (isSkillCentreRoute ? <SkillCentreNavbar /> : <NavbarTemp />)}
+    <SkillCentreNavbar />
       {isTrainingRoute && <Header />}
+      
       <Routes>
         <Route path="/SkillCentreLogin" element={<SkillCentreLogin />} />
         <Route path="/SkillCentre" element={<SkillCentre />} />
         <Route path="/SkillCentreTake" element={<PrivateRoute element={<SkillCentreTake />} />} />
-        <Route path="/community" element={<Community />} >
-          <Route path="/" element={<Message />} />
-          <Route path="/colloboration/" element={<Collab />} />
-          <Route path="/notification/" element={<Notification />} />
-          <Route path="/comments/" element={<Comments />} />
-          <Route path="/colloboration/teams" element={<Teams />} />
-          <Route path="/colloboration/createTeams" element={<CreateTeam />} />
-          <Route path="/netwrok" element={<Network />} />
-        </Route>
+
         <Route path='/skill_center/Training_program/' element={<Joined/>}/>
          <Route path='/skill_center/Question/' element={<Question/>}/>
          <Route path='/skill_center/full_Stack/' element={<Over_View/>}/>
          <Route path='/skill_center/Course_details/' element={<Full_Stack/>}/>
          <Route path='/skill_center/Assignment/' element={<Assignment/>}/>
          <Route path='/skill_center/CodeEditor/' element={<CodeEditor/>}/>
-      </Routes>
+
+           <Route path="/community" element={<Community />} />
+        <Route path="/community/messages" element={<Message />} />
+        <Route path="/community/colloboration/" element={<Collab />} />
+        <Route path="/community/notification/" element={<Notification />} />
+        <Route path="/community/comments/" element={<Comments />} />
+        <Route path="/community/colloboration/teams" element={<Teams />} />
+        <Route path="/community/colloboration/createTeams" element={<CreateTeam />} />
+        <Route path="/community/netwrok" element={<Network />} />
     </>
 
   )
