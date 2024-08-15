@@ -1,0 +1,14 @@
+.navbar{
+    
+}
+@media(min-width:601px){
+.sticky2{
+    
+        position:-webkit-sticky;
+        position:sticky;
+        bottom:10px;
+        
+        margin-bottom: 10px;
+      
+}
+}
