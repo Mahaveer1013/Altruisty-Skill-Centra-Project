@@ -2,34 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&display=swap');
 
-
-
-
-
-
-
-
 .bgcolor{
-  /* background-color:hsla(268,0%,100%,1); */
 background-color: white ;
- /* radial-gradient(at 76% 28%, hsla(0,0%,100%,0.6) 0px, transparent 50%),
-radial-gradient(at 70% 72%, hsla(0,0%,100%,0.3) 0px, transparent 50%),
-radial-gradient(at 21% 63%, hsla(0,0%,100%,0.4) 0px, transparent 50%),
-radial-gradient(at 0% 3%, hsla(341,0%,100%,1) 0px, transparent 50%),
-radial-gradient(at 35% 48%, hsla(235,0%,100%,1) 0px, transparent 50%),
-radial-gradient(at 42% 69%, hsla(101,47%,48%,0.9) 0px, transparent 50%),
-radial-gradient(at 10% 63%, hsla(316,0%,100%,1) 0px, transparent 50%),
-radial-gradient(at 40% 2%, hsla(36,84%,59%,0.9) 0px, transparent 50%),
-radial-gradient(at 1% 35%, hsla(203,73%,56%,0.7) 0px, transparent 50%),
-radial-gradient(at 79% 50%, hsla(203,73%,56%,0.5) 0px, transparent 50%);  */
 background-size: cover;
 background-repeat:no-repeat;
 background-attachment: fixed;

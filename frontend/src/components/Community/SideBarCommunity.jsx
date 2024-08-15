@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { CiGlobe } from "react-icons/ci";
 import { AiFillHome } from "react-icons/ai";
 import { IoPeopleSharp } from "react-icons/io5";
 import { AiOutlineMessage } from "react-icons/ai";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
-import logo from "./logoo.jpg";
+import logo from "../../assets/logo.jpg";
 
 
 import "./SideBarCommunity.css";
@@ -49,19 +48,19 @@ function SideBarCommunity() {
                            max-sm:absolute max-sm:top-[60px]  flex flex-row space-x-[20px] max-sm:justify-center`}>
 
           <li className={`${toggle ?" hidden ":" block "}hover:text-[#f5cf6b] md:mb-[10px]`}>
-           <Link to="/"><AiFillHome size="40" /></Link>
+           <Link to="/community"><AiFillHome size="40" /></Link>
           </li>
           <li className={`${toggle ?" hidden ":" block "}hover:text-[#f5cf6b] md:mb-[10px] `} >
-          <Link to="/SkillCentra/community/netwrok"><IoPeopleSharp size="40"/></Link>
+          <Link to="/community/netwrok"><IoPeopleSharp size="40"/></Link>
           </li>
           <li className={`${toggle ?" hidden ":" block "}hover:text-[#f5cf6b] md:mb-[10px] `}>
-          <Link to="/SkillCentra/community/messages/"> <AiOutlineMessage size="40"/></Link>
+          <Link to="/community/messages/"> <AiOutlineMessage size="40"/></Link>
           </li>
           <li className={`${toggle ?" hidden ":" block "}hover:text-[#f5cf6b] md:mb-[10px] `}>
-          <Link to="/SkillCentra/community/colloboration/"><FaPeopleGroup size="40"/></Link>
+          <Link to="/community/colloboration/"><FaPeopleGroup size="40"/></Link>
           </li>
           <li className={`${toggle ?" hidden ":" block "}hover:text-[#f5cf6b]  `}> 
-          <Link to="/SkillCentra/community/notification/"><IoNotifications size="40"/></Link>
+          <Link to="/community/notification/"><IoNotifications size="40"/></Link>
           </li>
           </div>
         </ul>
