@@ -7,7 +7,6 @@ import { IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/logo.jpg";
 
-
 import "./SideBarCommunity.css";
 import { Link } from "react-router-dom";
 function SideBarCommunity() {

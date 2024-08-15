@@ -2,7 +2,10 @@ import React from "react";
 
 import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
-import profile from "../../assets/profile.webp";
+import { CgProfile } from "react-icons/cg";
+import { IoPeopleSharp } from "react-icons/io5";
+import profile from "../../assets/profile.webp"
+
 function Network() {
     const userData = [
         {

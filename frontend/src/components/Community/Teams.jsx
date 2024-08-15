@@ -3,7 +3,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import profile from "../../assets/profile.webp";
+import profile from "../../assets/profile.webp"
 import { MdLeaderboard } from "react-icons/md";
 import TeamChat from "./TeamChat";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";

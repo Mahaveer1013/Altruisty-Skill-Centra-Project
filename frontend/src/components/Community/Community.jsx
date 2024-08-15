@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import { IoSearchOutline } from "react-icons/io5";
+import community from "../../assets/community.jpeg"
+
 import { IoIosSend } from "react-icons/io";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
@@ -8,7 +11,9 @@ import { FaImage } from "react-icons/fa6";
 import { BiLike } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
-import Post1 from "../../assets/Post1.webp";
+import Post1 from "../../assets/Post1.webp"
+import { Link } from "react-router-dom";
+
 import SideBarCommunity from "./SideBarCommunity";
 import "./HomeCommunity.css";
 import Comments from "./Comments";

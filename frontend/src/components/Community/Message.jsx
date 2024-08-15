@@ -3,6 +3,7 @@ import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { IoPeopleSharp } from "react-icons/io5";
+import { FcManager } from "react-icons/fc";
 import profile from "../../assets/profile.webp";
 import profile2 from "../../assets/profile2.jpg"
 import { IoIosSend } from "react-icons/io";
