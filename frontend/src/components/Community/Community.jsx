@@ -206,23 +206,7 @@ function Community() {
           isOpen={isshareOpen}
           onClose={() => setshareOpen(!isshareOpen)}
         />
-
-        {/* end */}
-        {/* <div className="mt-[40px] ml-[40px] ">
-        <input
-          type="text"
-          placeholder="Start Posting..."
-          className="h-[60px] w-11/12 p-2 pl-[40px] rounded-2xl border-2px border-gray shadow-xl relative"
-        />
-        <span className="absolute right-[120px] mt-[10px]">
-          {" "}
-          <FaImage size="40" />
-        </span>
-
-        <span className="absolute mt-[10px] ml-[10px] cursor-pointer">
-          <IoIosSend size="40" />
-        </span>
-        </div> */}
+        
         <div className="w-[100%] max-sm:w-[90%] flex justify-between space-x-6 mt-[40px] max-sm:pb-[10px] max-sm:ml-[10px]">
           <form action="" className="w-[100%] ">
             <div className="relative flex items-center text-gray-400 text-lg font-semibold focus-within:text-gray-600">

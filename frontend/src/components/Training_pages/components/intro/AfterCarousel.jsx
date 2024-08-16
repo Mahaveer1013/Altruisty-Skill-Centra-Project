@@ -48,13 +48,6 @@ function AfterCarousel() {
                     <p className='text-center  text-sm mt-3'>{item.content}</p>
                      </div>
                   </div>
-                //  <div className='text-white bg-[#F5CF6B] my-5 size-28  rounded-full'>
-                //     <div>
-                //        <img className='bg-center  bg-cover size-16 m-7 ' src={item.image} alt="image" />
-                //        <h1 className='text-lg  text-center'>{item.heading}</h1>
-                //        <p className='text-center text-sm mt-3'>{item.content}</p>
-                //     </div>
-                //  </div>
                 )
             })
         }

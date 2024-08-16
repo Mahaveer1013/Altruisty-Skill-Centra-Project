@@ -1,12 +1,9 @@
 import React from 'react';
-import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import question2 from "../../assets/images/question2.png"
 import { Link } from 'react-router-dom';
 import Mentor from '../course/Mentor';
-import MaskGroup from "../../assets/images/Mask group1.png"
-import checkList from "../../assets/images/Check_list1.png"
 
 const programs = [
   {

@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Sidebar.css */
+.dropdown-enter {
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 500ms ease-out, max-height 500ms ease-out;
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  max-height: 500px; /* Adjust this value based on your content */
+}
+
+.dropdown-exit {
+  opacity: 1;
+  max-height: 500px; /* Same value as used in .dropdown-enter-active */
+  transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  max-height: 0;
+}
+
+.sidebar .active{
+  background-color: #F5CF6B;
+  color: black;
+}
+.sidebar .active:hover{
+  color: black;
+}

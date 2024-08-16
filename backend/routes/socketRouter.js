@@ -9,7 +9,7 @@ const socketRouter = (io) => {
             userSocketMap.set(userId, socket.id);
             console.log(`User ${userId} connected`);
         });
-        // Join a community
+        
         socket.on('joinCommunity', async ({ communityCode }) => {
             try {
                 const community = await Community.findOne({ uniqueCode: communityCode });

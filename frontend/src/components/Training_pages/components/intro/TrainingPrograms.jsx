@@ -84,7 +84,7 @@ const TrainingPrograms = () => {
               <h3 className="text-lg font-semibold ">Full Stack</h3>
               <h2 className="text-lg font-semibold mb-2">Development</h2>
               <p className="text-gray-600 mb-4">{program.duration}</p>
-              <Link to={"/skill_center/full_stack/"}  className="bg-yellow-500 text-black px-4 py-2 rounded-lg hover:text-white hover:bg-[#17212E]">
+              <Link to={"/training/full_stack/"}  className="bg-yellow-500 text-black px-4 py-2 rounded-lg hover:text-white hover:bg-[#17212E]">
                 Learn More
               </Link>
             </div>
