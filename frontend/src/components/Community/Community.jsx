@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import { IoSearchOutline } from "react-icons/io5";
-import community from "../../assets/community.jpeg"
 
 import { IoIosSend } from "react-icons/io";
 import Slider from "react-slick";
@@ -12,9 +10,6 @@ import { BiLike } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
 import Post1 from "../../assets/Post1.webp"
-import { Link } from "react-router-dom";
-
-import SideBarCommunity from "./SideBarCommunity";
 import "./HomeCommunity.css";
 import Comments from "./Comments";
 import Share from "./Share";
@@ -62,13 +57,7 @@ function Community() {
   const [isshareOpen, setshareOpen] = useState(false);
 
   return (
-    // <div className='bg-[#f7d883] md:flex max-sm:w-[100%] max-sm:h-[100%] w-[100%]'>
-    //     <SideBarCommunity />
-    //     <HomeCommunity />
-
-    // </div>
     <div className="bg-[#f7d883]   font-times max-sm:w-[100%] xl:h-screen w-[100%] h-[100%]">
-      <SideBarCommunity />
 
       <div className="w-full  h-full   font-times bg-[#f7d883] p-2  ">
       <div className="container mx-auto mb-[30px] rounded-lg max-sm:mx-[10px] max-sm:w-[100%] ">
@@ -117,7 +106,6 @@ function Community() {
             </div>
             </Slider>
         </div>
-
         <div className="w-[100%] max-sm:w-[92%]  bg-white rounded-lg p-2 mb-[20px] max-sm:mx-[10px]">
           <div className="flex ">
             <CgProfile size="50" />

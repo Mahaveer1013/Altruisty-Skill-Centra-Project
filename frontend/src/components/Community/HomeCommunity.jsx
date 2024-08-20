@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import { IoSearchOutline } from "react-icons/io5";
-import community from "./community.jpeg";
 import { IoIosSend } from "react-icons/io";
 import Slider from "react-slick";
 import { FaImage } from "react-icons/fa6";
@@ -9,7 +7,6 @@ import { BiLike } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
 import Post1 from "./Post1.webp";
-import { Link } from "react-router-dom";
 
 import "./HomeCommunity.css";
 import Comments from "./Comments";

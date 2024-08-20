@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { LuFiles } from "react-icons/lu";
-import { IoClose } from "react-icons/io5";
 import "./TeamCodeSetting.css";
 import {Link} from "react-router-dom";
-import { MdContentCopy } from "react-icons/md";
 
 function TeamCodeSetting({ createTeam, closeCreateTeam }) {
   const [isTeamCreated, setTeamCreated] = useState(false);

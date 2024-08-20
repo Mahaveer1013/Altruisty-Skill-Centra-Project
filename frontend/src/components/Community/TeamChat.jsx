@@ -30,13 +30,6 @@ function TeamChat({ teamChat, closeTeamChat }) {
               <IoClose size="25" />
             </span>
           </div>
-          {/* <textarea
-            name="comments"
-            rows={4}
-            cols={30}
-            placeholder=""
-            className="mb-[20px] outline-none bg-white mt-[10px]"
-          ></textarea> */}
           <div className="bg-white text-Darkblue flex flex-col p-2 rounded-md  mb-[10px]  ">
             <div className="mb-[10px] flex">
           <img src={profile} className="rounded-full h-[30px] w-[30px] object-fit mr-[2px]"/>

@@ -1,0 +1,19 @@
+.background_image{
+   background-image: url("../../assets/images/background.png");
+   padding: 5;
+   background-size: cover;
+   border-radius: 70px;
+   height: 800px;
+
+}
+
+@media only screen and (min-width: 768px) {
+   .background_image{
+      background-image: url("../../assets/images/background.png");
+      padding: 5;
+      background-size: cover;
+      border-radius: 40px;
+      height: 400px; 
+   }
+   
+ }

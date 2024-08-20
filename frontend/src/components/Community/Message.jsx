@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SideBarCommunity from "./SideBarCommunity";
-
-import { FcManager } from "react-icons/fc";
 import { IoIosSend } from "react-icons/io";
 import { FaImage } from "react-icons/fa6";
 import { TiTick } from "react-icons/ti";
@@ -103,8 +100,7 @@ function Message() {
   };
 
   return (
-    <div className="bg-[#f7d883] font-times h-full w-full max-sm:h-[100%] xl:pb-[300px]">
-      <SideBarCommunity />
+    <div className="bg-[#f7d883] font-times h-full w-full max-sm:h-[100%] xl:pb-[300px] pt-4">
       <div className="w-[100%] h-full md:pb-[10px]">
         <div className="w-[98%] ml-2 mt-10 pr-[10px]">
           <div className="w-[100%] flex justify-between space-x-6 sticky">

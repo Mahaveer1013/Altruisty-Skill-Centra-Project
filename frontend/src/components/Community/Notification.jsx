@@ -1,9 +1,5 @@
 import React from "react";
-import SideBarCommunity from "./SideBarCommunity";
-
 import { IoSearchOutline } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
-import { FcManager } from "react-icons/fc";
 import profile from "../../assets/profile.webp";
 
 
@@ -47,7 +43,6 @@ function Notification() {
   ];
   return (
     <div className="bg-[#f7d883]  font-times">
-      <SideBarCommunity />
       <div className="w-[100%] h-full md:pb-[20px]">
         <div className="w-[98%] h-full ml-2 mt-10 pr-[10px] ">
           <div className="w-[100%] flex justify-between space-x-6 sticky ">

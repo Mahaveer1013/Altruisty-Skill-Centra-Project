@@ -1,7 +1,6 @@
 import React from 'react';
 import HomeImage from '../assets/online learning platform Altruisty 1.png';
 import Online from '../assets/OnlineCourse.png';
-import Project from '../assets/Project.png';
 import Training from '../assets/Training.png';
 import Internship from '../assets/Internship.png';
 import Job from '../assets/jobpreparation.png';
@@ -19,21 +18,8 @@ import Design from '../assets/DesignChallenge.png';
 import Hackathons from '../assets/Hackathons.png';
 import YoungMan from '../assets/YoungMan.png';
 import GirlWithHeadSet from '../assets/GirlWithHeadset.png';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
 
 function SkillCentre() {
-    const navigate = useNavigate();
-    const { isLoggedIn } = useAuth();
-
-    const handleTakeNowClick = (redirectPath) => {
-        if (isLoggedIn) {
-            navigate(redirectPath);
-        } else {
-            navigate('/SkillCentreLogin', { state: { from: redirectPath } });
-        }
-    };
-
     const offer1 = [
         { src: Job, title: 'Job Preparation' },
         { src: Govt, title: 'GOVT Exams Preparation' },

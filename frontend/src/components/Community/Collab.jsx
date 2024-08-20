@@ -1,14 +1,11 @@
 import React from 'react'
-import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
 import collab from "../../assets/colloborate.webp"
 import {Link } from "react-router-dom"
 function Collab() {
   return (
     <div className="bg-[#f7d883]  font-times max-sm:w-[100%] max-sm:h-full h-full w-full xl:pb[600px]">
-      <SideBarCommunity />
       <div className="w-[100%] h-full md:pb-[10px]">
-
         <div className="w-[98%]  ml-2 mt-10 pr-[10px] ">
           <div className="w-[100%] flex justify-between space-x-6 sticky ">
             <form action="" className="w-[100%] ">

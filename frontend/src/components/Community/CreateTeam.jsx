@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-
-import SideBarCommunity from "./SideBarCommunity";
 import { IoSearchOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import TeamCodeSetting from './TeamCodeSetting';
@@ -62,7 +60,6 @@ function CreateTeam() {
 
   return (
     <div className="bg-[#f7d883]  font-times max-sm:w-[100%] max-sm:h-full h-full w-full xl:h-screen">
-      <SideBarCommunity />
       <div className="w-[100%] h-full md:pb-[20px]">
 
         <div className="w-[98%]  ml-2 mt-10 pr-[10px] ">

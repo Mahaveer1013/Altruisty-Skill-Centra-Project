@@ -1,0 +1,75 @@
+{
+  "days": [
+    {
+      "day": 1,
+      "modules": [
+        { "title": "Module 1: Introduction to Full Stack Development" },
+        { "title": "Module 2: Overview of HTML and CSS" },
+        { "title": "Module 3: Basics of JavaScript" },
+        { "title": "Module 4: Setting up a Development Environment" },
+        { "title": "Module 5: Daily Task" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 2,
+      "modules": [
+        { "title": "Module 1: Advanced JavaScript Concepts" },
+        { "title": "Module 2: Introduction to Version Control" },
+        { "title": "Module 3: Basic React Setup" },
+        { "title": "Module 4: Working with Components" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 3,
+      "modules": [
+        { "title": "Module 1: State Management in React" },
+        { "title": "Module 2: Introduction to React Hooks" },
+        { "title": "Module 3: Handling Events in React" },
+        { "title": "Module 4: Using APIs in React" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 4,
+      "modules": [
+        { "title": "Module 1: Building Reusable Components" },
+        { "title": "Module 2: Introduction to CSS Frameworks" },
+        { "title": "Module 3: Tailwind CSS Overview" },
+        { "title": "Module 4: Styling React Applications" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 5,
+      "modules": [
+        { "title": "Module 1: React Router Basics" },
+        { "title": "Module 2: Working with Nested Routes" },
+        { "title": "Module 3: Handling Redirects in React" },
+        { "title": "Module 4: Route Protection in React" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 6,
+      "modules": [
+        { "title": "Module 1: Introduction to Backend Development" },
+        { "title": "Module 2: Setting up Node.js and Express" },
+        { "title": "Module 3: Creating APIs with Express" },
+        { "title": "Module 4: Connecting to a Database" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    },
+    {
+      "day": 7,
+      "modules": [
+        { "title": "Module 1: Full Stack Project Overview" },
+        { "title": "Module 2: Frontend and Backend Integration" },
+        { "title": "Module 3: Deployment Basics" },
+        { "title": "Module 4: Final Project Task" },
+        { "title": "Module 5: Daily Task" }
+      ]
+    }
+  ]
+}

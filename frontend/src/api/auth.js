@@ -59,3 +59,31 @@ export const handleGoogleLogin = async () => {
         handleApiError(error);
     }
 };
+
+export const handleCredentialSignup = async (username, password) => {
+    try {
+        const response = await encryptApi.post('/signup', {
+            username: username,
+            password: password,
+        }, {
+            
+        });
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.error(`Error :`, error);
+    }
+};
+
+export const handleCredentialLogin = async (username, password) => {
+    try {
+        const response = await encryptApi.post('/login', {
+            username: username,
+            password: password,
+        });
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.error(`Error :`, error);
+    }
+};

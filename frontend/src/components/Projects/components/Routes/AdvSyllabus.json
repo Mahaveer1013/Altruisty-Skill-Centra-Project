@@ -1,0 +1,74 @@
+{
+  "days": [
+    {
+      "day": 1,
+      "title": "Day 1: Introduction",
+      "modules": [
+        "Module 1: What you're going to learn",
+        "Module 2: Basic Concepts",
+        "Module 3: Introduction to the Topic",
+        "Module 4: First Steps"
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Day 2: Advanced Concepts",
+      "modules": [
+        "Module 1: Diving Deeper",
+        "Module 2: Practical Examples",
+        "Module 3: Case Study",
+        "Module 4: Quiz"
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Day 3: Hands-on Practice",
+      "modules": [
+        "Module 1: Setting Up",
+        "Module 2: Writing Your First Code",
+        "Module 3: Debugging Techniques",
+        "Module 4: Testing"
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Day 4: Building a Project",
+      "modules": [
+        "Module 1: Project Overview",
+        "Module 2: Step-by-step Guide",
+        "Module 3: Code Review",
+        "Module 4: Best Practices"
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Day 5: Deployment",
+      "modules": [
+        "Module 1: Preparing for Deployment",
+        "Module 2: Deployment Tools",
+        "Module 3: Launching the Project",
+        "Module 4: Post-Launch Monitoring"
+      ]
+    },
+    {
+      "day": 6,
+      "title": "Day 6: Optimization",
+      "modules": [
+        "Module 1: Performance Tuning",
+        "Module 2: Code Refactoring",
+        "Module 3: Resource Optimization",
+        "Module 4: Improving UX"
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Day 7: Final Review",
+      "modules": [
+        "Module 1: Recap",
+        "Module 2: Lessons Learned",
+        "Module 3: Final Project Walkthrough",
+        "Module 4: What's Next"
+      ]
+    }
+  ]
+}

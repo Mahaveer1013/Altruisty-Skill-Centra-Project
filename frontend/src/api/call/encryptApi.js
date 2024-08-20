@@ -6,6 +6,9 @@ import CryptoJS from 'crypto-js';
 const encryptApi = axios.create({
     baseURL: 'http://localhost:5000',
     withCredentials: true, 
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
 const secretKey = process.env.REACT_APP_SECRET_KEY; 

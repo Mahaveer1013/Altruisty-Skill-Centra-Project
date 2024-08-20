@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBook, faCashRegister, faCertificate, faHome, faPeopleGroup, faSignOut, faUser, faChevronDown, faNetworkWired, faMessage, faGroupArrowsRotate, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBook, faCashRegister, faCertificate, faHome, faPeopleGroup, faSignOut, faUser, faChevronDown, faNetworkWired, faMessage, faGroupArrowsRotate, faBell, faPieChart, faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../AuthContext';
 import logo from '../assets/logo.jpg';
 
 const Sidebar = () => {
-    const { logout, setIsSidebar, isSidebar } = useAuth();
+    const { logout, setIsSidebar, isSidebar, isLoggedIn } = useAuth();
     const [isDropdownOpen, setIsDropdownOpen] = useState(0);
     const [activeLink, setActiveLink] = useState('');
     const location = useLocation();
@@ -15,7 +15,7 @@ const Sidebar = () => {
         if (!isSidebar) {
             setIsDropdownOpen(false);
         }
-        // Update the activeLink state when the location changes
+
         setActiveLink(location.pathname);
     }, [isSidebar, location.pathname]);
 
@@ -28,6 +28,7 @@ const Sidebar = () => {
     };
 
     const isCommunityActive = location.pathname.startsWith('/community');
+    const isProfileActive = location.pathname.startsWith('/profile');
 
     return (
         <>
@@ -39,93 +40,140 @@ const Sidebar = () => {
                 <Link
                     to={'/'}
                     className={` p-3 rounded transition-all duration-300 ${activeLink === '/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                    onClick={() => setActiveLink('/')}
+                    onClick={() => {
+                        setActiveLink('/')
+                        setIsSidebar(false);
+                    }}
                 >
-                    <FontAwesomeIcon className='mr-2' icon={faHome} /> {isSidebar && 'Home'}
+                    <FontAwesomeIcon className='m-auto' icon={faHome} /> {isSidebar && 'Home'}
                 </Link>
 
-                <p onClick={() => toggleDropdown(1)} className={`flex items-center justify-between p-3 cursor-pointer rounded transition-all duration-300 ${(isCommunityActive && isDropdownOpen !== 1) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary' : ''}`}>
-                    <p><FontAwesomeIcon className='mr-2' icon={faUser} /> {isSidebar && 'Profile'}</p>
+                <p onClick={() => toggleDropdown(1)} className={`flex items-center p-3 cursor-pointer rounded transition-all duration-300 ${(isProfileActive && isDropdownOpen !== 1) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary  justify-between' : 'justify-center'}`}>
+                    <p><FontAwesomeIcon className='m-auto' icon={faUser} /> {isSidebar && 'Profile'}</p>
                     {isSidebar && <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isDropdownOpen === 1 ? 'rotate-180' : ''}`} />}
                 </p>
                 <div className={`overflow-hidden ${isDropdownOpen === 1 ? 'dropdown-enter-active' : 'dropdown-enter'}`}>
                     <div className='flex flex-col'>
                         <Link
                             to={'/profile'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/profile' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/profile')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/profile' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/profile')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faUser} /> {isSidebar && 'My Profile'}
+                            <FontAwesomeIcon className='m-auto' icon={faUser} /> {isSidebar && 'My Profile'}
                         </Link>
                         <Link
-                            to={'/profile/events'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/events' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/profile/events')}
+                            to={'/profile/learnings'}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/learnings' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/profile/learnings')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faBook} /> {isSidebar && 'My Learning'}
+                            <FontAwesomeIcon className='m-auto' icon={faBook} /> {isSidebar && 'My Learning'}
                         </Link>
                         <Link
                             to={'/profile/certifications'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/internship' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/profile/certifications')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/certifications' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/profile/certifications')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faCertificate} /> {isSidebar && 'Certifications'}
+                            <FontAwesomeIcon className='m-auto' icon={faCertificate} /> {isSidebar && 'Certifications'}
+                        </Link>
+                        <Link
+                            to={'/profile/analytics'}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/analytics' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/profile/analytics')
+                                setIsSidebar(false);
+                            }}
+                        >
+                            <FontAwesomeIcon className='m-auto' icon={faPieChart} /> {isSidebar && 'Analytics'}
                         </Link>
                     </div>
                 </div>
-                <p onClick={() => toggleDropdown(2)} className={`flex items-center justify-between p-3 cursor-pointer rounded transition-all duration-300 ${(isCommunityActive && isDropdownOpen !== 2) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary' : ''}`}>
-                    <p><FontAwesomeIcon className='mr-2' icon={faPeopleGroup} /> {isSidebar && 'Community'}</p>
+                <p onClick={() => toggleDropdown(2)} className={`flex items-center justify-between p-3 cursor-pointer rounded transition-all duration-300 ${(isCommunityActive && isDropdownOpen !== 2) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary flex justify-center items-center' : ''}`}>
+                    <p><FontAwesomeIcon className='m-auto' icon={faPeopleGroup} /> {isSidebar && 'Community'}</p>
                     {isSidebar && <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isDropdownOpen === 2 ? 'rotate-180' : ''}`} />}
                 </p>
                 <div className={`overflow-hidden ${isDropdownOpen === 2 ? 'dropdown-enter-active' : 'dropdown-enter'}`}>
                     <div className='flex flex-col'>
                         <Link
                             to={'/community'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/community' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/community')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/community' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/community')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faPeopleGroup} /> {isSidebar && 'Community'}
+                            <FontAwesomeIcon className='m-auto' icon={faPeopleGroup} /> {isSidebar && 'Community'}
                         </Link>
                         <Link
                             to={'/community/network'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/community/network' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/community/network')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/community/network' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/community/network')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faNetworkWired} /> {isSidebar && 'Network'}
+                            <FontAwesomeIcon className='m-auto' icon={faNetworkWired} /> {isSidebar && 'Network'}
                         </Link>
                         <Link
                             to={'/community/messages/'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/community/messages/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/community/messages/')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/community/messages/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/community/messages/')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faMessage} /> {isSidebar && 'Messages'}
+                            <FontAwesomeIcon className='m-auto' icon={faMessage} /> {isSidebar && 'Messages'}
                         </Link>
                         <Link
                             to={'/community/colloboration/'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/community/colloboration/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/community/colloboration/')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/community/colloboration/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/community/colloboration/')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faGroupArrowsRotate} /> {isSidebar && 'Collaboration'}
+                            <FontAwesomeIcon className='m-auto' icon={faGroupArrowsRotate} /> {isSidebar && 'Collaboration'}
                         </Link>
                         <Link
                             to={'/community/notification/'}
-                            className={`pl-10 p-3 rounded transition-all duration-300 ${activeLink === '/community/notification/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                            onClick={() => setActiveLink('/community/notification/')}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/community/notification/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/community/notification/')
+                                setIsSidebar(false);
+                            }}
                         >
-                            <FontAwesomeIcon className='mr-2' icon={faBell} /> {isSidebar && 'Notifications'}
+                            <FontAwesomeIcon className='m-auto' icon={faBell} /> {isSidebar && 'Notifications'}
                         </Link>
                     </div>
                 </div>
                 <Link
-                    to={'/training/Training_program/'}
-                    className={`p-3 rounded transition-all duration-300 ${activeLink === '/training/Training_program/' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
-                    onClick={() => setActiveLink('/training/Training_program/')}
+                    to={'/training'}
+                    className={`p-3 rounded transition-all duration-300 ${activeLink === '/training' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                    onClick={() => {
+                        setActiveLink('/training')
+                        setIsSidebar(false);
+                    }}
                 >
-                    <FontAwesomeIcon className='mr-2' icon={faCashRegister} /> {isSidebar && 'Jobs and Internships'}
+                    <FontAwesomeIcon className='m-auto' icon={faCashRegister} /> {isSidebar && 'Training'}
                 </Link>
-                <p onClick={logout} className='cursor-pointer p-3 rounded transition-all duration-300 hover:text-primary hover:text-[#F5CF6B]'>
-                    <FontAwesomeIcon className='mr-2' icon={faSignOut} /> {isSidebar && 'Logout'}
-                </p>
+                {
+                    isLoggedIn ?
+                        <p onClick={logout} className='cursor-pointer p-3 rounded transition-all duration-300 hover:text-primary hover:text-[#F5CF6B]'>
+                            <FontAwesomeIcon className='m-auto' icon={faSignOut} /> {isSidebar && 'Logout'}
+                        </p>
+                        :
+                        <Link to={'/login'} className='cursor-pointer p-3 rounded transition-all duration-300 hover:text-primary hover:text-[#F5CF6B]'>
+                            <FontAwesomeIcon className='m-auto' icon={faSignIn} /> {isSidebar && 'Login'}
+                        </Link>
+                }
             </nav>
         </>
     );
