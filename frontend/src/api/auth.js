@@ -3,23 +3,6 @@ import { auth, googleProvider } from "../firebaseConfig";
 import api from "./call/api";
 import encryptApi from "./call/encryptApi";
 
-
-const handleApiError = (error) => {
-    if (error.response) {
-        // Server responded with a status other than 200 range
-        console.error('Response error:', error.response.data);
-        throw new Error(error.response.data.message || 'API request failed');
-    } else if (error.request) {
-        // Request was made but no response was received
-        console.error('Request error:', error.request);
-        throw new Error('No response from the server. Please try again later.');
-    } else {
-        // Something happened in setting up the request
-        console.error('Error setting up request:', error.message);
-        throw new Error(error.message);
-    }
-};
-
 export const fetchCurrentUser = async () => {
     try {
         const response = await api.get('/user');
@@ -37,7 +20,7 @@ export const logout = async () => {
         const data = response.data;
         console.log(data);
     } catch (error) {
-        handleApiError(error)
+        console.error(error);
     }
 };
 
@@ -48,25 +31,19 @@ export const handleGoogleLogin = async () => {
         if (!email) {
             email = result.user.providerData[0].email;
         }
-        const response = await encryptApi.post('/firebase-login', { email: email }, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            withCredentials: true
-        });
+        console.log(email);
+        const response = await encryptApi.post('/firebase-login', { email: email });
         return response.data;
     } catch (error) {
-        handleApiError(error);
+        console.error(error);
     }
 };
 
 export const handleCredentialSignup = async (username, password) => {
     try {
-        const response = await encryptApi.post('/signup', {
+        const response = await encryptApi.post('/credential-signup', {
             username: username,
             password: password,
-        }, {
-            
         });
         const data = response.data;
         return data;
@@ -77,7 +54,7 @@ export const handleCredentialSignup = async (username, password) => {
 
 export const handleCredentialLogin = async (username, password) => {
     try {
-        const response = await encryptApi.post('/login', {
+        const response = await encryptApi.post('/credential-login', {
             username: username,
             password: password,
         });

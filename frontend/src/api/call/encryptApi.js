@@ -6,9 +6,6 @@ import CryptoJS from 'crypto-js';
 const encryptApi = axios.create({
     baseURL: 'http://localhost:5000',
     withCredentials: true, 
-    headers: {
-        'Content-Type': 'application/json',
-    },
 });
 
 const secretKey = process.env.REACT_APP_SECRET_KEY; 
@@ -43,6 +40,7 @@ const decryptValue = (encryptedValue) => {
 // Request interceptor to encrypt data
 encryptApi.interceptors.request.use((config) => {
     if (config.data) {
+        console.log(config.data);
         config.data = encryptValue(config.data);
         config.headers['Content-Type'] = 'application/octet-stream';
     }

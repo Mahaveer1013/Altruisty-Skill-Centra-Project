@@ -57,6 +57,9 @@ export const credentialLogin = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log(username, password);
+    
+    
     // Fetch user data from MongoDB
     const user = await User.findOne({ username });
     if (!user) {
@@ -74,7 +77,7 @@ export const credentialLogin = async (req, res) => {
     const tokenPayload = { id: user._id, username: user.username };
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
-
+    
     // Set cookies
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
@@ -88,7 +91,7 @@ export const credentialLogin = async (req, res) => {
       secure: true,   // Set to true in production with HTTPS
       sameSite: 'None' // Set 'SameSite' to 'None' for cross-site cookies
     });
-
+    
     res.json({ msg: 'Login successful' });
   } catch (error) {
     console.log(error);
@@ -100,14 +103,15 @@ export const credentialLogin = async (req, res) => {
 export const credentialSignup = async (req, res) => {
   try {
     const { username, password } = req.body;
-
-
+    
+    console.log(username, password);
+    
     // Check if the user already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ msg: 'Username already exists' });
     }
-
+    
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 12);
 

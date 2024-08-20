@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { fetchCurrentUser, handleCredentialLogin, handleCredentialSignup, handleGoogleLogin } from '../api/auth';
 
 const GmailLogin = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from || '/SkillCentre';
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +19,6 @@ const GmailLogin = () => {
         } else {
             await handleCredentialLogin(username, password);
             await fetchCurrentUser()
-            navigate(from);
         }
     };
 
