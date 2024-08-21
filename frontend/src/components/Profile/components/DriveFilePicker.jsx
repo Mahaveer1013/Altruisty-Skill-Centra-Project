@@ -28,7 +28,7 @@ function DriveFilePicker() {
    
   return (
     <div>
-      <button onClick={()=>handleClick()} className='h-[20px] pt-[2px]'><img src={gdrive} className=" w-[40px]  max-sm:w-[50px] " /></button>
+      <button onClick={()=>handleClick()} className='px-4 py-2 rounded-md bg-white flex justify-center items-center pt-[2px]'><img src={gdrive} className=" w-[40px]  max-sm:w-[50px] " /></button>
     </div>
   )
 }

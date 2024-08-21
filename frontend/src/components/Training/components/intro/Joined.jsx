@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel from './Carousel';
 import TrainingPrograms from './TrainingPrograms';
-import Testimonials from './Testimonials';
 import AfterCarousel from './AfterCarousel';
 
 const Joined = () => {
@@ -10,7 +9,6 @@ const Joined = () => {
       <Carousel />
       <AfterCarousel />
       <TrainingPrograms />
-      <Testimonials />
     </div>
   );
 };

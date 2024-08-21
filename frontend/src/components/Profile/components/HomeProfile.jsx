@@ -123,11 +123,7 @@ function HomeProfile() {
                 <div className="flex md:space-x-6 w-full max-sm:flex-col">
                   <span className=" w-[50%] flex space-y-2 flex-col text-lg font-semibold text-Darkblue mt-[20px] max-sm:w-full">
                     <h1>Upload your resume</h1>
-                    <button onCLick={() => handleOpenPicker()} className="bg-White text-Yellow font-bold text-lg
-                   border-none ring-2 ring-white rounded-md w-[20%] max-sm:w-[30%] ">
-                      {/* <img src={gdrive} className="h-[30px] w-[40px] ml-[10px]" /> */}
-                      <DriveFilePicker />
-                    </button>
+                    <DriveFilePicker />
                   </span>
                   <span className="w-[50%] flex space-y-2 flex-col text-lg font-semibold text-Darkblue mt-[20px] max-sm:w-full">
                     <h1>Edit your profile</h1>
@@ -178,17 +174,13 @@ function HomeProfile() {
                         <p className="text-white text-lg font-bold">Working Model:</p>
                         <p className="text-white">(website video link)</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                     <div className="flex flex-1 items-center space-x-4">
                       <div className="flex flex-col">
                         <p className="text-white text-lg font-bold">Proposal:</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                   </div>
                 </div>
@@ -220,17 +212,13 @@ function HomeProfile() {
                         <p className="text-white text-lg font-bold">Working Model:</p>
                         <p className="text-white">(website video link)</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                     <div className="flex flex-1 items-center space-x-4">
                       <div className="flex flex-col">
                         <p className="text-white text-lg font-bold">Proposal:</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                   </div>
                 </div>
@@ -263,26 +251,19 @@ function HomeProfile() {
                         <p className="text-white text-lg font-bold">Working Model:</p>
                         <p className="text-white">(website video link)</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                     <div className="flex flex-1 items-center space-x-4">
                       <div className="flex flex-col">
                         <p className="text-white text-lg font-bold">Proposal:</p>
                       </div>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2 ring-white rounded-lg w-[30%] h-[40px] flex items-center justify-center">
-                        <DriveFilePicker />
-                      </button>
+                      <DriveFilePicker />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </div>

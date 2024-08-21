@@ -1,48 +1,51 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import bodyParser from 'body-parser'
-import { MONGO_URI } from './utils/constants.js'
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import admin from 'firebase-admin';
+import mongoose from 'mongoose';
+import apiRoutes from './src/routes/routes.js'; 
+import { decryptRequest, encryptResponse } from './src/middlewares/middleware.js';
+import socketRouter from './src/routes/socketRouter.js';
+import http from 'http'
+import {Server} from 'socket.io'
+import socketLoginRequired from './src/middlewares/socketLoginRequired.js';
+
 
 const app = express();
-const port = 5000;
-
-// const allowedOrigins = [
-//   'https://altruisty.site/',
-//   'https://altruisty-company-website.vercel.app',
-//   'http://localhost:3000'
-// ];
-
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (!origin) return callback(null, true);
-
-//     if (allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// };
-
-app.use(cors());
-// app.use(cors(corsOptions));
-app.use(bodyParser.json());
 app.use(express.json());
+app.use(encryptResponse);
+app.use(decryptRequest);
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000,
-  connectTimeoutMS: 30000
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch((error) => {
-  console.error('Connection error:', error);
+dotenv.config();
+
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+
+app.use(cookieParser());
+
+const server = http.createServer(app);
+const io = new Server(server);
+export const userSocketMap = new Map();
+
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+app.use('/api', apiRoutes);
+
+io.use(socketLoginRequired)
+socketRouter(io)
+
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    server.listen(5000, '0.0.0.0',() => {
+      console.log('Server is running on port http://localhost:5000');
+    });
+  })
+  .catch(error => {
+    console.error('Database connection error:', error);
+  });

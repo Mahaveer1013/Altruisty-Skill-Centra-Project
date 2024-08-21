@@ -1,34 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { useAuth } from '../AuthContext';
+import encryptApi from '../api/encryptApi';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { fetchCurrentUser, handleCredentialLogin, handleCredentialSignup, handleGoogleLogin } from '../api/auth';
 
 const GmailLogin = () => {
-    const navigate = useNavigate();
+
+    const { setFlash, checkUser, isLoggedIn } = useAuth();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState(''); // State for confirm password
     const [isSignup, setIsSignup] = useState(false); // State to toggle between login and signup forms
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            return navigate('/');
+        }
+    }, [isLoggedIn])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isSignup) {
-            await handleCredentialSignup(username, password);
-            console.log('Login Successfull');
+            if (password !== confirmPassword) {
+                setFlash(['Passwords do not match', 'error']);
+                return;
+            }
+            await encryptApi.post('/credential-signup', {
+                username: username,
+                password: password,
+            }).then(() => {
+                setIsSignup(false)
+                setFlash(['Success, Login Now !', 'success']);
+            }).catch((error) => {
+                setFlash([error.response.data.message, 'error']);
+            })
         } else {
-            await handleCredentialLogin(username, password);
-            await fetchCurrentUser()
+            await encryptApi.post('/credential-login', {
+                username: username,
+                password: password,
+            }).then(() => {
+                checkUser();
+                setFlash(['Logged In Successfully', 'success']);
+            }).catch((error) => {
+                setFlash([error.response.data.message, 'error']);
+            })
         }
     };
 
-    const handleGoogleLoginFunction = async () => {
+    const GoogleAuthSuccess = async (response) => {
         try {
-            await handleGoogleLogin();
-            await fetchCurrentUser()
-            navigate(from);
+            await encryptApi.post('/google-login', { tokenId: response.credential })
+            .then(() => {
+                checkUser();
+                setFlash(['Logged In Successfully', 'success']);
+            }).catch((error) => {
+                setFlash([error.response.data.message, 'error']);
+            })
         } catch (error) {
-            console.error('Google sign-in error:', error);
+            console.error('Error during Google login:', error);
         }
     };
 
@@ -57,6 +88,16 @@ const GmailLogin = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    {isSignup && (
+                        <input
+                            className="border border-[#697381] p-3 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-[#697381]"
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    )}
                     <button
                         type="submit"
                         className="w-full px-4 py-3 bg-[#F5CF6B] text-[#17212E] font-semibold rounded-lg shadow hover:bg-[#f5cc63] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 hover:scale-105 transition duration-300"
@@ -78,13 +119,14 @@ const GmailLogin = () => {
                     <hr className="flex-grow border-gray-300" />
                 </div>
                 <div className="flex justify-center">
-                    <button
-                        onClick={handleGoogleLoginFunction}
-                        className="w-full max-w-sm flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#4285F4] to-[#3367D6] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
-                    >
-                        <FontAwesomeIcon icon={faGoogle} className="mr-3 text-lg" />
-                        <span className="text-sm md:text-base">Continue with Google</span>
-                    </button>
+                    <GoogleOAuthProvider clientId='286309906436-1mhnk8b933efuina84sro4q61prji0p4.apps.googleusercontent.com'>
+                        <GoogleLogin
+                            onSuccess={GoogleAuthSuccess}
+                            onError={(error) => {
+                                console.log('Login Failed', error);
+                            }}
+                        />
+                    </GoogleOAuthProvider>
                 </div>
             </div>
         </div>

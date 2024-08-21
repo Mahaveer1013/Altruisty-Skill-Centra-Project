@@ -1,14 +1,14 @@
 import './App.css';
-import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SkillCentre from './pages/SkillCentre';
-import Message from './components/Community/Message';
-import Community from './components/Community/Community';
-import Collab from "./components/Community/Collab";
-import Notification from './components/Community/Notification';
-import Comments from './components/Community/Comments';
-import Teams from './components/Community/Teams';
-import CreateTeam from './components/Community/CreateTeam';
-import Network from './components/Community/Network';
+import Message from './components/community/components/Message';
+import Community from './components/community/components/Community';
+import Collab from "./components/community/components/Collab";
+import Notification from './components/community/components/Notification';
+import Comments from './components/community/components/Comments';
+import Teams from './components/community/components/Teams';
+import CreateTeam from './components/community/components/CreateTeam';
+import Network from './components/community/components/Network';
 import Joined from "./components/Training/components/intro/Joined"
 import Question from "./components/Training/components/Question/Question"
 import Assignment from './components/Training/components/Assignment/Assignment';
@@ -28,6 +28,7 @@ import Mainpage from './components/Internship/pages/Mainpage';
 import StudentDetails from './components/Internship/pages/StudentDetails';
 import Profileattribute from './components/Internship/pages/Profileattribute';
 import Subscription from './components/Internship/pages/Subscription';
+import FlashMessage from './components/FlashMessage';
 // import ProjectPage from './components/Projects/components/ProjectPage';
 // import Basic from './components/Projects/components/Routes/Basic';
 // import Premium from './components/Projects/components/Routes/Premium';
@@ -40,12 +41,12 @@ function Main() {
 
   return (
     <>
-      {<Sidebar />}
+      <Sidebar />
+      <FlashMessage/>
       <main className={(isSidebar ? 'hidden md:left-[250px] md:block' : 'left-[60px]') + ' absolute top-16 transition-all duration-200'} style={{ width: width }}>
         <Routes>
           <Route path="/" element={<SkillCentre />} />
           <Route path="/login" element={<GmailLogin />} />
-          {/* <Route path="/SkillCentreTake" element={<PrivateRoute element={<SkillCentreTake />} />} /> */}
 
           <Route path='/training/' element={<Joined />} />
           <Route path='/training/question/' element={<Question />} />

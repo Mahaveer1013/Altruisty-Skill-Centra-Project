@@ -4,12 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faBook, faCashRegister, faCertificate, faHome, faPeopleGroup, faSignOut, faUser, faChevronDown, faNetworkWired, faMessage, faGroupArrowsRotate, faBell, faPieChart, faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../AuthContext';
 import logo from '../assets/logo.jpg';
+import api from '../api/api';
 
 const Sidebar = () => {
-    const { logout, setIsSidebar, isSidebar, isLoggedIn } = useAuth();
+    const { setIsSidebar, isSidebar, setUser, isLoggedIn, setIsLoggedIn, setFlash } = useAuth();
     const [isDropdownOpen, setIsDropdownOpen] = useState(0);
     const [activeLink, setActiveLink] = useState('');
     const location = useLocation();
+
+    const handleLogout = async () => {
+        if (window.confirm('Are you sure you want to log out?')) {
+            try {
+                await api.get('/logout')
+                    .then((res) => {
+                        setUser(null);
+                        setIsLoggedIn(false);
+                        setFlash(['Logged out Successfully', 'success']);
+                    })
+                    .catch((err) => {
+                        setFlash(['Error Logging out', 'error']);
+                    });
+            } catch (error) {
+                setFlash(['Error Logging out', 'error']);
+            }
+        }
+    };
+    
 
     useEffect(() => {
         if (!isSidebar) {
@@ -49,7 +69,7 @@ const Sidebar = () => {
                 </Link>
 
                 <p onClick={() => toggleDropdown(1)} className={`flex items-center p-3 cursor-pointer rounded transition-all duration-300 ${(isProfileActive && isDropdownOpen !== 1) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary  justify-between' : 'justify-center'}`}>
-                    <p><FontAwesomeIcon className='m-auto' icon={faUser} /> {isSidebar && 'Profile'}</p>
+                    <span><FontAwesomeIcon className='m-auto' icon={faUser} /> {isSidebar && 'Profile'}</span>
                     {isSidebar && <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isDropdownOpen === 1 ? 'rotate-180' : ''}`} />}
                 </p>
                 <div className={`overflow-hidden ${isDropdownOpen === 1 ? 'dropdown-enter-active' : 'dropdown-enter'}`}>
@@ -97,7 +117,7 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <p onClick={() => toggleDropdown(2)} className={`flex items-center justify-between p-3 cursor-pointer rounded transition-all duration-300 ${(isCommunityActive && isDropdownOpen !== 2) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary flex justify-center items-center' : ''}`}>
-                    <p><FontAwesomeIcon className='m-auto' icon={faPeopleGroup} /> {isSidebar && 'Community'}</p>
+                    <span><FontAwesomeIcon className='m-auto' icon={faPeopleGroup} /> {isSidebar && 'Community'}</span>
                     {isSidebar && <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isDropdownOpen === 2 ? 'rotate-180' : ''}`} />}
                 </p>
                 <div className={`overflow-hidden ${isDropdownOpen === 2 ? 'dropdown-enter-active' : 'dropdown-enter'}`}>
@@ -166,7 +186,7 @@ const Sidebar = () => {
                 </Link>
                 {
                     isLoggedIn ?
-                        <p onClick={logout} className='cursor-pointer p-3 rounded transition-all duration-300 hover:text-primary hover:text-[#F5CF6B]'>
+                        <p onClick={handleLogout} className='cursor-pointer p-3 rounded transition-all duration-300 hover:text-primary hover:text-[#F5CF6B]'>
                             <FontAwesomeIcon className='m-auto' icon={faSignOut} /> {isSidebar && 'Logout'}
                         </p>
                         :
