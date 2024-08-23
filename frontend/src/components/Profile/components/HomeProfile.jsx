@@ -36,8 +36,8 @@ function HomeProfile() {
 
   const handleOpenPicker = () => {
     openPicker({
-      clientId: "687826912462-d6vg873c90345g0t2rm68dles95q78rd.apps.googleusercontent.com",
-      developerKey: "AIzaSyDwHpjxzWp8nN26e8FVkzf90aTLrZ4OxPc",
+      clientId: process.env.REACT_APP_DRIVE_CLIENT_ID,
+      developerKey: process.env.REACT_APP_DEVELOPER_KEY,
       viewId: "DOCS",
       // token: token, // pass oauth token in case you already have one
       showUploadView: true,
