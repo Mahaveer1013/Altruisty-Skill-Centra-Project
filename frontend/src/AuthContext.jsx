@@ -9,15 +9,13 @@ export const AuthProvider = ({ children }) => {
   const [isSidebar, setIsSidebar] = useState(null);
   const [flash, setFlash] = useState(null); // eg: ['message successfull', 'success']
 
-  const checkUser = async () => {
-    await api.get('/user')
+  const checkUser = () => {
+    api.get('/user')
       .then((response) => {
         setUser(response.data);
         console.log(response.data);
-        
         setIsLoggedIn(true);
       }).catch(() => {
-        
       })
   }
 

@@ -13,5 +13,3 @@ const communitySchema = new Schema({
 const Community = mongoose.model('Community', communitySchema);
 
 export default Community
-
-

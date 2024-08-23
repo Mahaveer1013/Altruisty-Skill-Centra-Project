@@ -7,10 +7,9 @@ function DriveFilePicker() {
 
   const handleClick=()=>{
     openPicker({
-      clientId: "286309906436-1mhnk8b933efuina84sro4q61prji0p4.apps.googleusercontent.com",
-      developerKey: "AIzaSyCqPjSxsDb7xCmnkKP9Q6eomvLfdAIC2LY",
+      clientId: process.env.REACT_APP_DRIVE_CLIENT_ID,
+      developerKey: process.env.REACT_APP_DEVELOPER_KEY,
       viewId: "DOCS",
-    //   token: "Rec1oc3Wftd569TcLQj5P8UpoWF2", // pass oauth token in case you already ha?ve one
       showUploadView: true,
       showUploadFolders: true,
       supportDrives: true,

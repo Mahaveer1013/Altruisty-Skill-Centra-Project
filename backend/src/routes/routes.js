@@ -1,8 +1,10 @@
 import { credentialLogin, credentialSignup, getUser, googleLogin, logout } from '../controllers/auth.js';
 import { checkIsAdmin, loginRequired } from '../middlewares/middleware.js';
 import express from 'express';
-import { checkUserRoute, createCommunity } from '../controllers/user.js';
+import { checkUserRoute } from '../controllers/user.js';
 import { checkAdminRoute } from '../controllers/admin.js';
+import { getAllDomainData, registerInternship, updateInternProgress } from '../controllers/internship.js';
+import { createCommunity } from '../controllers/community.js';
 
 const router = express.Router();
 
@@ -18,11 +20,18 @@ router.get('/logout', logout);
 // ===========> admin routes <==============
 router.get('/check-admin', loginRequired, checkIsAdmin, checkAdminRoute);
 
-// ===========> user routes <=============
+// ===========> user routes <===============
 router.get('/check-user', loginRequired, checkUserRoute);
-router.post('/create-community', loginRequired, createCommunity);
 
-// intern routed
+// ===========> community routes <===========
+router.post('/create-community', loginRequired, createCommunity);
+// router.post('/get-messages', loginRequired, );
+// router.post('/get-recent-chats', loginRequired, );
+
+// ===========> internship routes <=============
+router.post('/register-internship',loginRequired, registerInternship)
+router.get('/get-all-domain',loginRequired, getAllDomainData)
+router.post('/internship-progress',loginRequired, updateInternProgress)
 
 
 export default router;
