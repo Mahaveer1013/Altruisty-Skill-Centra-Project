@@ -62,7 +62,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
                 </div>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 text-left">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -75,7 +75,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 text-left">
                       Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -88,7 +88,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 text-left">
                       Phone <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -101,7 +101,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 text-left">
                       Domain Of Interest <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -114,7 +114,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 text-left">
                       Choose Your Plan <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-wrap gap-2 mt-2">

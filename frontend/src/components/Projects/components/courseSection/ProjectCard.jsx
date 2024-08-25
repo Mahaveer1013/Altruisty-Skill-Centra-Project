@@ -9,7 +9,7 @@ const ProjectCard = ({
 }) => (
   <div className="Project-card">
     <div className="max-w-screen-sm rounded-3xl shadow-md overflow-hidden bg-[#F5CF6B] md:w-fit]">
-      <Link to="fullstack">
+      <Link to="/Internships/Projects/FullStack">
         <div className="p-4">
           <div className="mb-4">
             <img src={imageData} className="w-full rounded-3xl" alt={title} />

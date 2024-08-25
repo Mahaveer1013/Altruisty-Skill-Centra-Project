@@ -29,6 +29,15 @@ import StudentDetails from './components/Internship/pages/StudentDetails';
 import Profileattribute from './components/Internship/pages/Profileattribute';
 import Subscription from './components/Internship/pages/Subscription';
 import FlashMessage from './components/FlashMessage';
+import DomainPage from './components/Internship/componenets/DomainPage/DomainPage';
+import CircularChart from './components/Internship/componenets/Explore/CircularChart';
+import CourseDetails from './components/Internship/componenets/CourseDetails/CourseDetails';
+import Explore from './components/Internship/componenets/Explore/Explore';
+import ProcedureSteps from './components/Internship/componenets/internDetail/ProcedureSteps';
+import InternDetail from './components/Internship/componenets/internDetail/InternDetail';
+import HomePage from './components/Internship/componenets/HomePage/HomePage';
+import ProjectPage from './components/Projects/components/ProjectPage';
+import CoursePlans from './components/Internship/componenets/CoursePlans/CoursePlans';
 // import ProjectPage from './components/Projects/components/ProjectPage';
 // import Basic from './components/Projects/components/Routes/Basic';
 // import Premium from './components/Projects/components/Routes/Premium';
@@ -76,11 +85,26 @@ function Main() {
           <Route path='/Profileattribute' element={<Profileattribute />} />
           <Route path='/Subscription' element={<Subscription />} />
 
+          <Route path= '/Internships' element={<HomePage />} />
+          <Route path= '/Internships/InternDetails' element={<InternDetail />} />
+          <Route path='/Internships/InternDetails/DomainPage' element={<DomainPage/>}/>
+          <Route path= '/Internships/InternDetails/DomainPage/CourseDetails' element={<CourseDetails />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CoursePlans' element={<CoursePlans />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/CoursePlans' element={<CoursePlans />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/Explore' element={<Explore />} />
+          {/* <Route path='/Internships/Projects' element={<ProjectPage/>} />
+          <Route path='/Internships/Projects/FullStack' element={<OverView/>} /> */}
+
+
+          <Route path= '/Internships/MyInternship' element={<CircularChart />} />
+
+
+
           {/* <Route path="/projects" element={<ProjectPage />} />
           <Route path="/projects/fullstack/" element={<Fullstack />} />
           <Route path="/projects/fullstack/premium/:id" element={<Premium />} />
           <Route path="/projects/fullstack/basic/:id" element={<Basic />} />
-          <Route path="/projects/fullstack/adv/:id" element={<Advanced />} /> */}
+          <Route path="/projects/fullstack/adv/:id" element={<Advanced />} />  */}
 
         </Routes>
       </main>

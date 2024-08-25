@@ -26,18 +26,21 @@ const CustomPrevArrow = (props) => {
 const DomainSlider = () => {
   const domains = [
     {
+      id:1,
       title: 'Web Development',
       description: 'Web development internship that provides practical work experience and an introduction to crafting and enhancing web-based systems. This opportunity offers engaging challenges.',
       registered: 47,
       availableSlots: 3,
     },
     {
+      id:2,
       title: 'UI / UX Design',
       description: 'UI/UX Design internship that provides practical work experience and an introduction to crafting and enhancing user experiences. This opportunity offers engaging challenges.',
       registered: 47,
       availableSlots: 3,
     },
     {
+      id:2,
       title: 'Data Science',
       description: 'Data Science internship offering practical work experience in data analysis and machine learning.',
       registered: 50,
@@ -103,11 +106,11 @@ const DomainSlider = () => {
   return (
     <div className="my-10 mx-5 bg-[#D4CAAA] text-[#17212E] font-times">
 
-      <h2 className="text-2xl md:text-4xl font-semibold text-[#17212E] md:ml-5 mb-4">View Domain</h2>
+      {/* <h2 className="text-2xl md:text-4xl font-semibold text-[#17212E] md:ml-5 mb-4">View Domain</h2> */}
       
       <div className='hidden md:block'>
       <div className='text-center '>
-        <h1 className='text-3xl font-bold'>In-Demand Domains</h1>
+        <h1 className='text-4xl font-bold'>In-Demand Domains</h1>
       </div>
       <div className='md:p-10 '>
     

@@ -1,11 +1,13 @@
-import CourseSection from "./components/courseSection/CourseSection";
-import Pricing from "./components/PricingSection/Pricing";
-import student from "./Images/Male-Student.png";
+import CourseSection from "./courseSection/CourseSection";
+import Footer from './Footer';
+import Pricing from "./PricingSection/Pricing";
+import student from "../Images/Male-Student.png";
 import { IoIosArrowBack } from "react-icons/io";
-import head from "./Images/head5.jpg";
+import head from "../Images/head5.jpg";
+
 
 import { useState } from "react";
-import RegistorForm from "./components/RegistorForm";
+import RegistorForm from "./RegistorForm";
 
 const ProjectPage = () => {
   const [isFormOpen, SetFormOpen] = useState(false);
@@ -95,6 +97,8 @@ const ProjectPage = () => {
       {isFormOpen && (
         <RegistorForm isFormOpen={isFormOpen} SetFormOpen={SetFormOpen} />
       )}
+
+      <Footer />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import girl from "../../assets/images/Girl.png"
 import Group4 from "../../assets/images/Group 4.png"
 
 import "./homepage.css"
+import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section className="bg-[#D4CAAA] md:p-8 p-2 font-times">
@@ -17,9 +18,11 @@ const Hero = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
         </p>
         <div className='flex'>
+          <Link to={"/Internships/InternDetails/DomainPage"}>
         <button className="bg-[#F5CF6B] text-[#17212E] font-semibold py-2 px-4 rounded-lg shadow-md mt-4 hover:bg-yellow-500">
           Apply Now
         </button>
+        </Link>
         <div className='hidden md:block ml-3'>
         <div className="flex items-center ml-4  mt-4">
             <img src={Group4} alt="" />
