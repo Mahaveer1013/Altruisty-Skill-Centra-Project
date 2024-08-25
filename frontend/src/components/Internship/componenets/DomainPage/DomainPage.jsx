@@ -5,7 +5,7 @@ import DomainSection from './DomainSection'
 function DomainPage() {
   return (
     <div className='-mb-20 bg-[#D4CAAA]'>
-        <Header />
+        {/* <Header /> */}
         <About/>
         <DomainSection />
     </div>
