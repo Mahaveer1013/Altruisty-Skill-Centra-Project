@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       }).catch(() => {
       })
   }
-
+  
   useEffect(() => {
     if (!isLoggedIn) {
       checkUser();

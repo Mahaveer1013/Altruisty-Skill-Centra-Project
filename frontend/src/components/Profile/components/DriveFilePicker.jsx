@@ -6,6 +6,8 @@ function DriveFilePicker() {
   const [openPicker,data,authResponse]=useDrivePicker();
 
   const handleClick=()=>{
+    console.log(process.env.REACT_APP_DRIVE_CLIENT_ID)
+    console.log(process.env.REACT_APP_DEVELOPER_KEY)
     openPicker({
       clientId: process.env.REACT_APP_DRIVE_CLIENT_ID,
       developerKey: process.env.REACT_APP_DEVELOPER_KEY,
@@ -19,6 +21,7 @@ function DriveFilePicker() {
           console.log('User clicked cancel/close button')
         }
         console.log(data)
+       
       },
     })
     

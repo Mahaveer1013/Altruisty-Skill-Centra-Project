@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBook, faCashRegister, faCertificate, faHome, faPeopleGroup, faSignOut, faUser, faChevronDown, faNetworkWired, faMessage, faGroupArrowsRotate, faBell, faPieChart, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBook, faCashRegister, faCertificate,faGraduationCap, faHome, faPeopleGroup, faSignOut, faUser, faChevronDown, faNetworkWired, faMessage, faGroupArrowsRotate, faBell, faPieChart, faSignIn,faBookOpen, faBriefcase, faChalkboard, faChalkboardTeacher, faGift } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../AuthContext';
 import logo from '../assets/logo.jpg';
 import api from '../api/api';
@@ -49,6 +49,8 @@ const Sidebar = () => {
 
     const isCommunityActive = location.pathname.startsWith('/community');
     const isProfileActive = location.pathname.startsWith('/profile');
+    const isLearningActive = location.pathname.startsWith('/learning');
+    const isReedem = location.pathname.startsWith('/Reedem');
 
     return (
         <>
@@ -174,15 +176,53 @@ const Sidebar = () => {
                         </Link>
                     </div>
                 </div>
+                <p onClick={() => toggleDropdown(3)} className={`flex items-center justify-between p-3 cursor-pointer rounded transition-all duration-300 ${(isLearningActive && isDropdownOpen !== 3) ? 'bg-[#F5CF6B] text-black' : 'hover:text-[#F5CF6B]'} ${isSidebar ? 'text-primary flex justify-center items-center' : ''}`}>
+                    <span><FontAwesomeIcon className='m-auto' icon={faGraduationCap} /> {isSidebar && 'Learning'}</span>
+                    {isSidebar && <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isDropdownOpen === 3 ? 'rotate-180' : ''}`} />}
+                </p>
+                <div className={`overflow-hidden ${isDropdownOpen === 3 ? 'dropdown-enter-active' : 'dropdown-enter'}`}>
+                    <div className='flex flex-col'>
+                        <Link
+                            to={'/learning/internships'}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/learning/internships' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/learning/internships')
+                                setIsSidebar(false);
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faBriefcase} className='m-auto'  /> {isSidebar && 'internships'}
+                        </Link>
+                        <Link
+                            to={'/learning/courses'}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/learning/courses' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/learning/courses')
+                                setIsSidebar(false);
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faBook} className='m-auto'  /> {isSidebar && 'courses'}
+                        </Link>
+                        <Link
+                            to={'/learning/training'}
+                            className={`p-3 rounded transition-all duration-300 ${isSidebar ? 'pl-10' : 'pl-3'} ${activeLink === '/learning/training' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                            onClick={() => {
+                                setActiveLink('/learning/training')
+                                setIsSidebar(false);
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faChalkboardTeacher} className='m-auto'  /> {isSidebar && 'training'}
+                        </Link>
+                    </div>
+                </div>
                 <Link
-                    to={'/training'}
-                    className={`p-3 rounded transition-all duration-300 ${activeLink === '/training' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
+                    to={'/Reedem'}
+                    className={`p-3 rounded transition-all duration-300 ${activeLink === '/Reedem' ? 'bg-[#F5CF6B] text-black' : 'hover:text-primary hover:text-[#F5CF6B]'}`}
                     onClick={() => {
-                        setActiveLink('/training')
+                        setActiveLink('/Reedem')
                         setIsSidebar(false);
                     }}
                 >
-                    <FontAwesomeIcon className='m-auto' icon={faCashRegister} /> {isSidebar && 'Training'}
+                    <FontAwesomeIcon icon={faGift} className='m-auto'  /> {isSidebar && 'Reedem'}
                 </Link>
                 {
                     isLoggedIn ?

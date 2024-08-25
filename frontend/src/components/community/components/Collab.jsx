@@ -1,9 +1,52 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import collab from "../assets/colloborate.webp";
 import { Link } from "react-router-dom"
-
+import {io} from 'socket.io-client'
 function Collab() {
+  const [socket,setSocket] = useState("");
+  const [popup,setPopup] = useState("")
+  const [search,setsearch] = useState("");
+  const [searchResult,setsearchResult] = useState([])
+  const [code,setCode] = useState('')
+  useEffect(() => {
+    const websocket = io('http://localhost:5000');
+    
+    websocket.on('connect', () => {
+      console.log('WebSocket connected');
+    });
+  
+    websocket.on('disconnect', () => {
+      console.log('WebSocket disconnected');
+    });
+  
+    websocket.emit('userConnected', 'user');
+  
+    websocket.on('joinedCommunity', ({ communityCode }) => {
+      console.log('Joined community:', communityCode);
+      setPopup(`Successfully joined the community ${communityCode}`);
+    });
+  
+    websocket.on('error', ({ message }) => {
+      console.log('WebSocket error:', message);
+      setPopup(message);
+    });
+  
+    return () => {
+      console.log('WebSocket cleanup');
+      websocket.disconnect();
+    };
+  }, []);
+  
+  
+
+  const handleJoinCommunity = () => {
+    console.log('before')
+    if (socket) {
+      console.log('after')
+        socket.emit('joinCommunity', { communityCode: code });
+    }
+};
   return (
     <div className="bg-[#f7d883]  font-times max-sm:w-[100%] max-sm:h-full h-full w-full xl:pb[600px]">
       <div className="w-[100%] h-full md:pb-[10px]">
@@ -20,6 +63,7 @@ function Collab() {
                   text="text"
                   name="search"
                   placeholder="search"
+                 
                   autoComplete="off"
                   className="w-full h-[50px] px-3 pl-8 py-2 font-semibold text-Darkblue placeholder-gray-400 text-lg rounded-2xl  border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
                 />
@@ -50,14 +94,19 @@ function Collab() {
                 <input
                   type="text"
                   placeholder="Enter a team code to join"
+                  value={code}
+                  onChange={(e)=> setCode(e.target.value)}
                   className='p-2 placeholder-gray-400 ring-2 ring-Yellow w-[35%] 
                   focus:outline-none text-Darkblue focus:ring-2 focus:ring-Yellow 
                   h-[35px] rounded-md max-sm:w-[100%]' />
 
-                 <Link to="/community/colloboration/teams">
-                  <button className='ring-2 ring-Yellow bg-Yellow text-Darkblue  font-normal 
+                 
+                  <button 
+                  
+                  onClick={handleJoinCommunity}
+                  className='ring-2 ring-Yellow bg-Yellow text-Darkblue  font-normal 
                   text-lg rounded-sm cursor-pointer px-4  max-sm:mt-[20px] max-sm:w-full'>Join</button>
-                  </Link>
+                 
 
 
               </div>

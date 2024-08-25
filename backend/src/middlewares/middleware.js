@@ -2,17 +2,17 @@ import User from '../models/user.model.js';
 import { generateAccessToken } from '../utils/tokenUtils.js';
 import jwt from 'jsonwebtoken';
 import CryptoJS from 'crypto-js';
-import { JWT_SECRET, REFRESH_TOKEN_SECRET, SECRET_KEY } from '../utils/constants.js';
-
-
-const secretKey = SECRET_KEY;
-
+import { JWT_SECRET, REFRESH_TOKEN_SECRET,SECRET_KEY } from '../utils/constants.js';
 
 const loginRequired = async (req, res, next) => {
   const { accessToken, refreshToken } = req.cookies;
 
   try {
+    // Verify the access token
     jwt.verify(accessToken, JWT_SECRET, async (err, decoded) => {
+      console.log('Decoded Access Token:', decoded);
+      
+      // If there's an error with the access token (e.g., expired), check the refresh token
       if (err && (err.name === 'TokenExpiredError' || err.name === 'JsonWebTokenError') && refreshToken) {
         jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, async (refreshErr, refreshDecoded) => {
           if (refreshErr) {
@@ -21,26 +21,28 @@ const loginRequired = async (req, res, next) => {
 
           let user, newAccessToken;
 
-          if (refreshDecoded.email) {
-            user = await User.findOne({ email: refreshDecoded.email });
-            if (!user) {
-              return res.status(404).json({ message: 'User not found' });
-            }
-            newAccessToken = generateAccessToken({
-              email: user.email,
-              user_type: user.user_type
-            });
-          }else if (refreshDecoded.username) {
+          // Update 1: Check if the refresh token contains `username`
+          if (refreshDecoded.username) {
             user = await User.findOne({ username: refreshDecoded.username });
-            if (!user) {
-              return res.status(404).json({ message: 'User not found' });
-            }
-            newAccessToken = generateAccessToken({
-              username: user.username,
-              user_type: user.user_type
-            });
+          } 
+          // Update 2: If not `username`, check if the refresh token contains `id`
+          else if (refreshDecoded.id) {
+            user = await User.findById(refreshDecoded.id);
           }
-          
+
+          // If the user is not found in the database, return a 404 error
+          if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+          }
+
+          // Generate a new access token with the user information
+          newAccessToken = generateAccessToken({
+            username: user.username,  // Update 3: Now using `username` for token generation
+            id: user._id,             // Update 4: Also using `id` for token generation
+            user_type: user.user_type
+          });
+
+          // Set the new access token in the cookie
           res.cookie('accessToken', newAccessToken, {
             httpOnly: true,
             maxAge: 3600000, // 1 hour
@@ -49,13 +51,31 @@ const loginRequired = async (req, res, next) => {
           });
 
           req.user = user;
+          console.log('User assigned to req.user after refresh token verification:', req.user);
           next();
         });
-      } else if (err) {
+      } 
+      // If there's no error with the access token, proceed with the request
+      else if (err) {
         return res.status(401).json({ message: 'Invalid access token' });
       } else {
-        const user = await User.findOne({ email: decoded.email });
+        let user;
+        // Update 5: Check if the decoded access token contains `username`
+        if (decoded.username) {
+          user = await User.findOne({ username: decoded.username });
+        } 
+        // Update 6: If not `username`, check if the decoded access token contains `id`
+        else if (decoded.id) {
+          user = await User.findById(decoded.id);
+        }
+
+        // If the user is not found in the database, return a 404 error
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+
         req.user = user;
+        console.log('User assigned to req.user after access token verification:', req.user);
         next();
       }
     });
@@ -63,8 +83,7 @@ const loginRequired = async (req, res, next) => {
     console.error('Error in authentication middleware:', error);
     res.status(500).json({ message: 'Server error' });
   }
-};
-
+}
 
 const checkIsAdmin = async (req, res, next) => {
   try {
