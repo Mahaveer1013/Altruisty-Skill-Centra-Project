@@ -11,6 +11,8 @@ import http from 'http';
 import { Server } from 'socket.io';
 import socketLoginRequired from './src/middlewares/socketLoginRequired.js';
 import ProfileRoutes from "./src/routes/profile.js"
+import { insertDomains } from './src/controllers/domain.js';
+import UserInternRoutes from "./src/routes/userIntern.js"
 // Initialize environment variables
 dotenv.config();
 
@@ -50,6 +52,7 @@ admin.initializeApp({
 // API routes
 app.use('/api', apiRoutes);
 app.use('/api',ProfileRoutes)
+app.use('/api',UserInternRoutes);
 
 // Socket.IO middleware for authentication
 io.use(socketLoginRequired);
@@ -62,6 +65,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => {
     server.listen(5000, () => {
       console.log('Server is running on port http://localhost:5000');
+       insertDomains();
     });
   })
   .catch(error => {

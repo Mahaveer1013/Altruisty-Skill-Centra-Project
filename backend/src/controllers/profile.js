@@ -9,7 +9,9 @@ export const registerProfile = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const { PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, profile, Resume } = req.body;
+    const { PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, ProfileBase64, Resume } = req.body;
+
+    console.log('Request Body:', req.body);
 
     // Prepare the fields to update
     const updateFields = {};
@@ -17,16 +19,27 @@ export const registerProfile = async (req, res) => {
     if (CollegeName) updateFields.college = CollegeName;
     if (github) updateFields.github_link = github;
     if (LinkedIn) updateFields.linkedIn_link = LinkedIn;
-    if (Portfolio) updateFields.Portfolio = Portfolio;
+    if (Portfolio) updateFields.portfolio = Portfolio;  // Ensure field names match your schema
     if (domain) updateFields.Interest = domain;
-    if (profile) updateFields.ProfilePicture = profile;
+
+    if (ProfileBase64) {
+      // Handle base64 image data if available
+      updateFields.ProfilePicture = ProfileBase64;
+    }
+
+    console.log('Update Fields:', updateFields);
 
     const updateOperations = { $set: updateFields };
 
-    // If Resume is provided and is not null, push it to the Resume array
-    if (Resume && Resume.length > 0) {
-      updateOperations.$push = { Resume: { $each: Resume } };
+    // If Resume is provided and is not empty, push it to the Resume array
+    if (Resume) {
+      const resumeArray = JSON.parse(Resume); // Parse JSON string to array
+      if (Array.isArray(resumeArray) && resumeArray.length > 0) {
+        updateOperations.$push = { Resume: { $each: resumeArray } };
+      }
     }
+
+    console.log('Update Operations:', updateOperations);
 
     // Update user profile
     const updatedUser = await User.findByIdAndUpdate(
@@ -40,6 +53,7 @@ export const registerProfile = async (req, res) => {
       user: updatedUser,
     });
   } catch (error) {
+    console.error('Error updating profile:', error);
     return res.status(500).json({ message: "Error updating profile", error: error.message });
   }
 };

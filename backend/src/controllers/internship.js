@@ -1,30 +1,32 @@
 import Domain from "../models/domain.model.js";
 import Internship from "../models/internship.model.js";
 
-
 export const registerInternship = async (req, res) => {
     const user = req.user
-    const { internshipType, domain } = req.body;
-    if (![1, 2, 3, 4].includes(internshipType)) {
+    const { duration, domain,transactionId } = req.body;
+    if (![1, 2, 3, 4].includes(duration)) {
         return res.status(400).json({ message: 'Invalid internship type' });
     }
-
-    if (!domain) {
+    const isDomain = await Domain.findById(domain)
+    if (!isDomain) {
         return res.status(400).json({ message: 'Domain is required' });
     }
 
     try {
         const newInternship = new Internship({
             user: user._id,
-            internshipType,
-            domain,
+            internshipType:duration,
+            transactionId,
+            domain:domain,
+            role:isDomain.title,
             progress: []
         });
 
         const savedInternship = await newInternship.save();
-
+        console.log(savedInternship.domain)
         res.status(201).json(savedInternship);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Error registering internship', error });
     }
 }
@@ -34,6 +36,7 @@ export const getAllDomainData = async (req, res) => {
     try {
         const internships = await Domain.find()
         if (internships) {
+            console.log(internships);
             res.status(200).json(internships);
         } else {
             res.status(404).json({ message: 'Domains Not Found' });

@@ -53,7 +53,7 @@ function Collab() {
 
         <div className="w-[98%]  ml-2 pt-10 pr-[10px] ">
           <div className="w-[100%] flex justify-between space-x-6 sticky ">
-            <form action="" className="w-[100%] ">
+            {/* <form action="" className="w-[100%] ">
               <div className="relative flex items-center text-gray-400 text-lg font-semibold focus-within:text-gray-600">
                 <IoSearchOutline
                   size="20"
@@ -68,7 +68,7 @@ function Collab() {
                   className="w-full h-[50px] px-3 pl-8 py-2 font-semibold text-Darkblue placeholder-gray-400 text-lg rounded-2xl  border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
                 />
               </div>
-            </form>
+            </form> */}
             {/* <span className="mr-[10px]">
               <CgProfile size="50" />
             </span> */}

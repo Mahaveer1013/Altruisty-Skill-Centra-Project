@@ -3,7 +3,11 @@ const { Schema } = mongoose;
 
 
 const domainSchema = new Schema({
-    domain: { type: String, required: true }
+    title: { type: String, required: true },
+    description:{type:String,required:true},
+    registered:{type:Number,required:true},
+    availSlots:{type:Number,required:true}
+    
 });
 
 const Domain = mongoose.model('Domain', domainSchema);

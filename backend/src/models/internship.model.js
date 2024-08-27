@@ -11,6 +11,8 @@ const internshipSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     internshipType: { type: Number, enum: [1, 2, 3, 4] }, // 1 for (15 days), 2 for (1 month), 3 for (2 months), 4 for (3 months)
     domain: { type: Schema.Types.ObjectId, ref: 'Domain' },
+    transactionId:{type:String,required:true},
+    role:{type:String,required:true},
     progress: [progressSchema],
 }, { timestamps: true }); // Enable timestamps
 

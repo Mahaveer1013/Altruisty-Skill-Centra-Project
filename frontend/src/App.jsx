@@ -42,7 +42,7 @@ import CoursePlans from './components/Internship/componenets/CoursePlans/CourseP
 // import Basic from './components/Projects/components/Routes/Basic';
 // import Premium from './components/Projects/components/Routes/Premium';
 // import Fullstack from './components/Projects/components/Routes/Fullstack';
-
+import { InternProvider } from './components/Internship/InternContext';
 function Main() {
   const { isSidebar } = useAuth();
 
@@ -84,12 +84,12 @@ function Main() {
           <Route path='/StudentDetails' element={<StudentDetails />} />
           <Route path='/Profileattribute' element={<Profileattribute />} />
           <Route path='/Subscription' element={<Subscription />} />
-
-          <Route path= '/Internships' element={<HomePage />} />
+          
+          <Route path= 'Learning/Internship' element={<HomePage />} />
           <Route path= '/Internships/InternDetails' element={<InternDetail />} />
           <Route path='/Internships/InternDetails/DomainPage' element={<DomainPage/>}/>
           <Route path= '/Internships/InternDetails/DomainPage/CourseDetails' element={<CourseDetails />} />
-          <Route path= '/Internships/InternDetails/DomainPage/CoursePlans' element={<CoursePlans />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CoursePlans/:id' element={<CoursePlans />} />
           <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/CoursePlans' element={<CoursePlans />} />
           <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/Explore' element={<Explore />} />
           {/* <Route path='/Internships/Projects' element={<ProjectPage/>} />

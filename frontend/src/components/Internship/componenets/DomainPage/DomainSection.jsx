@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import DomainCard from './DomainCard';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrPrevious } from "react-icons/gr";
-
+import App from '../CoursePlans/CoursePlans';
+import api from '../../../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const CustomPrevArrow = (props) => {
   const { className, style, onClick } = props;
@@ -20,10 +22,12 @@ const CustomPrevArrow = (props) => {
 };
 
 
+
 // Custom right arrow
 
 
 const DomainSlider = () => {
+  const navigate = useNavigate();
   const domains = [
     {
       id:1,
@@ -48,6 +52,36 @@ const DomainSlider = () => {
     },
     // Add more domains as needed
   ];
+  const [selectedId,setSelectedId] = useState('')
+  const [data,Setdata] = useState([])
+  const [loading, setLoading] = useState(true);
+  const getDomainData = async()=>
+    {
+      try
+      {
+        const res = await api.get('/getDomains')
+        console.log(res);
+        Setdata(res.data);
+        setLoading(false);
+        
+      }
+      catch(err)
+      {
+        console.error(err);
+      }
+    }
+    useEffect(()=>
+    {
+      getDomainData()
+    },[])
+  const handleDomain = (id,title)=>
+    {
+      setSelectedId(id)
+      console.log(id)
+      navigate(`/Internships/InternDetails/DomainPage/CoursePlans/${id}`)
+      
+     
+    }
   const CustomArrowSmall = ({ onClick }) => (
     <div onClick={onClick} style={styles.arrow}>
       <GrPrevious size={30} /> {/* Custom left arrow icon */}
@@ -103,6 +137,13 @@ const DomainSlider = () => {
       nextArrow: <CustomArrow style={{ display: "none" }} />, // Right arrow will be hidden
       prevArrow: <CustomArrow /> // Left arrow with custom icon
     };
+    if (loading) {
+      return <div>Loading...</div>; // Show loading spinner or placeholder
+    }
+  
+    if (!data.length) {
+      return <div>No domains available</div>; // Handle case when data is empty
+    }
   return (
     <div className="my-10 mx-5 bg-[#D4CAAA] text-[#17212E] font-times">
 
@@ -115,14 +156,16 @@ const DomainSlider = () => {
       <div className='md:p-10 '>
     
     <Slider {...settings} className="flex items-center ">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+            id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -138,14 +181,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -163,14 +208,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -187,14 +234,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -211,14 +260,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -239,14 +290,16 @@ const DomainSlider = () => {
       <div className='md:p-10 '>
     
     <Slider {...setting} className="flex items-center ">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -262,14 +315,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -287,14 +342,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -311,14 +368,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>
@@ -335,14 +394,16 @@ const DomainSlider = () => {
     </div>
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
-      {domains.map((domain, index) => (
+      {data.map((domain, index) => (
         <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
           <div className="w-full h-full"> {/* Ensures card maintains its size */}
             <DomainCard
+             id={domain._id}
               title={domain.title}
               description={domain.description}
               registered={domain.registered}
               availableSlots={domain.availableSlots}
+              handleDomain={handleDomain}
             />
           </div>
         </div>

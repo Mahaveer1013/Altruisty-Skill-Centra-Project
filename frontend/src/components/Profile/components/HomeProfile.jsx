@@ -10,6 +10,8 @@ import DriveFilePicker from "./DriveFilePicker";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import api from "../../../api/api";
+import AddProject from "./AddProject";
+
 
 function HomeProfile() {
   const [editProfile, setEditProfile] = useState(false);
@@ -25,8 +27,8 @@ function HomeProfile() {
   const [Profile, SetProfile] = useState("");
   const [Resume, SetResume] = useState([]);
   const [file, setFile] = useState(null); // State to hold the uploaded image
-
-  // Handle updated data
+  
+  const [addProject,setAddProject]=useState(false);
   const handleData1 = async (phone, college, github, LinkedIn, Portfolio, Profile, domain) => {
     setPhoneNumber(phone);
     setCollegeName(college);
@@ -35,7 +37,7 @@ function HomeProfile() {
     SetPortfolio(Portfolio);
     setDomain(domain);
     SetProfile(Profile);
-
+  
     try {
       const formData = new FormData();
       formData.append('PhoneNumber', phone);
@@ -44,14 +46,22 @@ function HomeProfile() {
       formData.append('LinkedIn', LinkedIn);
       formData.append('Portfolio', Portfolio);
       formData.append('domain', domain);
-      formData.append('Profile', Profile);
-      if (file) formData.append('ProfilePicture', file); // Append the profile picture if selected
-      formData.append('Resume', JSON.stringify(Resume));
-
+  
+      if (file) {
+        formData.append('ProfilePicture', file); // Send file object
+      } else if (Profile) {
+        formData.append('ProfileBase64', Profile); // Send base64 string
+      }
+  
+      formData.append('Resume', JSON.stringify(Resume)); // Ensure Resume is in the correct format
+  
+      // Log formData to check values
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+  
       const res = await api.post('/registerProfile', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+       
       });
       console.log("Profile updated:", res.data);
       fetchDetails(); // Refresh profile data after updating
@@ -59,7 +69,7 @@ function HomeProfile() {
       console.error("Error updating profile:", err);
     }
   };
-
+  
   // Fetch profile details
   const fetchDetails = async () => {
     try {
@@ -112,7 +122,52 @@ function HomeProfile() {
       SetResume(files);
     }
   }, [data]);
+  const [projects,setProjects]=useState([
+    {
+      
+      name:"Foot Style",
+      
+      description:"It is an E-commerce website lorem ipsum",
+      githubLink:'https://github.com/user/portfolio',
+      driveLink:'https://github.com/user/portfolio',
 
+    },
+    {
+      
+      name:"Library ManageMent System",
+   
+      description:"It is an E-commerce website lorem ipsum",
+      githubLink:'https://github.com/user/portfolio',
+      driveLink:'https://github.com/user/portfolio',
+    },
+    
+    {
+      
+      name:"Admin Dashboard",
+     
+      description:"It is an E-commerce website lorem ipsum",
+      githubLink:'https://github.com/user/portfolio',
+      driveLink:'https://github.com/user/portfolio',
+    },
+  ]);
+  const [newProject, setNewProject] = useState({
+    name: '',
+    description: '',
+    githubLink: '',
+    driveLink: '',
+  });
+  const handleInputChange = (e) => {
+    setNewProject({
+      ...newProject,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleFormSubmit = (e) => {
+    
+    setProjects([...projects, newProject]); // Add new project to the list
+    setNewProject({ name: '', description: '', githubLink: '', driveLink: '' }); // Reset form
+    
+  };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
@@ -209,131 +264,95 @@ function HomeProfile() {
 
           {/* Assigned work */}
           <div className="w-full h-full bg-Yellow mt-[10px] rounded-md p-2 mb-[10px] pl-[20px] max-sm:w-[98%]">
+            {/* <h1 className="font-bold text-lg text-Darkblue ">Assigned Trainings /Bootcamps/ Workshops</h1>
+            <div className="w-[26%] max-sm:w-[98%] mt-[10px] border-1 border-white bg-Darkblue rounded-md transform transition-transform duration-500 ease-in-out hover:scale-105">
+              <img src={assigned1} className="rounded-md"/>
+              <div className="p-2 ">
+                <p className="text-center font-semibold text-Yellow text-lg">Full Stack Development</p>
+                <p className="text-justify font-normal text-white text-md">learn full stack and build your own sites and make it functional</p>
+              </div>
+              <div className="w-full flex justify-end pb-[10px] pr-[10px]">
+                <button className="text-Darkblue bg-Yellow rounded-[30px] ring-2 
+                ring-Yellow w-[50%] ">Get Started</button>
+              </div>
+
+            </div> */}
             {/* Projects */}
             <div className="w-full space-y-2">
+              <div className="w-full flex space-x-2 ">
               <h1 className="mt-[10px] font-bold text-lg">Projects</h1>
-              <hr className="h-1 bg-Darkblue rounded-md mb-[10px]" />
+              <button className="ring-2 ring-Darkblue bg-Darkblue text-Yellow rounded-md px-2" onClick={()=>setAddProject(true)}>
+                Add projects</button>
+              </div>
+              <AddProject addProject={addProject} onClose={()=>setAddProject(false)} handleFormSubmit={handleFormSubmit} handleInputChange={handleInputChange} newProject={newProject}/>
+              <hr className="h-1 bg-Darkblue rounded-md mb-[10px]"/>
+              {/* foot style */}
+              {projects.map((project)=>(
+                <div key={project.id} className="bg-Darkblue p-2 rounded-md flex w-full space-x-2 max-sm:flex-col">
+                <div className="image h-[150px] w-[280px] max-sm:w-full">
+                  <img src={ecommerce} className=" projectImage w-full h-full rounded-md"/>
+                  <div  className="content text-White font-semibold p-[2px]">
+                    <h1 className="text-lg font-bold text-Yellow underline">{project.name}</h1>
+                    <p className="text-center">{project.description}</p>
+                  </div>
 
-              {/* Foot Style */}
-              <div className="bg-Darkblue p-6 rounded-lg flex flex-wrap w-full space-y-4 md:space-y-0 md:flex-nowrap md:space-x-4">
-                <div className="image h-[150px] w-full md:w-[280px]">
-                  <img src={ecommerce} className="w-full h-full rounded-lg object-cover" />
-                  <div className="content text-White font-semibold mt-2">
-                    <h1 className="text-xl font-bold text-Yellow underline text-center">Foot Style</h1>
-                    <p className="text-center">It is an E-commerce website lorem ipsum</p>
-                  </div>
                 </div>
-                <div className="w-full md:flex-1 space-y-6">
-                  <h1 className="text-2xl font-bold text-Yellow text-center md:text-left">Foot Style</h1>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">GitHub Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Enter your project repo link" />
+                <div className="w-full   ">
+                    <h1 className="text-xl font-bold text-Yellow text-center">{project.name}</h1>
+                    <div className="flex w-full md:justify-around max-sm:flex-col">
+                      <span className="w-[45%] max-sm:w-[90%]">
+                         <p className="text-white text-lg font-semibold">Github Link:</p>
+                         <a className="text-Yellow text-lg font-semibold hover:underline" href={project.githubLink} >github link-click me</a>
+                        {/* <input type="text" className="outline-none rounded-md w-full" placeholder="Enter your project repo link" /> */}
+                      </span>
+                      <span className="w-[45%] max-sm:w-[90%]">
+                       <p className="text-white text-lg font-semibold">website Link:</p>
+                       <a href={project.driveLink} className="text-Yellow text-lg font-semibold hover:underline">website-clickMe</a>
+                        {/* <input type="text" className="outline-none rounded-md w-full " placeholder="provide if you have deployed" /> */}
+                      </span>
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">Website Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Provide if you have deployed" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
+                    <div className="flex w-full justify-around max-sm:flex-col">
+                    <div className="flex w-[50%] mt-[30px] max-sm:mt-[20px] max-sm:w-full md:ml-[20px] space-x-2 ">
+                      <span className="flex-col">
                         <p className="text-white text-lg font-bold">Working Model:</p>
                         <p className="text-white">(website video link)</p>
-                      </div>
-                      <DriveFilePicker />
+                      </span>
+                      <button className="bg-White text-Yellow font-bold
+                       text-lg border-none ring-2 ring-white 
+                       rounded-md w-[20%] h-[30px] max-sm:w-[30%]">
+                          <DriveFilePicker />
+                       </button>
                     </div>
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
-                        <p className="text-white text-lg font-bold">Proposal:</p>
-                      </div>
-                      <DriveFilePicker />
+                    <div className="flex mt-[30px] w-[50%] max-sm:w-full max-sm:mt-[20px] md:ml-[20px] space-x-2 ">
+                      <span className="flex-col">
+                      <p className="text-white text-lg font-bold">Proposal:</p>
+                      {/* <p className="text-white">(view the pdf)</p> */}
+                      </span>
+                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2
+                       ring-white rounded-md w-[20%] h-[30px] max-sm:w-[30%] flex justify-center items-center">
+                         <DriveFilePicker />
+                       </button>
                     </div>
-                  </div>
+                    </div>
                 </div>
+
               </div>
 
-              <div className="bg-Darkblue p-6 rounded-lg flex flex-wrap w-full space-y-4 md:space-y-0 md:flex-nowrap md:space-x-4">
-                <div className="image h-[150px] w-full md:w-[280px]">
-                  <img src={library} className="w-full h-full rounded-lg object-cover" />
-                  <div className="content text-White font-semibold mt-2">
-                    <h1 className="text-xl font-bold text-Yellow underline text-center">Library Management System</h1>
-                    <p className="text-center">It is a Management system using MERN stack</p>
-                  </div>
-                </div>
-                <div className="w-full md:flex-1 space-y-6">
-                  <h1 className="text-2xl font-bold text-Yellow text-center md:text-left">Library Management System</h1>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">GitHub Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Enter your project repo link" />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">Vercel Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Provide if you have deployed" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
-                        <p className="text-white text-lg font-bold">Working Model:</p>
-                        <p className="text-white">(website video link)</p>
-                      </div>
-                      <DriveFilePicker />
-                    </div>
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
-                        <p className="text-white text-lg font-bold">Proposal:</p>
-                      </div>
-                      <DriveFilePicker />
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Admin Dashboard */}
-              <div className="bg-Darkblue p-6 rounded-lg flex flex-wrap w-full space-y-4 md:space-y-0 md:flex-nowrap md:space-x-4">
-                <div className="image h-[150px] w-full md:w-[280px]">
-                  <img src={admin} className="w-full h-full rounded-lg object-cover" />
-                  <div className="content text-White font-semibold mt-2">
-                    <h1 className="text-xl font-bold text-Yellow underline">Admin Dashboard</h1>
-                    <p className="text-center">An Admin dashboard designed using Figma</p>
-                  </div>
-                </div>
-                <div className="w-full md:flex-1 space-y-6">
-                  <h1 className="text-2xl font-bold text-Yellow text-center md:text-left">Admin Dashboard</h1>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">GitHub Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Enter your project repo link" />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-white text-lg font-semibold">Figma Link:</p>
-                      <input type="text" className="outline-none px-3 py-2 rounded-lg w-full" placeholder="Provide if you have deployed" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
-                        <p className="text-white text-lg font-bold">Working Model:</p>
-                        <p className="text-white">(website video link)</p>
-                      </div>
-                      <DriveFilePicker />
-                    </div>
-                    <div className="flex flex-1 items-center space-x-4">
-                      <div className="flex flex-col">
-                        <p className="text-white text-lg font-bold">Proposal:</p>
-                      </div>
-                      <DriveFilePicker />
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+              ))}
+              
+              
+              
             </div>
+
           </div>
+
+          
         </div>
       </div>
     </div>
+
   );
 }
 {/* <h1 className={`${isClick?" bg-Darkblue text-Yellow ":" bg-Yellow text-Darkblue "}`}></h1> */ }
