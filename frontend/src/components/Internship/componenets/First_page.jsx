@@ -14,11 +14,11 @@ function First_page() {
           <span className="text-4xl text-[#F5CF6B]">Altruisty</span> help you to Take your career to next level by Join Our Exciting Internship Journey
         </div>
         <div className="mt-10">
-          <Link to={'/HomePage'}><button className="bg-[#F5CF6B] text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md m-2 hover:bg-yellow-600">
+          <Link to={'/Internships/Homepage'}><button className="bg-[#F5CF6B] text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md m-2 hover:bg-yellow-600">
             real time project
           </button></Link>
         
-          <Link to={'/InternDetail'}><button className=" bg-[#17212E] text-[white] font-semibold py-2 px-4 rounded-md shadow-md m-2 hover:bg-gray-800">
+          <Link to={'/training/Internships/HomePage'}><button className=" bg-[#17212E] text-[white] font-semibold py-2 px-4 rounded-md shadow-md m-2 hover:bg-gray-800">
           training internship
           </button></Link>
          

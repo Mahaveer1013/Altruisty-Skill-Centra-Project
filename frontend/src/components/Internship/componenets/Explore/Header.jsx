@@ -13,7 +13,7 @@ const Header = () => {
       <nav className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex  items-center">
-          <Link to={"/Internships/InternDetails/DomainPage/CourseDetails"}><h1>{"<"} &nbsp; Back</h1></Link>
+          <Link to={"/Internships/Homepage/InternDetails/DomainPage/CourseDetails"}><h1>{"<"} &nbsp; Back</h1></Link>
           </div>
           <div>
           <img src={logo} alt="" className='h-16 '/>

@@ -4,11 +4,11 @@ import img from "../assets/images/profileimg.jpg"
 export default function Subscription() {
 
     const users = [
-        { Title: "Plan Period", Data: "2 Months" },
-        { Title: "Plan Starts", Data: "16.07.2024" },
-        { Title: "Plan ends", Data: "16.12.2024" },
-        { Title: "Payment", Data: "xxyyz243" },
-        { Title: "Completion", Data: "Internship" },
+        {id:1, Title: "Plan Period", Data: "2 Months" },
+        {id:2, Title: "Plan Starts", Data: "16.07.2024" },
+        {id:3, Title: "Plan ends", Data: "16.12.2024" },
+        {id:4, Title: "Transaction_id", Data: "xxyyz243" },
+        {id:5, Title: "Course Completion", Data: "Full stack" },
 
       ];
 
@@ -58,18 +58,18 @@ export default function Subscription() {
         </div>
 
         {/* User Table */}
-        <table className="w-[500px] h-full mx-auto bg-dark-blue rounded-lg mt-10">
+        <table className="w-[500px] h-full items-center mx-auto bg-dark-blue rounded-lg mt-10">
           <thead>
             <tr className="bg-light-yellow text-dark-blue">
-              <th className="py-4 px-6">Title</th>
-              <th className="py-4 px-6">Data</th>
+              <th className="py-4 px-16">Title</th>
+              <th className="py-4 px-16">Data</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="text-center text-white border-b mx-auto">
-                <td className="py-4 px-8 text-justify pl-[100px] pr-[100px]">{user.Title}</td>
-                <td className="py-4 px-8 text-justify pl-[100px] pr-[100px]">{user.Data}</td>
+              <tr key={user.id} className="text-center items-center text-white border-b mx-auto pl-[150px]">
+                <td className="py-4 px-26 text-center text-justify pl-[100px]">{user.Title}</td>
+                <td className="py-4 px-26 text-center text-justify pr-[50px] pl-16">{user.Data}</td>
               </tr>
             ))}
           </tbody>

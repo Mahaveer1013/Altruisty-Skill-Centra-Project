@@ -7,6 +7,10 @@ module.exports = {
 			Darkblue:"#17212E",
 			Yellow:"#F5CF6B",
 			White:"#FFFFFF",
+			'bgcolor':'#F5CF6B',
+			'dark-blue':'#111E28',
+			'light-yellow':'#E6B63C',
+			'white':'#FFFFFF',
 		},
 		fontFamily: {
 		  Poppins: ["Poppins", "sans-serif"],

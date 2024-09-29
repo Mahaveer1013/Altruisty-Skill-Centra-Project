@@ -1,6 +1,6 @@
 import img from "../assets/images/profileimg.jpg";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell } from "recharts";
 
 export default function StudentDetails() {
@@ -8,16 +8,19 @@ export default function StudentDetails() {
     /**student detail json */
   }
   const users = [
-    { Title: "Domain", Data: "UI / UX" },
-    { Title: "Internship Period", Data: "2 Months" },
-    { Title: "Currently work on", Data: "Day 10" },
-    { Title: "Joined Date", Data: "10.7.2024" },
-    { Title: "End Date", Data: "10.8.2024" },
-    { Title: "Subscription", Data: "1 Month", Button: "View" },
-    { Title: "Assignment", Data: "5 / 5", Button: "View" },
-    { Title: "Task", Data: "30 / 30", Button: "View" },
-    { Title: "Project", Data: "1 / 3", Button: "View" },
+    { id:1, Title: "Domain", Data: "UI / UX" },
+    { id:2, Title: "Internship Period", Data: "2 Months" },
+    { id:3, Title: "Currently work on", Data: "Day 10" },
+    { id:4, Title: "Joined Date", Data: "10.7.2024" },
+    { id:5, Title: "End Date", Data: "10.8.2024" },
+    { id:6, Title: "Subscription", Data: "1 Month", Button: "View", route:'/Subscription'},
+    { id:7, Title: "Assignment", Data: "5 / 5", Button: "View", route:'/Profileattribute'},
+    { id:8, Title: "Task", Data: "30 / 30", Button: "View", route:'/Profileattribute'},
+    { id:9, Title: "Project", Data: "1 / 3", Button: "View", route:'/Profileattribute'},
   ];
+
+  {/**router navigation for view button */}
+  const navigate = useNavigate();
 
   {
     /**Analysis json */
@@ -148,13 +151,13 @@ export default function StudentDetails() {
                 <td className="py-2 px-16 text-justify pl-[160px]">
                   {user.Data}{" "}
                 </td>
-                <Link to="/Profileattribute">
-                  <td className="mr-10">
-                    <button className=" bg-light-yellow text-dark-blue w-10 my-2 mr-6 mx-auto rounded-lg">
-                      {user.Button}
-                    </button>
-                  </td>
-                </Link>
+                <td className="mr-10">
+                  <button className=" bg-light-yellow text-dark-blue w-10 my-2 mr-6 mx-auto rounded-lg"
+                    onClick={() => navigate(user.route)}
+                  >
+                    {user.Button}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

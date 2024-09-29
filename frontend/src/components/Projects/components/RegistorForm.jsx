@@ -48,7 +48,7 @@ const RegistorForm = ({ isFormOpen, SetFormOpen }) => {
         {isFormOpen && (
           <div>
             <div className="flex justify-center align-middle mx-3 md:-m-0 items-center min-h-screen ">
-              <div className="bg-white p-6 md:p-8 rounded-2xl w-full max-w-md border border-2 border-[#F5CF6B]">
+              <div className="bg-white p-6 md:p-8 rounded-2xl w-full max-w-md border-2 border-[#F5CF6B]">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-center">
                     Register Now!

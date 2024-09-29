@@ -4,6 +4,7 @@ import "./EditProfile.css";
 
 function EditProfile({ editProfile, onClose, handleData1 }) {
   const [phone, setPhone] = useState("");
+  const [FullName,SetfullName] = useState('')
   const [college, setCollege] = useState("");
   const [github, setGithub] = useState("");
   const [LinkedIn, SetLinkedIn] = useState("");
@@ -14,7 +15,7 @@ function EditProfile({ editProfile, onClose, handleData1 }) {
 
   const handleData = (e) => {
     e.preventDefault();
-    handleData1(phone, college, github, LinkedIn, Portfolio, profile, domain);
+    handleData1(FullName,phone, college, github, LinkedIn, Portfolio, profile, domain);
     onClose();
   };
 
@@ -57,6 +58,19 @@ function EditProfile({ editProfile, onClose, handleData1 }) {
                 </div>
 
                 <form className="space-y-4 text-white" onSubmit={handleData}>
+                  
+                <div>
+                    <label className="block text-sm font-medium">
+                      Full Name <span className="text-Yellow">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter Your Full Name"
+                      onChange={(event) => SetfullName(event.target.value)}
+                      className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue"
+                    />
+                  </div>
+
                   <div>
                     <label className="block text-sm font-medium">
                       Phone <span className="text-Yellow">*</span>

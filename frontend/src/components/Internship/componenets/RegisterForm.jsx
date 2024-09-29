@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
+import api from '../../../api/api';
+import { useAuth } from '../../../AuthContext';
 
 const RegisterForm = () => {
   // State variables for each input field
@@ -22,35 +24,47 @@ const RegisterForm = () => {
   const [github, setGithub] = useState('');
   const [duration, setDuration] = useState('');
   const [resume, setResume] = useState(null);
+  const {setFlash} = useAuth();
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // Create an object with all the form data
-    const formData = {
-      name,
-      email,
-      address,
-      country,
-      city,
-      countryCode,
-      phoneNo,
-      domain,
-      graduatingYear,
-      college,
-      reason,
-      skills,
-      department,
-      year,
-      linkedin,
-      github,
-      duration,
-      resume,
-    };
-
+    try
+    {
+      const formData = {
+        name,
+        email,
+        address,
+        country,
+        city,
+        countryCode,
+        phoneNo,
+        domain,
+        graduatingYear,
+        college,
+        reason,
+        skills,
+        department,
+        year,
+        linkedin,
+        github,
+        duration,
+        resume,
+      };
+      console.log(formData);
+      const res = await api.post('/interns',formData);
+      console.log(res);
+      if(res.status === 200)
+      {
+          setFlash(['Registered sucessfully we will contact you soon','info'])
+      }
+  
+    }
+  
     // TODO: Send formData to the backend database
-    console.log(formData);
+    
     // You can use fetch or axios to send the data to the backend
     // Example:
     // fetch('/api/register', {
@@ -61,6 +75,10 @@ const RegisterForm = () => {
     //   body: JSON.stringify(formData),
     // }).then(response => response.json())
     // .then(data => console.log(data));
+    catch(err)
+    {
+      console.error(err);
+    }
   };
 
   return (
@@ -284,14 +302,16 @@ const RegisterForm = () => {
               <label className="block mb-2">Resume Upload</label>
               <input
                 type="file"
-                required
+               required
                 className="w-full p-2 border border-gray-300 rounded-md bg-[#1C2540] text-white"
                 onChange={(e) => setResume(e.target.files[0])}
               />
             </div>
 
             {/* Submit Button */}
-            <button className="w-full bg-[#17212E] text-white hover:bg-[#F5CF6B] hover:text-[#17212E] p-2 rounded-md mt-4">
+            <button 
+            onClick={(e)=>handleSubmit(e)}
+            className="w-full bg-[#17212E] text-white hover:bg-[#F5CF6B] hover:text-[#17212E] p-2 rounded-md mt-4">
               Register
             </button>
           </form>

@@ -16,7 +16,7 @@ const About = () => {
         </div>
         <h1 className='mt-3 text-2xl font-bold'>Intern with Altruistry</h1>
         <p className='mt-3 text-xl md:mr-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <Link to={"/Internships/InternDetails"}><button className='bg-[#17212E] text-white hover:bg-[#F5CF6B] hover:text-[#17212E] h-12 w-28 rounded-md  mt-5'>Read More</button>
+        <Link to={"/Internships/HomePage/InternDetails"}><button className='bg-[#17212E] text-white hover:bg-[#F5CF6B] hover:text-[#17212E] h-12 w-28 rounded-md  mt-5'>Read More</button>
         </Link></div>
       </div>
     </section>

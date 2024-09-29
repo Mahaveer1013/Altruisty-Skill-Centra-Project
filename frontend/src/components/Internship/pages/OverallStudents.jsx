@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react'
 import { IoSearchOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-export default function Currentstudents() {
+export default function OverallStudents() {
 
-  const data = [
-    {id:1, title: "UI / UX design", count: 23, route:'/Students'},
-    {id:2, title: "Java developer", count: 25, route:'/Students'},
-    {id:3, title: "UI / UX design", count: 26, route:'/Students'},
-    {id:4, title: "Java developer", count: 24, route:'/Students'},
-    {id:5, title: "UI / UX design", count: 33, route:'/Students'},
-    {id:6, title: "Java developer", count: 24, route:'/Students'},
-    {id:7, title: "UI / UX design", count: 29, route:'/Students'},
-    {id:8, title: "Java developer", count: 33, route:'/Students'},
-    {id:9, title: "UI / UX design", count: 23, route:'/Students'},
-  ];
-
-  //for router navigation
-  const navigate = useNavigate();
+    const data = [
+        {id:1, title: "UI / UX design", count: 23, route:'/Students'},
+        {id:2, title: "Java developer", count: 25, route:'/Students'},
+        {id:3, title: "UI / UX design", count: 26, route:'/Students'},
+        {id:4, title: "Java developer", count: 24, route:'/Students'},
+        {id:5, title: "UI / UX design", count: 33, route:'/Students'},
+        {id:6, title: "Java developer", count: 24, route:'/Students'},
+        {id:7, title: "UI / UX design", count: 29, route:'/Students'},
+        {id:8, title: "Java developer", count: 33, route:'/Students'},
+        {id:9, title: "UI / UX design", count: 23, route:'/Students'},
+      ];
+    
+      //for router navigation
+      const navigate = useNavigate();
 
   return (
     <div className="flex flex-row w-full h-full mx-auto">
@@ -68,8 +68,8 @@ export default function Currentstudents() {
         </header>
 
         <div className="bg-dark-blue text-center py-6 rounded mb-8">
-          <h2 className="text-2xl font-bold text-light-yellow">1433</h2>
-          <p className="text-white">Current students</p>
+          <h2 className="text-2xl font-bold text-light-yellow">5300</h2>
+          <p className="text-white">Overall students</p>
         </div>
 
         {/* Data Cards */}
@@ -89,5 +89,5 @@ export default function Currentstudents() {
         </div>
       </div>
     </div>
-  );
+  )
 }

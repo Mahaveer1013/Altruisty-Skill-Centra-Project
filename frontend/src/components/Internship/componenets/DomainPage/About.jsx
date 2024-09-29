@@ -7,7 +7,7 @@ const About = () => {
   return (
     <div className="bg-gray-900 text-white py-10 px-5 font-times  flex  items-center justify-between">
       <div  className="absolute top-2 left-0 pr-1.5 rounded-tr-md rounded-br-md">
-        <Link to={"/Internships/InternDetails"}>
+        <Link to={"/Internships/Homepage/InternDetails"}>
           <h1 className="bg-Yellow text-black text-semibold md:font-bold text-lg md:text-1.5xl p-1.5 rounded-br-md rounded-tr-md mb-0.75">{"<"} Back&nbsp;&nbsp;</h1>
         </Link>
       </div>
@@ -15,19 +15,19 @@ const About = () => {
 
       <div>
         <div className="md:flex  justify-center w-full md:px-20 md:py-3 lg:px-40">
-          <div className="flex items-center bg-gray-800 rounded-full px-4 py-2 mb-4 lg:mb-0 lg:mr-4 ">
+          {/* <div className="flex items-center bg-gray-800 rounded-full px-4 py-2 mb-4 lg:mb-0 lg:mr-4 ">
             <input
               type="text"
               placeholder="Search..."
               className="bg-transparent border-none text-white focus:outline-none w-full md:w-[300px]"
             />
             <FiSearch className="text-[#F5CF6B]   ml-2" size={20} />
-          </div>
-          <div className="flex justify-center ">
+          </div> */}
+        {/*   <div className="flex justify-center ">
             <button className="bg-[#F5CF6B] text-gray-900 font-semibold py-2 px-6 rounded-full shadow-md">
               Search now
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-6  text-center lg:text-left w-full md:mt-10 md:px-20 ">
@@ -36,9 +36,9 @@ const About = () => {
             of corporate employee
           </h2>
           <div className="flex justify-center">
-            <button className="bg-[#F5CF6B] text-[#17212E]  font-semibold py-2 px-6 mt-4 rounded-md ">
+            {/* <button className="bg-[#F5CF6B] text-[#17212E]  font-semibold py-2 px-6 mt-4 rounded-md ">
               Apply now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -53,4 +53,3 @@ const About = () => {
 };
 
 export default About;
-

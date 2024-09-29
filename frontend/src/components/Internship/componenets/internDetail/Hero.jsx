@@ -18,9 +18,9 @@ const Hero = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
         </p>
         <div className='flex'>
-          <Link to={"/Internships/InternDetails/DomainPage"}>
+          <Link to={"/Internships/Homepage/InternDetails/DomainPage"}>
         <button className="bg-[#F5CF6B] text-[#17212E] font-semibold py-2 px-4 rounded-lg shadow-md mt-4 hover:bg-yellow-500">
-          Apply Now
+          View Domain
         </button>
         </Link>
         <div className='hidden md:block ml-3'>

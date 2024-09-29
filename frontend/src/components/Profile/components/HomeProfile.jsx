@@ -11,7 +11,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import api from "../../../api/api";
 import AddProject from "./AddProject";
-
+import {useAuth} from "../../../AuthContext"
 
 function HomeProfile() {
   const [editProfile, setEditProfile] = useState(false);
@@ -27,9 +27,9 @@ function HomeProfile() {
   const [Profile, SetProfile] = useState("");
   const [Resume, SetResume] = useState([]);
   const [file, setFile] = useState(null); // State to hold the uploaded image
-  
+  const {setFlash} = useAuth()
   const [addProject,setAddProject]=useState(false);
-  const handleData1 = async (phone, college, github, LinkedIn, Portfolio, Profile, domain) => {
+  const handleData1 = async (FullName,phone, college, github, LinkedIn, Portfolio, Profile, domain) => {
     setPhoneNumber(phone);
     setCollegeName(college);
     setGithub(github);
@@ -37,9 +37,11 @@ function HomeProfile() {
     SetPortfolio(Portfolio);
     setDomain(domain);
     SetProfile(Profile);
-  
+    SetfullName(FullName);
+    console.log(FullName);
     try {
       const formData = new FormData();
+      formData.append('username',FullName)
       formData.append('PhoneNumber', phone);
       formData.append('CollegeName', college);
       formData.append('github', github);
@@ -48,13 +50,12 @@ function HomeProfile() {
       formData.append('domain', domain);
   
       if (file) {
-        formData.append('ProfilePicture', file); // Send file object
+        formData.append('ProfilePicture', file); 
       } else if (Profile) {
-        formData.append('ProfileBase64', Profile); // Send base64 string
+        formData.append('ProfileBase64', Profile); 
       }
   
-      formData.append('Resume', JSON.stringify(Resume)); // Ensure Resume is in the correct format
-  
+      formData.append('Resume', JSON.stringify(Resume)); 
       // Log formData to check values
       for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
@@ -64,7 +65,7 @@ function HomeProfile() {
        
       });
       console.log("Profile updated:", res.data);
-      fetchDetails(); // Refresh profile data after updating
+      fetchDetails();
     } catch (err) {
       console.error("Error updating profile:", err);
     }
@@ -76,6 +77,7 @@ function HomeProfile() {
       const res = await api.get('/user');
       console.log(res.data);
       SetResData(res.data);
+      SetEmailId(res.data.email)
       SetfullName(res.data.username);
       SetPortfolio(res.data.Portfolio);
       setPhoneNumber(res.data.phone_number);
@@ -91,8 +93,10 @@ function HomeProfile() {
   };
 
   useEffect(() => {
+    setFlash(['Kindly update your profile before proceeding', 'info']); 
     Aos.init();
     fetchDetails();
+    
   }, []);
 
   const [openPicker, data, authResponse] = useDrivePicker();

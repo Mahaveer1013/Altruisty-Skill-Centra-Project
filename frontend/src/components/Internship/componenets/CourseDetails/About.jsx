@@ -23,10 +23,15 @@ const About = () => {
         Gain mastery in UI/UX Design from the comfort of your home and open doors to amazing job opportunities with our but the certification program. Enroll in our intensive 4-week internship, where you'll acquire knowledge in web application the way it development and deployment . Establish a strong base for your career and real-world implementation within a supportive and collaborative setting.
         </h2>
         <div className='flex justify-evenly'>
+          {
+            /* undeclared buttons */
+          }
+          {/* <Link to={'/Internships/Homepage/InternDetails/DomainPage/CourseDetails/DetailedCoursePlans'}>
            <button className="bg-[#F5CF6B] text-[#17212E]  font-semibold py-2 px-6 mt-4 rounded-md ">
               Apply now
            </button>
-           <Link to={'/Internships/InternDetails/DomainPage/CourseDetails/Explore'}><button className="border-2 border-[#F5CF6B] text-white bg-[#17212E]  font-semibold py-2 px-6 mt-4 rounded-md ">
+           </Link> */}
+           <Link to={'/Internships/Homepage/InternDetails/DomainPage/CourseDetails/Explore'}><button className="border-2 border-[#F5CF6B] text-white bg-[#17212E]  font-semibold py-2 px-6 mt-4 rounded-md ">
               Explore now
            </button></Link>
         </div>
@@ -44,4 +49,3 @@ const About = () => {
 };
 
 export default About;
-

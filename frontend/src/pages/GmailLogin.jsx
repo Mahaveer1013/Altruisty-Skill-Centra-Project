@@ -8,7 +8,7 @@ const GmailLogin = () => {
 
     const { setFlash, checkUser, isLoggedIn } = useAuth();
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState(''); // State for confirm password
     const [isSignup, setIsSignup] = useState(false); // State to toggle between login and signup forms
@@ -28,20 +28,24 @@ const GmailLogin = () => {
                 return;
             }
             await encryptApi.post('/credential-signup', {
-                username: username,
+                email: email,
                 password: password,
             }).then(() => {
                 setIsSignup(false)
                 setFlash(['Success, Login Now !', 'success']);
+               
             }).catch((error) => {
                 setFlash([error.response.data.message, 'error']);
             })
         } else {
             await encryptApi.post('/credential-login', {
-                username: username,
+                email: email,
                 password: password,
             }).then(() => {
                 checkUser();
+                setTimeout(() => {
+                    navigate('/profile');
+                }, 100);
                 setFlash(['Logged In Successfully', 'success']);
             }).catch((error) => {
                 setFlash([error.response.data.message, 'error']);
@@ -74,10 +78,10 @@ const GmailLogin = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mb-6">
                     <input
                         className="border border-[#17212E] p-3 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-[#17212E]"
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                     <input

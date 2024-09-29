@@ -42,7 +42,24 @@ import CoursePlans from './components/Internship/componenets/CoursePlans/CourseP
 // import Basic from './components/Projects/components/Routes/Basic';
 // import Premium from './components/Projects/components/Routes/Premium';
 // import Fullstack from './components/Projects/components/Routes/Fullstack';
+import DayDetail from './components/Internship/componenets/Explore/DayDetail';
 import { InternProvider } from './components/Internship/InternContext';
+import DetailedCoursePlans from "./components/Internship/componenets/CoursePlans/DetailedCoursePlans"
+import First_page from './components/Internship/componenets/First_page';
+/* import RegistorForm from './components/Projects/components/RegistorForm'; */
+import RegisterForm from './components/Internship/componenets/RegisterForm'
+import OverallStudents from './components/Internship/pages/OverallStudents';
+import Previous from './components/Internship/pages/Previous';
+import Nextbatch from './components/Internship/pages/Nextbatch';
+import Students from './components/Internship/pages/Students';
+import Paymentdetails from './components/Internship/pages/Paymentdetails';
+import AdminMain from './components/Internship/pages/Training/AdminMain';
+import PreviousPlan from "./components/Internship/pages/Training/PreviousPlan"
+import CurrentPlan from './components/Internship/pages/Training/CurrentPlan'
+import Overallplan from './components/Internship/pages/Training/Overallplan';
+import Mentor from './components/Internship/pages/Training/Mentor';
+import TrainingProcedure from './components/Internship/componenets/HomePage/TrainingProcedure';
+
 function Main() {
   const { isSidebar } = useAuth();
 
@@ -79,19 +96,48 @@ function Main() {
           <Route path="/profile/certifications" element={<Certifications />} />
 
           <Route path='/CrntStudents' element={<Currentstudents />} />
-          <Route path='/CrntStudents/Current' element={<Current />} />
+          <Route path='/OverallStudents' element={<OverallStudents />} />
+          {/* <Route path='/CrntStudents/Current' element={<Current />} /> */}
+          <Route path='/Previous' element={<Previous />} />
+          <Route path='/Nextbatch' element={<Nextbatch />} />
+
+          <Route path='/Students' element={<Students />} />
           <Route path='/Mainpage' element={<Mainpage />} />
           <Route path='/StudentDetails' element={<StudentDetails />} />
           <Route path='/Profileattribute' element={<Profileattribute />} />
           <Route path='/Subscription' element={<Subscription />} />
-          
-          <Route path= 'Learning/Internship' element={<HomePage />} />
+          <Route path='/Payment' element={<Paymentdetails />} />
+
+      <Route path='/Training/Main' element={<AdminMain />}/>
+      <Route path='/Training/PreviousPlan' element={<PreviousPlan />} />
+      <Route path='/Training/CurrentPlan' element={<CurrentPlan />} />
+      <Route path='/Training/OverallPlan' element={<Overallplan />} />
+      <Route path='/Mentor' element={<Mentor/>} />
+        
+
+
+
+          <Route path= '/Internships' element={<First_page />} />
+          <Route path='/RegisterForm' element={<RegisterForm />} />
+          <Route path= '/Internships/Projects' element={<ProcedureSteps />} />
+          <Route path= '/Internships/Homepage' element={<HomePage />} />
+          <Route path='/training/Internships/homepage' element={<TrainingProcedure />} />
+          <Route path= '/Internships/Homepage/InternDetails' element={<InternDetail />} />
+          <Route path='/Internships/Homepage/InternDetails/DomainPage' element={<DomainPage/>}/>
+          <Route path= '/Internships/Homepage/InternDetails/DomainPage/CourseDetails' element={<CourseDetails />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CoursePlans/:id' element={<CoursePlans />} />
+          {/* <Route path= '/Internships/Homepage/InternDetails/DomainPage/CoursePlans' element={<CoursePlans />} /> */}
+          <Route path= '/Internships/Homepage/InternDetails/DomainPage/CourseDetails/DetailedCoursePlans' element={<DetailedCoursePlans />} />
+          <Route path= '/Internships/Homepage/InternDetails/DomainPage/CourseDetails/Explore' element={<Explore />} />
+          <Route path="/day/:day" element={<DayDetail />} />
+          {/* <Route path='/Internships/Projects' element={<ProjectPage/>} />
+          {/* <Route path= 'Learning/Internship' element={<HomePage />} />
           <Route path= '/Internships/InternDetails' element={<InternDetail />} />
           <Route path='/Internships/InternDetails/DomainPage' element={<DomainPage/>}/>
           <Route path= '/Internships/InternDetails/DomainPage/CourseDetails' element={<CourseDetails />} />
-          <Route path= '/Internships/InternDetails/DomainPage/CoursePlans/:id' element={<CoursePlans />} />
+          
           <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/CoursePlans' element={<CoursePlans />} />
-          <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/Explore' element={<Explore />} />
+          <Route path= '/Internships/InternDetails/DomainPage/CourseDetails/Explore' element={<Explore />} /> */}
           {/* <Route path='/Internships/Projects' element={<ProjectPage/>} />
           <Route path='/Internships/Projects/FullStack' element={<OverView/>} /> */}
 
@@ -105,6 +151,29 @@ function Main() {
           <Route path="/projects/fullstack/premium/:id" element={<Premium />} />
           <Route path="/projects/fullstack/basic/:id" element={<Basic />} />
           <Route path="/projects/fullstack/adv/:id" element={<Advanced />} />  */}
+
+            {/* Intern admin routes */}
+            {/* <Route path='/CurrentStudents' element={<CurrentStudents />} />
+            <Route path ='/OverallStudents' element={<OverallStudents />} />
+            <Route path='/Previous' element={<Previous />}/>
+            <Route path='/Nextbatch' element={<Nextbatch />}/>
+
+            <Route path='/Students' element={<Students />}/>
+           <Route path='/MainPage' element={<InternMainpage />} />
+           <Route path='/Profileattribute' element={<Profileattribute />}/>
+            <Route path='/InternAdmin/StudentDetails' element={<Studentdetails />} />
+            <Route path='/InternAdmin/Profileattribute' element={<InternProfileattribute />} />
+            <Route path='/InternAdmin/Subscription' element={<InternSubscription />} />
+            <Route path='payment' element={<Paymentdetails />} />
+
+
+            <Route path='/Training/Main' element={<InternMain />}/>
+            <Route path='/Training/PreviousPlan' element={<PreviousPlan />}/>
+            <Route path='/Training/CurrentPlan' element={<CurrentPlan/>}/>
+            <Route path='/Training/OverallPlan' element={<Overallplan />}/>
+            <Route path='/Mentor' element={<Mentor />}/> */}
+          
+
 
         </Routes>
       </main>

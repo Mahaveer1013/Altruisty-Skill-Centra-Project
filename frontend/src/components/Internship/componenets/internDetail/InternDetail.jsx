@@ -13,7 +13,7 @@ function InternDetail() {
       <About />
       <ProcedureSteps />
       <div className='flex justify-center bg-[#D4CAAA]'>
-         <Link to={'/Internships/InternDetails/DomainPage'}>
+         <Link to={'/Internships/Homepage/InternDetails/DomainPage'}>
             <button className='w-32 h-12 bg-[#17212E] text-white hover:bg-[#F5CF6B] hover:text-[#17212E] my-10 rounded-lg'>View Domain</button>
          </Link>
           </div>
