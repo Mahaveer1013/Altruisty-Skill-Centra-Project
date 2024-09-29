@@ -13,6 +13,7 @@ import socketLoginRequired from './src/middlewares/socketLoginRequired.js';
 import ProfileRoutes from "./src/routes/profile.js"
 import { insertDomains } from './src/controllers/domain.js';
 import UserInternRoutes from "./src/routes/userIntern.js"
+import AdminRoutes from "./src/routes/internship.js"
 // Initialize environment variables
 dotenv.config();
 
@@ -53,7 +54,7 @@ admin.initializeApp({
 app.use('/api', apiRoutes);
 app.use('/api',ProfileRoutes)
 app.use('/api',UserInternRoutes);
-
+app.use(AdminRoutes)
 // Socket.IO middleware for authentication
 io.use(socketLoginRequired);
 

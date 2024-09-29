@@ -1,5 +1,14 @@
+import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from 'url';
+import express from 'express';
+import { loginRequired } from "../middlewares/middleware.js";
+import { getInterns, handleAcceptIntern } from "../controllers/internAdmin.js";
 
+const router = express.Router();
 const db = mongoose.connection;
+
+// Register form schema
 
 const internSchema = new mongoose.Schema({
   name: String,
@@ -52,6 +61,8 @@ const internDataSchema = new mongoose.Schema({
 const InternData = mongoose.model('InternData', internDataSchema);
 
 let data = [];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const filePath = path.resolve(__dirname, 'internships.xlsx');
 
 try {
@@ -64,7 +75,7 @@ try {
   console.error(`Error reading Excel file at ${filePath}:`, error);
 }
 
-app.post('/api/fetch-and-save', async (req, res) => {
+router.post('/api/fetch-and-save', async (req, res) => {
   const { data } = req.body;
   console.log('Received body:', req.body);
 
@@ -100,11 +111,11 @@ app.post('/api/fetch-and-save', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.json({ message: 'API is working' });
 });
 
-app.post('/api/interns', async (req, res) => {
+router.post('/api/interns', async (req, res) => {
   const {
     name,
     email,
@@ -159,7 +170,7 @@ app.post('/api/interns', async (req, res) => {
   }
 });
 
-app.get('/api/interns', async (req, res) => {
+router.get('/api/interns', async (req, res) => {
   try {
     const interns = await Intern.find();
     res.status(200).json(interns);
@@ -169,7 +180,7 @@ app.get('/api/interns', async (req, res) => {
   }
 });
 
-app.get('/api/intern/:registernumber', async (req, res) => {
+router.get('/api/intern/:registernumber', async (req, res) => {
   const regNo = req.params.registernumber;
 
   console.log(regNo);
@@ -189,3 +200,8 @@ app.get('/api/intern/:registernumber', async (req, res) => {
     res.status(500).json({ message: 'Error finding intern data', error: error.message });
   }
 });
+
+router.get('/api/getInterns',loginRequired,getInterns);
+router.put('/api/acceptIntern/:id',loginRequired,handleAcceptIntern)
+
+export default router

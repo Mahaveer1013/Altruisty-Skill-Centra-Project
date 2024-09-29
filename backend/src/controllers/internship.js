@@ -11,6 +11,10 @@ export const registerInternship = async (req, res) => {
     if (!isDomain) {
         return res.status(400).json({ message: 'Domain is required' });
     }
+    const existingInternship = await Internship.findOne({ user: user._id, domain: domain });
+    if (existingInternship) {
+        return res.status(400).json({ message: 'Internship with this domain already exists for the user.' });
+    }
 
     try {
         const newInternship = new Internship({
@@ -98,4 +102,32 @@ export const updateInternProgress = async (req, res) => {
         res.status(500).json({ message: 'Error updating internship progress', error });
     }
 };
+export const getInternDetails = async(req,res)=>
+{
+    try
+    {
+        const user = req.user;
+        const internship = await Internship.find({user: user._id});
+        if(!internship)
+        {
+            return res.status(400).json({msg:"intern not found"});
+        }
+        res.status(200).json(internship);
+       
+    }
+    catch(err)
+    {
+        return res.status(500).json({message:"Error finding intern details"})
+    }
+}
+const onAcceptIntern = async(req,res)=>
+{
+    try
+    {
 
+    }
+    catch(err)
+    {
+
+    }
+}

@@ -108,7 +108,7 @@ const decryptRequest = (req, res, next) => {
       });
       req.on('end', () => {
           try {
-              const decryptedBytes = CryptoJS.AES.decrypt(data, secretKey);
+              const decryptedBytes = CryptoJS.AES.decrypt(data, SECRET_KEY);
               const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
               req.body = JSON.parse(decryptedText);
               next();
@@ -136,7 +136,7 @@ const encryptResponse = (req, res, next) => {
       try {
         if (body !== null) {
           try {
-            body= CryptoJS.AES.encrypt(body, secretKey).toString();
+            body= CryptoJS.AES.encrypt(body, SECRET_KEY).toString();
           } catch (error) {
             console.error('Error during value encryption:', error);
             throw new Error('Encryption failed');

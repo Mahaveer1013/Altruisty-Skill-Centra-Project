@@ -14,6 +14,8 @@ const internshipSchema = new Schema({
     transactionId:{type:String,required:true},
     role:{type:String,required:true},
     progress: [progressSchema],
+    completion:{type:Boolean,default:false},
+    verification:{type:String,default:"pending"}
 }, { timestamps: true }); // Enable timestamps
 
 const Internship = mongoose.model('Internship', internshipSchema);

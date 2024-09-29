@@ -93,13 +93,13 @@ export const firebaselogin = async (req, res) => {
 // ============> Credential login <===========
 export const credentialLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    console.log(username, password);
+    console.log(email, password);
     
     
     // Fetch user data from MongoDB
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid Credentials' });
     }
@@ -110,7 +110,7 @@ export const credentialLogin = async (req, res) => {
     }
 
     // Create a payload for the JWT token
-    const tokenPayload = { id: user._id, username: user.username };
+    const tokenPayload = { id: user._id, email: user.email };
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
     
@@ -138,21 +138,21 @@ export const credentialLogin = async (req, res) => {
 // ============> Credential signup <===========
 export const credentialSignup = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     
-    console.log(username, password);
+    console.log(email, password);
     
     // Check if the user already exists
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Username already exists' });
+      return res.status(400).json({ message: 'email already exists' });
     }
     
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create a new user
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });

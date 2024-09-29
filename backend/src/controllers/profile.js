@@ -9,17 +9,18 @@ export const registerProfile = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const { PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, ProfileBase64, Resume } = req.body;
+    const { username,PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, ProfileBase64, Resume } = req.body;
 
     console.log('Request Body:', req.body);
 
     // Prepare the fields to update
     const updateFields = {};
+    if(username) updateFields.username = username;
     if (PhoneNumber) updateFields.phone_number = PhoneNumber;
     if (CollegeName) updateFields.college = CollegeName;
     if (github) updateFields.github_link = github;
     if (LinkedIn) updateFields.linkedIn_link = LinkedIn;
-    if (Portfolio) updateFields.portfolio = Portfolio;  // Ensure field names match your schema
+    if (Portfolio) updateFields.Portfolio = Portfolio;  // Ensure field names match your schema
     if (domain) updateFields.Interest = domain;
 
     if (ProfileBase64) {
