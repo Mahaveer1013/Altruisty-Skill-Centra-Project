@@ -1,8 +1,110 @@
 import { useState } from "react";
 import { FaCirclePlus } from "react-icons/fa6";
 import { RiVideoFill } from "react-icons/ri";
+import api from "../../../../api/api";
+import { useAuth } from "../../../../AuthContext";
 
 function Upload({value}) {
+    const {setFlash} = useAuth()
+    const [FirstProj, SetFirstProj] = useState({
+        project1: "",
+      });
+      const [SecondProj, SetSecondProj] = useState({
+        project1: "",
+        project2: "",
+       
+      });
+      const [ThirdProj, SetThirdProj] = useState({
+        project1: "",
+        project2: "",
+        project3: "",
+       
+      });
+      const [FourthProj, SetFourthProj] = useState({
+        project1: "",
+        project2: "",
+        project3: "",
+        project4: "",
+      });
+      const handleSubmit1 = async(project1)=>
+      {
+        try
+        {
+            
+            const res = await api.post('/project1',project1)
+            console.log(res);
+            if(res.status === 201)
+            {
+                setFlash(['Project1 link submitted sucessfully','info'])
+            }
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+      }
+       const handleSubmit2 = async()=>
+       {
+            try
+            {
+                const projectLinks = {
+                    project1: SecondProj.project1 || '',
+                    project2: SecondProj.project2 || '',
+                   
+                };
+                const res = await api.post('/project2',projectLinks);
+                if(res.status === 201)
+                {
+                    setFlash(['Project Link is submitted sucessfully', 'info'])
+                }
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+       }
+
+       const handleSubmit3 = async()=>
+       {
+            try
+            {
+                const projectLinks = {
+                    project1: ThirdProj.project1 || '',
+                    project2: ThirdProj.project2 || '',
+                    project3: ThirdProj.project3 || ''
+                }
+                const res = await api.post('/project3',projectLinks);
+                if(res.status === 201)
+                {
+                    setFlash(['Project Link is submittes sucessfully','info'])
+                }
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+       }
+       const handleSubmit4 = async()=>
+       {
+        try
+        {
+            const projectLinks = {
+                project1: FourthProj.project1 || '', 
+                project2: FourthProj.project2 || '',
+                project3: FourthProj.project3 || '',
+                project4: FourthProj.project4 || '',
+            };
+            const res = await api.post('/project4',projectLinks)
+            if(res.status === 201)
+                {
+                    setFlash(['Project Link is submittes sucessfully','info'])
+                }
+        }
+        catch(err)
+        {
+            console.log(err)
+        }
+       }
 
     const Modal = ({ isOpen, onClose, children }) => {
         if (!isOpen) return null;
@@ -149,53 +251,296 @@ function Upload({value}) {
                     {
                      value=="15 Days"? 
                     <div className='flex mb-5 justify-between text-white md:px-6 p-3'>
-                    <h1 className='text-xl'>Project1 Drive Link</h1>
-                        <input type="text" className='rounded-lg md:w-[300px] ml-2' placeholder='  Enter the Drive Link' />
+                     <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                     <form
+  onSubmit={(e) => {
+    e.preventDefault();
+    if (FirstProj.project1 === '') {
+      alert("Please enter the Drive Link");
+    } else {
+      
+      console.log(FirstProj.project1);
+    }
+  }}
+>
+  <h1 className="text-xl">Project 1 Drive Link</h1>
+  <input
+    required
+    type="text"
+    value={FirstProj.project1}
+    onChange={(e) => SetFirstProj({ ...FirstProj, project1: e.target.value })}
+    className="md:w-[300px] rounded-lg mx-2 text-black"
+    placeholder="Enter the Drive Link"
+  />
+  <button className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold" type="submit">
+    Upload
+  </button>
+</form>
+
+                      </div>
                     </div> :""
                     }
                     {
                      value==1? 
-                    <div className='mb-5'><div className='flex justify-between text-white md:px-6 p-3'>
-                    <h1 className='text-xl'>Project1 Drive Link</h1>
-                        <input type="text" className='md:w-[300px] rounded-lg ml-2' placeholder='  Enter the Drive Link' />
-                    </div>
-                    <div className='flex justify-between text-white md:px-6 p-3'>
-                    <h1 className='text-xl'>Project1 Drive Link</h1>
-                        <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                    </div></div> :""
+                     <form
+  onSubmit={(e) => {
+    e.preventDefault();
+   
+   
+  }}
+>
+  <div className="mb-5">
+    <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+      <h1 className="text-xl">Project 1 Drive Link</h1>
+      <input
+        type="text"
+        required
+        value={SecondProj.project1}
+        onChange={(e) => SetSecondProj({ ...SecondProj, project1: e.target.value })}
+        className="md:w-[300px] rounded-lg mx-2 text-black"
+        placeholder="Enter the Drive Link"
+      />
+      <button 
+      className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold" 
+      type="submit"
+      onClick={() => {
+        if (!SecondProj.project1) {
+          alert("Project 1 Drive Link is not filled");
+        } else {
+          handleSubmit2()
+          console.log("Project 1 Drive Link:", SecondProj.project1);
+        }
+      }}
+      >
+        Upload
+      </button>
+    </div>
+
+    <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+      <h1 className="text-xl">Project 2 Drive Link</h1>
+      <input
+        type="text"
+        required
+        value={SecondProj.project2}
+        onChange={(e) => SetSecondProj({ ...SecondProj, project2: e.target.value })}
+        className="md:w-[300px] rounded-lg mx-2 text-black"
+        placeholder="Enter the Drive Link"
+      />
+      <button className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold" 
+      type="submit"
+      onClick={() => {
+        if (!SecondProj.project2) {
+          alert("Project 1 Drive Link is not filled");
+        } else {
+          
+          handleSubmit2();
+        }
+      }}
+      >
+        Upload
+      </button>
+    </div>
+  </div>
+</form>
+ :""
                     }{
                       value==2? 
-                      <div className='mb-5'>
-                      <div className='flex justify-between text-white md:px-6 p-3'>
-                   <h1 className='text-xl'>Project1 Drive Link</h1>
-                       <input type="text" className='md:w-[300px] rounded-lg ml-2' placeholder='  Enter the Drive Link' />
-                   </div> 
-                   <div className='flex justify-between text-white md:px-6 p-3'>
-                   <h1 className='text-xl'>Project2 Drive Link</h1>
-                       <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                   </div><div className='flex justify-between text-white md:px-6 p-3'>
-                   <h1 className='text-xl'>Project3 Drive Link</h1>
-                       <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                   </div></div> :""
+                      <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        // This can be empty if each button handles its own validation
+                      }}
+                    >
+                      <div className="mb-5">
+                        <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                          <h1 className="text-xl">Project 1 Drive Link</h1>
+                          <input
+                            required
+                            type="text"
+                            value={ThirdProj.project1}
+                            onChange={(e) => SetThirdProj({ ...ThirdProj, project1: e.target.value })}
+                            className="md:w-[300px] rounded-lg mx-2 text-black"
+                            placeholder="Enter the Drive Link"
+                          />
+                          <button
+                            className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={() => {
+                              if (!ThirdProj.project1) {
+                                alert("Project 1 Drive Link is not filled");
+                              } else {
+                                // Handle Project 1 Upload
+                                handleSubmit3();
+                                console.log("Project 1 Drive Link:", ThirdProj.project1);
+                              }
+                            }}
+                          >
+                            Upload
+                          </button>
+                        </div>
+                    
+                        <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                          <h1 className="text-xl">Project 2 Drive Link</h1>
+                          <input
+                            required
+                            type="text"
+                            value={ThirdProj.project2}
+                            onChange={(e) => SetThirdProj({ ...ThirdProj, project2: e.target.value })}
+                            className="md:w-[300px] rounded-lg mx-2 text-black"
+                            placeholder="Enter the Drive Link"
+                          />
+                          <button
+                            className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={() => {
+                              if (!ThirdProj.project2) {
+                                alert("Project 2 Drive Link is not filled");
+                              } else {
+                                // Handle Project 2 Upload
+                                handleSubmit3();
+                                console.log("Project 2 Drive Link:", ThirdProj.project2);
+                              }
+                            }}
+                          >
+                            Upload
+                          </button>
+                        </div>
+                    
+                        <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                          <h1 className="text-xl">Project 3 Drive Link</h1>
+                          <input
+                            required
+                            type="text"
+                            value={ThirdProj.project3}
+                            onChange={(e) => SetThirdProj({ ...ThirdProj, project3: e.target.value })}
+                            className="md:w-[300px] rounded-lg mx-2 text-black"
+                            placeholder="Enter the Drive Link"
+                          />
+                          <button
+                            className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={() => {
+                              if (!ThirdProj.project3) {
+                                alert("Project 3 Drive Link is not filled");
+                              } else {
+                                // Handle Project 3 Upload
+                                handleSubmit3();
+                                console.log("Project 3 Drive Link:", ThirdProj.project3);
+                              }
+                            }}
+                          >
+                            Upload
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    
+                    
+ :""
                      }{
                       value==3? 
-                      <div className='mb-5'>
-                        <div className='flex justify-between text-white md:px-6 p-3'>
-                     <h1 className='text-xl'>Project1 Drive Link</h1>
-                         <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                     </div> 
-                     <div className='flex justify-between text-white md:px-6 p-3'>
-                     <h1 className='text-xl'>Project2 Drive Link</h1>
-                         <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                     </div><div className='flex justify-between text-white md:px-6 p-3'>
-                     <h1 className='text-xl'>Project3 Drive Link</h1>
-                         <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                     </div>
-                     <div className='flex justify-between text-white md:px-6 p-3'>
-                     <h1 className='text-xl'>Project4 Drive Link</h1>
-                         <input type="text" className='md:w-[300px] ml-2 rounded-lg' placeholder='  Enter the Drive Link' />
-                     </div> 
-                     </div> :""
+                      <div className="mb-5">
+                      <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                        <h1 className="text-xl">Project 1 Drive Link</h1>
+                        <input
+                          required
+                          type="text"
+                          value={FourthProj.project1}
+                          onChange={(e) => SetFourthProj({ ...FourthProj, project1: e.target.value })}
+                          className="md:w-[300px] rounded-lg mx-2 text-black"
+                          placeholder="Enter the Drive Link"
+                        />
+                        <button
+                          className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                          onClick={() => {
+                            if (!FourthProj.project1) {
+                              alert("Project 1 Drive Link is not filled");
+                            } else {
+                             handleSubmit4()
+                            }
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    
+                      <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                        <h1 className="text-xl">Project 2 Drive Link</h1>
+                        <input
+                          required
+                          type="text"
+                          value={FourthProj.project2}
+                          onChange={(e) => SetFourthProj({ ...FourthProj, project2: e.target.value })}
+                          className="md:w-[300px] rounded-lg mx-2 text-black"
+                          placeholder="Enter the Drive Link"
+                        />
+                        <button
+                          className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                          onClick={() => {
+                            if (!FourthProj.project2) {
+                              alert("Project 2 Drive Link is not filled");
+                            } else {
+                              // Proceed with the upload logic
+                             handleSubmit4()
+                            }
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    
+                      <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                        <h1 className="text-xl">Project 3 Drive Link</h1>
+                        <input
+                          required
+                          type="text"
+                          value={FourthProj.project3}
+                          onChange={(e) => SetFourthProj({ ...FourthProj, project3: e.target.value })}
+                          className="md:w-[300px] rounded-lg mx-2 text-black"
+                          placeholder="Enter the Drive Link"
+                        />
+                        <button
+                          className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                          onClick={() => {
+                            if (!FourthProj.project3) {
+                              alert("Project 3 Drive Link is not filled");
+                            } else {
+                              // Proceed with the upload logic
+                              handleSubmit4()
+                            }
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    
+                      <div className="flex justify-between items-center text-white md:px-6 p-3 mt-4">
+                        <h1 className="text-xl">Project 4 Drive Link</h1>
+                        <input
+                          required
+                          type="text"
+                          value={FourthProj.project4}
+                          onChange={(e) => SetFourthProj({ ...FourthProj, project4: e.target.value })}
+                          className="md:w-[300px] rounded-lg mx-2 text-black"
+                          placeholder="Enter the Drive Link"
+                        />
+                        <button
+                          className="bg-[#F5CF6B] w-20 h-10 rounded-lg font-bold"
+                          onClick={() => {
+                            if (!FourthProj.project4) {
+                              alert("Project 4 Drive Link is not filled");
+                            } else {
+                              // Proceed with the upload logic
+                             handleSubmit4()
+                            }
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    </div>
+                    
+                     :""
                      
                      }
                  </div>
