@@ -120,14 +120,3 @@ export const getInternDetails = async(req,res)=>
         return res.status(500).json({message:"Error finding intern details"})
     }
 }
-const onAcceptIntern = async(req,res)=>
-{
-    try
-    {
-
-    }
-    catch(err)
-    {
-
-    }
-}

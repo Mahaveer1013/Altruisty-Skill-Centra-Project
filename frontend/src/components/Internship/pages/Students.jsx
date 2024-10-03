@@ -1,7 +1,8 @@
 import StudentDetails from "./StudentDetails";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
+import api from "../../../api/api";
 
 const Students = () => {
   const users = [
@@ -70,6 +71,20 @@ const Students = () => {
   ];
 
   const navigate = useNavigate();
+  const [UserDomain,SetUserDomain] = useState([]);
+  const getData = async()=>
+  {
+    try
+    {
+        const res = await api.get('/domainData');
+        SetUserDomain(res.data);
+
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="flex flex-row w-full h-full  mx-auto">

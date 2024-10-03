@@ -1,5 +1,6 @@
 import Internship from "../models/internship.model.js";
 import nodemailer from 'nodemailer'
+import Domain from "../models/domain.model.js";
 export const getInterns = async (req, res) => {
     try {
         // Fetch all internship data and populate 'user' field with 'name' and 'email'
@@ -66,9 +67,20 @@ export const handleAcceptIntern = async(req,res)=>
             subject:"Thanks for registering Intern at Altruisty",
             html:htmlContent
         }
-
+        const domain = await Domain.findOne({ title: isIntern.domain.title });
+        
+        if (!domain) {
+            console.log('Domain not found');
+            return;
+        }        
+        domain.registered += 1;
+        await domain.save();
         await transporter.sendMail(message);
         return res.status(201).json({msg:"Intern accepted successfully"});
+       }
+       else
+       {
+        return res.status(400).json({msg:"Already accepted offer letter"})
        }
     
     }
@@ -79,3 +91,36 @@ export const handleAcceptIntern = async(req,res)=>
     }
 }
 
+export const getStudentsDomain = async(req,res)=>
+{
+    try
+    {
+        const domain = await Domain.find();
+        return res.status(201).json(domain);
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.status(500).json({msg:"Internal Server Error"})
+    }
+}
+
+export const getdomainStudents = async (req, res) => {
+    try {
+        const { id } = req.params; 
+
+        
+        const data = await Internship.find({ role: id })
+            .populate('user', 'email username')  
+            .select('role user');  
+
+        if (!data || data.length === 0) {
+            return res.status(404).json({ msg: "Data not found" });
+        }
+
+        return res.status(200).json(data); 
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ msg: "Internal Server Error" });
+    }
+};

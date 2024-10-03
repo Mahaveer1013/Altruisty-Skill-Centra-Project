@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { loginRequired } from "../middlewares/middleware.js";
-import { getInterns, handleAcceptIntern } from "../controllers/internAdmin.js";
+import { getInterns, getStudentsDomain, handleAcceptIntern } from "../controllers/internAdmin.js";
 
 const router = express.Router();
 const db = mongoose.connection;
@@ -203,5 +203,7 @@ router.get('/api/intern/:registernumber', async (req, res) => {
 
 router.get('/api/getInterns',loginRequired,getInterns);
 router.put('/api/acceptIntern/:id',loginRequired,handleAcceptIntern)
+router.get('/api/getStudentDomains',loginRequired,getStudentsDomain);
+router.get('/api/getstudents/:id',loginRequired)
 
 export default router
