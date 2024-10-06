@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import api from '../../../api/api';
 
 export default function OverallStudents() {
 
@@ -18,6 +19,22 @@ export default function OverallStudents() {
     
       //for router navigation
       const navigate = useNavigate();
+      const [userData,setUserData] = useState([])
+      const getStudentsData = async()=>
+      {
+        try
+        {
+            const res = await api.get('/OverallStudents');
+            if(res.status==201)
+            {
+              setUserData(res.data);
+            }
+        }
+        catch(err)
+        {
+          console.log(err);
+        }
+      }
 
   return (
     <div className="flex flex-row w-full h-full mx-auto">
@@ -78,7 +95,7 @@ export default function OverallStudents() {
             <div
               key={item.id}
               className="bg-dark-blue text-white p-6 rounded flex items-center justify-between"
-              onClick={() => navigate(item.route)}
+              onClick={() => navigate(`/Students/:${item.title}`)}
             >
               <p className="text-xl">{item.count}</p>
               <p className="text-light-yellow">{item.title}</p>

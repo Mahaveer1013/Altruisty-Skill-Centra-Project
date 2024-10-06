@@ -1,6 +1,6 @@
 import StudentDetails from "./StudentDetails";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import api from "../../../api/api";
 
@@ -72,19 +72,24 @@ const Students = () => {
 
   const navigate = useNavigate();
   const [UserDomain,SetUserDomain] = useState([]);
-  const getData = async()=>
-  {
-    try
-    {
-        const res = await api.get('/domainData');
-        SetUserDomain(res.data);
-
-    }
-    catch(err)
-    {
-      console.log(err);
-    }
-  }
+  const {id} = useParams();
+  useEffect(()=> {
+    const getData = async()=>
+      {
+        try
+        {
+            const res = await api.get(`/getstudents/${id}`);
+            SetUserDomain(res.data);
+            console.log(res.data);
+        }
+        catch(err)
+        {
+          console.log(err);
+        }
+      }
+      getData();
+     
+  },[])
 
   return (
     <div className="flex flex-row w-full h-full  mx-auto">
@@ -138,18 +143,18 @@ const Students = () => {
         <table className="w-full bg-white rounded-lg mx-auto">
           <thead>
             <tr className="bg-gray-800 text-white">
-              <th className="py-2 px-4">User Id</th>
+              {/* <th className="py-2 px-4">User Id</th> */}
               <th className="py-2 px-4">Name</th>
               <th className="py-2 px-4">Email Id</th>
               <th className="py-2 px-4">Operation</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="text-center border-b">
-                <td className="py-2 px-4">{user.id}</td>
-                <td className="py-2 px-4">{user.name}</td>
-                <td className="py-2 px-4">{user.email}</td>
+            {UserDomain.map((user) => (
+              <tr key={user._id} className="text-center border-b">
+                {/* <td className="py-2 px-4">{user.id}</td> */}
+                <td className="py-2 px-4">{user.user?.username}</td>
+                <td className="py-2 px-4">{user.user?.email}</td>
                 <td className="py-2 px-4">
                   <button
                     className="bg-green-500 text-white px-4 py-1 rounded mx-1"

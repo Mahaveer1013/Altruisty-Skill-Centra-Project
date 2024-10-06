@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import api from "../../../api/api";
 
 export default function Currentstudents() {
 
@@ -18,6 +19,23 @@ export default function Currentstudents() {
 
   //for router navigation
   const navigate = useNavigate();
+  const [domainData,setDomainData] = useState([])
+  useEffect(()=> {
+    const getDomainData = async()=>
+    {
+      try
+      {
+        const res = await api.get('/getStudentDomains');
+        console.log(res.data)
+       setDomainData(res.data);
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    }
+    getDomainData();
+  },[])
 
   return (
     <div className="flex flex-row w-full h-full mx-auto">
@@ -67,20 +85,20 @@ export default function Currentstudents() {
           </div>
         </header>
 
-        <div className="bg-dark-blue text-center py-6 rounded mb-8">
+       {/*  <div className="bg-dark-blue text-center py-6 rounded mb-8">
           <h2 className="text-2xl font-bold text-light-yellow">1433</h2>
           <p className="text-white">Current students</p>
-        </div>
+        </div> */}
 
         {/* Data Cards */}
         <div className="grid grid-cols-3 gap-4">
-          {data.map((item) => (
+          {domainData.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="bg-dark-blue text-white p-6 rounded flex items-center justify-between"
-              onClick={() => navigate(item.route)}
+              onClick={() => navigate(`/Students/${item._id}`)}
             >
-              <p className="text-xl">{item.count}</p>
+              <p className="text-xl">{item.registered}</p>
               <p className="text-light-yellow">{item.title}</p>
               {/* Replace with actual image */}
               <div className="bg-white w-16 h-16 rounded"></div>

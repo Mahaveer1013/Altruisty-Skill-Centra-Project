@@ -109,9 +109,9 @@ export const getdomainStudents = async (req, res) => {
     try {
         const { id } = req.params; 
 
-        
-        const data = await Internship.find({ role: id })
-            .populate('user', 'email username')  
+        console.log(id);
+        const data = await Internship.find({domain:id})
+            .populate('user', 'email username _id')  
             .select('role user');  
 
         if (!data || data.length === 0) {

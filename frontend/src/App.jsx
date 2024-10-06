@@ -101,7 +101,7 @@ function Main() {
           <Route path='/Previous' element={<Previous />} />
           <Route path='/Nextbatch' element={<Nextbatch />} />
 
-          <Route path='/Students' element={<Students />} />
+          <Route path='/Students/:id' element={<Students />} />
           <Route path='/Mainpage' element={<Mainpage />} />
           <Route path='/StudentDetails' element={<StudentDetails />} />
           <Route path='/Profileattribute' element={<Profileattribute />} />
