@@ -35,7 +35,15 @@ const Header = () => {
 
 const DayDetail = () => {
   const { day } = useParams();
- 
+  
+  useEffect(()=> {
+    const getMyIntern = async()=>
+    {
+      
+    }
+  })
+
+
   // Dummy content for each day. Replace with actual content.
   
  

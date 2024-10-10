@@ -1,6 +1,8 @@
 import Internship from "../models/internship.model.js";
 import nodemailer from 'nodemailer'
 import Domain from "../models/domain.model.js";
+import User from "../models/user.model.js";
+import Internship from "../models/internship.model.js";
 export const getInterns = async (req, res) => {
     try {
         // Fetch all internship data and populate 'user' field with 'name' and 'email'
@@ -30,7 +32,7 @@ export const handleAcceptIntern = async(req,res)=>
     {
         const {id} = req.params;
         const isIntern = await Internship.findById(id)
-        .populate('user', 'username email')
+        .populate('user', 'username email _id')
         .populate('domain', 'title')
         if(!isIntern)
         {
@@ -72,7 +74,56 @@ export const handleAcceptIntern = async(req,res)=>
         if (!domain) {
             console.log('Domain not found');
             return;
-        }        
+        }    
+       
+        const data = await Internship.find({user:isIntern._id});
+        if(!data)
+        {
+            return res.status(404).json({msg:"Intern not found"});
+        }
+        if(data.InternshipType === 1)
+        {
+            data.progress.startAt = new Date(); 
+
+            
+            const endAt = new Date(data.progress.startAt); 
+            endAt.setMonth(endAt.getDay() + 15); 
+        
+           
+            data.progress.EndAt = endAt;
+        }
+        else if(data.InternshipType === 2)
+        {
+            data.progress.startAt = new Date(); 
+
+            
+            const endAt = new Date(data.progress.startAt); 
+            endAt.setMonth(endAt.getMonth() + 1); 
+        
+           
+            data.progress.EndAt = endAt;
+        }
+        else if(data.InternshipType === 3)
+        {
+            data.progress.startAt = new Date(); 
+
+            
+            const endAt = new Date(data.progress.startAt); 
+            endAt.setMonth(endAt.getMonth() + 2); 
+        
+           
+            data.progress.EndAt = endAt;
+        }
+        else if(data.InternshipType === 4)
+        {
+            data.progress.startAt = new Date(); 
+
+            
+            const endAt = new Date(data.progress.startAt); 
+            endAt.setMonth(endAt.getMonth() + 3); 
+            data.progress.EndAt = endAt;
+        }
+        await data.save();
         domain.registered += 1;
         await domain.save();
         await transporter.sendMail(message);

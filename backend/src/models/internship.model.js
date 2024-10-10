@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const progressSchema = new Schema({
     day: { type: Number },
+    StartAt:{type:Number},
+    EndAt:{type:Number},
     status: { type: Number, enum: [1, 0] }, // 1 completed, 0 not completed
     file: { type: String } // drive link
 });
