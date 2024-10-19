@@ -29,6 +29,7 @@ function HomeProfile() {
   const [file, setFile] = useState(null); // State to hold the uploaded image
   const {setFlash} = useAuth()
   const [addProject,setAddProject]=useState(false);
+  const [Projects,SetProjects] = useState([]);
   const handleData1 = async (FullName,phone, college, github, LinkedIn, Portfolio, Profile, domain) => {
     setPhoneNumber(phone);
     setCollegeName(college);
@@ -155,10 +156,11 @@ function HomeProfile() {
     },
   ]);
   const [newProject, setNewProject] = useState({
-    name: '',
-    description: '',
-    githubLink: '',
-    driveLink: '',
+    ProjectName: '',
+    ProjectDescription: '',
+    ProjectGithub: '',
+    ProjectLink: '',
+   
   });
   const handleInputChange = (e) => {
     setNewProject({
@@ -166,12 +168,10 @@ function HomeProfile() {
       [e.target.name]: e.target.value,
     });
   };
-  const handleFormSubmit = (e) => {
-    
-    setProjects([...projects, newProject]); // Add new project to the list
-    setNewProject({ name: '', description: '', githubLink: '', driveLink: '' }); // Reset form
-    
-  };
+ const handleFormSubmit = ()=>
+ {
+
+ }
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
@@ -182,7 +182,37 @@ function HomeProfile() {
       };
       reader.readAsDataURL(file);
     }
+
+    const handleFormSubmit = async()=>
+    {
+        try
+        {
+          const res = await api.get('/addProject',addProject);
+          console.log(res.data);
+        }
+        catch(err)
+        {
+          console.log(err);
+
+        }
+    }
+
+    const getProjects = async()=>
+      {
+        try
+        {
+          const res = await api.get('/getprojects');
+          console.log(res);
+          SetProjects(res.data);
+        }
+        catch(err)
+        {
+          console.log(err);
+          
+        }
+      }
   };
+
   return (
     <div className="w-full h-full font-times max-sm:w-full">
       <div className="flex w-full h-full max-sm:w-full">
@@ -291,7 +321,7 @@ function HomeProfile() {
               <AddProject addProject={addProject} onClose={()=>setAddProject(false)} handleFormSubmit={handleFormSubmit} handleInputChange={handleInputChange} newProject={newProject}/>
               <hr className="h-1 bg-Darkblue rounded-md mb-[10px]"/>
               {/* foot style */}
-              {projects.map((project)=>(
+              {Projects.length > 0 ? (projects.map((project)=>(
                 <div key={project.id} className="bg-Darkblue p-2 rounded-md flex w-full space-x-2 max-sm:flex-col">
                 <div className="image h-[150px] w-[280px] max-sm:w-full">
                   <img src={ecommerce} className=" projectImage w-full h-full rounded-md"/>
@@ -344,7 +374,9 @@ function HomeProfile() {
 
 
 
-              ))}
+              ))) : (
+                <h2>No projects To display</h2>
+              )}
               
               
               

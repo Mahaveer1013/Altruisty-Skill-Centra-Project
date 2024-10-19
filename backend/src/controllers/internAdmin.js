@@ -2,7 +2,7 @@ import Internship from "../models/internship.model.js";
 import nodemailer from 'nodemailer'
 import Domain from "../models/domain.model.js";
 import User from "../models/user.model.js";
-import Internship from "../models/internship.model.js";
+
 export const getInterns = async (req, res) => {
     try {
         // Fetch all internship data and populate 'user' field with 'name' and 'email'

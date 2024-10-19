@@ -43,23 +43,23 @@ function AddProject({ addProject, onClose,handleFormSubmit,handleInputChange,new
             <label className="block text-sm font-medium text-white">Project Name <span className="text-Yellow">*</span></label>
             <input type="text"
               id="name"
-              name="name"
-              value={newProject.name}
+              name="ProjectName"
+              value={newProject.ProjectName}
               onChange={handleInputChange} placeholder="Enter your Project Name"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
           </div>
           <div>
             <label className="block text-sm font-medium text-white">Project description <span className="text-Yellow">*</span></label>
             <input type="text" id="description"
-              name="description"
-              value={newProject.description}
+              name="ProjectDescription"
+              value={newProject.ProjectDescription}
               onChange={handleInputChange} placeholder="Enter your Project description"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
           </div>
           <div>
             <label className="block text-sm font-medium text-white">Project Github Link <span className="text-Yellow">*</span></label>
             <input type="url"
               id="githubLink"
-              name="githubLink"
-              value={newProject.githubLink}
+              name="ProjectGithub"
+              value={newProject.ProjectGithub}
               onChange={handleInputChange} placeholder="Enter your Project Github Link"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
           </div>
           <div>
@@ -67,17 +67,11 @@ function AddProject({ addProject, onClose,handleFormSubmit,handleInputChange,new
             <input type="url"
               id="driveLink"
               name="driveLink"
-              value={newProject.driveLink}
+              value={newProject.ProjectLink}
               onChange={handleInputChange} placeholder="Enter your Project Website Link"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-white">Project Working Model <span className="text-Yellow">*</span></label>
-            <input type="text" placeholder="Enter your Project Working Model"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-white">Project Proposal <span className="text-Yellow">*</span></label>
-            <input type="text" placeholder="Enter your Project Proposal"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
-          </div>
+          
+            
           <button type="submit" className="w-full bg-Yellow text-Darkblue p-2 rounded-md mt-4">submit</button>
         </form>
           
