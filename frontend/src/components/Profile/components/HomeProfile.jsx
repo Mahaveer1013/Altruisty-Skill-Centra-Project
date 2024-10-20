@@ -197,13 +197,14 @@ function HomeProfile() {
         }
     }
 
+   useEffect(()=> {
     const getProjects = async()=>
       {
         try
         {
           const res = await api.get('/getprojects');
           console.log(res);
-          SetProjects(res.data);
+          
         }
         catch(err)
         {
@@ -211,6 +212,8 @@ function HomeProfile() {
           
         }
       }
+      getProjects();
+   })
   };
 
   return (
