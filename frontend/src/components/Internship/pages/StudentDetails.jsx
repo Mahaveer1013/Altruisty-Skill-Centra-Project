@@ -1,7 +1,8 @@
 import img from "../assets/images/profileimg.jpg";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { PieChart, Pie, Cell } from "recharts";
+import api from "../../../api/api";
 
 export default function StudentDetails() {
   {
@@ -21,7 +22,26 @@ export default function StudentDetails() {
 
   {/**router navigation for view button */}
   const navigate = useNavigate();
-
+  const {id} = useParams();
+  const [details,SetDetails] = useState([]);
+  useEffect(()=> {
+    const getStudentDetails = async()=>
+      {
+        try
+        {
+          const res = await api.get(`/getStudentDetails/${id}`);
+          console.log(res);
+          SetDetails(res.data);
+        
+    
+        }
+        catch(err)
+        {
+          console.log(err);
+        }
+      }
+      getStudentDetails();
+  },[])
   {
     /**Analysis json */
   }
@@ -140,13 +160,13 @@ export default function StudentDetails() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {details.map((user) => (
               <tr
-                key={user.id}
+                key={user._id}
                 className="text-center text-white border-b mx-auto"
               >
                 <td className="py-2 px-16 text-justify pl-[150px] pr-[100px]">
-                  {user.Title}
+                  
                 </td>
                 <td className="py-2 px-16 text-justify pl-[160px]">
                   {user.Data}{" "}

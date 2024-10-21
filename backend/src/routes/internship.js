@@ -4,6 +4,8 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import { loginRequired } from "../middlewares/middleware.js";
 import { getdomainStudents, getInterns, getStudentsDomain, handleAcceptIntern } from "../controllers/internAdmin.js";
+import User from "../models/user.model.js";
+import Internship from "../models/internship.model.js";
 
 const router = express.Router();
 const db = mongoose.connection;
@@ -201,9 +203,38 @@ router.get('/api/intern/:registernumber', async (req, res) => {
   }
 });
 
+
+
+const getStudentDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if the 'id' is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ msg: "Invalid User ID" });
+    }
+
+    const isUser = await User.findById(id);
+    if (!isUser) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    const isIntern = await Internship.find({ user: id });
+    if (!isIntern || isIntern.length === 0) {
+      return res.status(404).json({ msg: "Internship not found" });
+    }
+
+    return res.status(200).json(isIntern);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
+
 router.get('/api/getInterns',loginRequired,getInterns);
 router.put('/api/acceptIntern/:id',loginRequired,handleAcceptIntern)
 router.get('/api/getStudentDomains',loginRequired,getStudentsDomain);
 router.get('/api/getstudents/:id',loginRequired,getdomainStudents)
-
+router.get('/api/getStudentDetails/:id',loginRequired,getStudentDetails)
 export default router

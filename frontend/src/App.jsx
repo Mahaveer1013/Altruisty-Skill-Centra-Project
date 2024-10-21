@@ -103,7 +103,7 @@ function Main() {
 
           <Route path='/Students/:id' element={<Students />} />
           <Route path='/Mainpage' element={<Mainpage />} />
-          <Route path='/StudentDetails' element={<StudentDetails />} />
+          <Route path='/StudentDetails/:id' element={<StudentDetails />} />
           <Route path='/Profileattribute' element={<Profileattribute />} />
           <Route path='/Subscription' element={<Subscription />} />
           <Route path='/Payment' element={<Paymentdetails />} />

@@ -99,6 +99,24 @@ function HomeProfile() {
     fetchDetails();
     
   }, []);
+  useEffect(()=> {
+    const getProjects = async()=>
+      {
+        try
+        {
+          const res = await api.get('/getprojects');
+          console.log(res);
+          SetProjects(res.data);
+          
+        }
+        catch(err)
+        {
+          console.log(err);
+          
+        }
+      }
+      getProjects();
+   })
 
   const [openPicker, data, authResponse] = useDrivePicker();
 
@@ -197,23 +215,7 @@ function HomeProfile() {
         }
     }
 
-   useEffect(()=> {
-    const getProjects = async()=>
-      {
-        try
-        {
-          const res = await api.get('/getprojects');
-          console.log(res);
-          
-        }
-        catch(err)
-        {
-          console.log(err);
-          
-        }
-      }
-      getProjects();
-   })
+ 
   };
 
   return (

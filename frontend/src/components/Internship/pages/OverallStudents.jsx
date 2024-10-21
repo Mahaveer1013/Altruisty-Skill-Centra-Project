@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import api from '../../../api/api';
@@ -20,21 +20,25 @@ export default function OverallStudents() {
       //for router navigation
       const navigate = useNavigate();
       const [userData,setUserData] = useState([])
-      const getStudentsData = async()=>
-      {
-        try
-        {
-            const res = await api.get('/OverallStudents');
-            if(res.status==201)
+      useEffect(()=> {
+        const getStudentsData = async()=>
+          {
+            try
             {
-              setUserData(res.data);
+                const res = await api.get('/getStudentDomains');
+                console.log(res);
+                if(res.status==201)
+                {
+                  setUserData(res.data);
+                }
             }
-        }
-        catch(err)
-        {
-          console.log(err);
-        }
-      }
+            catch(err)
+            {
+              console.log(err);
+            }
+          }
+          getStudentsData();
+      })
 
   return (
     <div className="flex flex-row w-full h-full mx-auto">
@@ -91,11 +95,11 @@ export default function OverallStudents() {
 
         {/* Data Cards */}
         <div className="grid grid-cols-3 gap-4">
-          {data.map((item) => (
+          {userData.map((item) => (
             <div
               key={item.id}
               className="bg-dark-blue text-white p-6 rounded flex items-center justify-between"
-              onClick={() => navigate(`/Students/:${item.title}`)}
+              onClick={() => navigate(`/Students/${item._id}`)}
             >
               <p className="text-xl">{item.count}</p>
               <p className="text-light-yellow">{item.title}</p>

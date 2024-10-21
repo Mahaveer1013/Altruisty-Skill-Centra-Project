@@ -158,7 +158,7 @@ const Students = () => {
                 <td className="py-2 px-4">
                   <button
                     className="bg-green-500 text-white px-4 py-1 rounded mx-1"
-                    onClick={() => navigate(user.route)}
+                    onClick={() => navigate(`/StudentDetails/${user.user?._id}`)}
                   >
                     View
                   </button>

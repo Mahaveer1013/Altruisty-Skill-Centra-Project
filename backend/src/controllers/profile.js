@@ -58,3 +58,5 @@ export const registerProfile = async (req, res) => {
     return res.status(500).json({ message: "Error updating profile", error: error.message });
   }
 };
+
+
