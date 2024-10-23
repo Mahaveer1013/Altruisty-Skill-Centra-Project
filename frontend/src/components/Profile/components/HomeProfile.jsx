@@ -29,7 +29,7 @@ function HomeProfile() {
   const [file, setFile] = useState(null); // State to hold the uploaded image
   const {setFlash} = useAuth()
   const [addProject,setAddProject]=useState(false);
-  const [Projects,SetProjects] = useState([]);
+  const [UserProjects,SetUserProjects] = useState([]);
   const handleData1 = async (FullName,phone, college, github, LinkedIn, Portfolio, Profile, domain) => {
     setPhoneNumber(phone);
     setCollegeName(college);
@@ -106,7 +106,7 @@ function HomeProfile() {
         {
           const res = await api.get('/getprojects');
           console.log(res);
-          SetProjects(res.data);
+          SetUserProjects(res.data);
           
         }
         catch(err)
@@ -116,7 +116,7 @@ function HomeProfile() {
         }
       }
       getProjects();
-   })
+   },[])
 
   const [openPicker, data, authResponse] = useDrivePicker();
 
@@ -186,9 +186,18 @@ function HomeProfile() {
       [e.target.name]: e.target.value,
     });
   };
- const handleFormSubmit = ()=>
+ const handleFormSubmit = async()=>
  {
+  try
+  {
+    const res = await api.post('/addProject',newProject);
+    console.log(res.data);
+  }
+  catch(err)
+  {
+    console.log(err);
 
+  }
  }
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -201,19 +210,7 @@ function HomeProfile() {
       reader.readAsDataURL(file);
     }
 
-    const handleFormSubmit = async()=>
-    {
-        try
-        {
-          const res = await api.get('/addProject',addProject);
-          console.log(res.data);
-        }
-        catch(err)
-        {
-          console.log(err);
-
-        }
-    }
+    
 
  
   };
@@ -326,13 +323,13 @@ function HomeProfile() {
               <AddProject addProject={addProject} onClose={()=>setAddProject(false)} handleFormSubmit={handleFormSubmit} handleInputChange={handleInputChange} newProject={newProject}/>
               <hr className="h-1 bg-Darkblue rounded-md mb-[10px]"/>
               {/* foot style */}
-              {Projects.length > 0 ? (projects.map((project)=>(
-                <div key={project.id} className="bg-Darkblue p-2 rounded-md flex w-full space-x-2 max-sm:flex-col">
+              {UserProjects.length > 0 ? (UserProjects.map((project)=>(
+                <div key={project._id} className="bg-Darkblue p-2 rounded-md flex w-full space-x-2 max-sm:flex-col">
                 <div className="image h-[150px] w-[280px] max-sm:w-full">
                   <img src={ecommerce} className=" projectImage w-full h-full rounded-md"/>
                   <div  className="content text-White font-semibold p-[2px]">
-                    <h1 className="text-lg font-bold text-Yellow underline">{project.name}</h1>
-                    <p className="text-center">{project.description}</p>
+                    <h1 className="text-lg font-bold text-Yellow underline">{project.ProjectName}</h1>
+                    <p className="text-center">{project.ProjectDescription}</p>
                   </div>
 
                 </div>
@@ -353,7 +350,7 @@ function HomeProfile() {
                     <div className="flex w-full justify-around max-sm:flex-col">
                     <div className="flex w-[50%] mt-[30px] max-sm:mt-[20px] max-sm:w-full md:ml-[20px] space-x-2 ">
                       <span className="flex-col">
-                        <p className="text-white text-lg font-bold">Working Model:</p>
+                        <p className="text-white text-lg font-bold">Working Model:{project.ProjectLink}</p>
                         <p className="text-white">(website video link)</p>
                       </span>
                       <button className="bg-White text-Yellow font-bold
@@ -364,7 +361,7 @@ function HomeProfile() {
                     </div>
                     <div className="flex mt-[30px] w-[50%] max-sm:w-full max-sm:mt-[20px] md:ml-[20px] space-x-2 ">
                       <span className="flex-col">
-                      <p className="text-white text-lg font-bold">Proposal:</p>
+                      <p className="text-white text-lg font-bold">Proposal:{project.ProjectGithub}</p>
                       {/* <p className="text-white">(view the pdf)</p> */}
                       </span>
                       <button className="bg-White text-Yellow font-bold text-lg border-none ring-2

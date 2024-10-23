@@ -66,7 +66,7 @@ function AddProject({ addProject, onClose,handleFormSubmit,handleInputChange,new
             <label className="block text-sm font-medium text-white">Project Website Link <span className="text-Yellow">*</span></label>
             <input type="url"
               id="driveLink"
-              name="driveLink"
+              name="ProjectLink"
               value={newProject.ProjectLink}
               onChange={handleInputChange} placeholder="Enter your Project Website Link"  className="mt-1 block w-full p-2 placeholder-black rounded-md text-Darkblue  " />
           </div>

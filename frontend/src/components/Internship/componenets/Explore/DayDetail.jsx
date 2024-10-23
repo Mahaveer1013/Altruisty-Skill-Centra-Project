@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { BsFillFileEarmarkTextFill } from "react-icons/bs"
 import About from './About';
@@ -10,6 +10,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import logo from "../../assets/images/logo.png"
 import { Link } from 'react-router-dom';
+import api from '../../../../api/api';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,16 +36,27 @@ const Header = () => {
 
 const DayDetail = () => {
   const { day } = useParams();
+  const [Day,SetDay] = useState()
   
-  useEffect(()=> {
-    const getMyIntern = async()=>
-    {
-      
-    }
-  })
+  useEffect(() => {
+    const getMyIntern = async () => {
+      try {
+        const res = await api.get('/getMyInternship');
+        console.log(res);
+        if (res.status === 201) {
+          SetDay(res.data.msg);  
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  
+    getMyIntern();  
+  }, []); 
+  
 
 
-  // Dummy content for each day. Replace with actual content.
+  
   
  
   const content = {

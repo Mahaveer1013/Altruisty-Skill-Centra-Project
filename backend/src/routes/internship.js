@@ -7,6 +7,7 @@ import { getdomainStudents, getInterns, getStudentsDomain, handleAcceptIntern } 
 import User from "../models/user.model.js";
 import Internship from "../models/internship.model.js";
 
+
 const router = express.Router();
 const db = mongoose.connection;
 
@@ -219,7 +220,7 @@ const getStudentDetails = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    const isIntern = await Internship.find({ user: id });
+    const isIntern = await Internship.find({ user: id }).populate('user', 'username email')
     if (!isIntern || isIntern.length === 0) {
       return res.status(404).json({ msg: "Internship not found" });
     }
@@ -231,10 +232,36 @@ const getStudentDetails = async (req, res) => {
   }
 };
 
+const getMyInternship = async (req, res) => {
+  try {
+    const isUser = req.user.id;
+    if (!isUser) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+ 
+    const internship = await Internship.findOne({ user: isUser }).populate('user', 'name email');
+    if (!internship) {
+      return res.status(400).json({ msg: "Intern not found" });
+    }
+
+   
+    if (internship.verification === "accepted" && internship.progress.EndAt >= new Date()) {
+      const dayDifference = Math.ceil((new Date(internship.progress.EndAt) - new Date()) / (1000 * 60 * 60 * 24));
+      return res.status(201).json({ msg: dayDifference });
+    } else {
+      return res.status(400).json({ msg: "Internship not active" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
 
 router.get('/api/getInterns',loginRequired,getInterns);
 router.put('/api/acceptIntern/:id',loginRequired,handleAcceptIntern)
 router.get('/api/getStudentDomains',loginRequired,getStudentsDomain);
 router.get('/api/getstudents/:id',loginRequired,getdomainStudents)
 router.get('/api/getStudentDetails/:id',loginRequired,getStudentDetails)
+router.get('/api/getMyInternship',loginRequired,getMyInternship)
 export default router

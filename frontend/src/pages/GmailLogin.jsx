@@ -35,7 +35,12 @@ const GmailLogin = () => {
                 setFlash(['Success, Login Now !', 'success']);
                
             }).catch((error) => {
-                setFlash([error.response.data.message, 'error']);
+                console.log(error)
+                if (error.message==="Request failed with status code 400")
+                    {
+                   // Server responded with a status other than 2xx
+                   setFlash(["Email Id already exists" || 'An error occurred', 'error']);
+               }
             })
         } else {
             await encryptApi.post('/credential-login', {
@@ -48,6 +53,7 @@ const GmailLogin = () => {
                 }, 100);
                 setFlash(['Logged In Successfully', 'success']);
             }).catch((error) => {
+                
                 setFlash([error.response.data.message, 'error']);
             })
         }

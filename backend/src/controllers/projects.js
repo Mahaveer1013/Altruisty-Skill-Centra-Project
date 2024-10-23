@@ -25,8 +25,10 @@ export const getProjects = async (req, res) => {
 export const addProjects = async (req, res) => {
     try {
       const userId = req.user.id;
+      
       const IsUser = await User.findById(userId);
-  
+      console.log('---------------')
+      console.log(IsUser);
       if (!IsUser) {
         return res.status(404).json({ msg: "User not found" });
       }
