@@ -121,29 +121,3 @@ export const getInternDetails = async(req,res)=>
     }
 }
 
-const getMyInternship = async(req,res)=>
-{
-    try
-    {
-        const isUser = req.user.id;
-        if(!isUser)
-        {
-            return res.status(404).json({msg:"User not found"})
-        }
-        const internship = await Internship.find({user: isUser._id});
-        if(!internship)
-        {
-            return res.status(400).json({msg:"Intern not found"});
-        }
-        if(internship.verification === "accepted"  && internship.progress.EndAt >= new Date())
-        {
-            const day = internship.progress.EndAt - new Date();
-            return res.status(201).json({msg:"day"});
-        }
-    }
-    catch(err)
-    {
-        console.log(err);
-        return res.status(500).json({msg:"Internal Server Error"})
-    }
-}

@@ -424,16 +424,16 @@ const Sidebar = () => {
               <div className="flex flex-col">
                 {/* <<=========================Training Internships===================>> */}
                 <Link
-                  to={"/Internships"}
+                  to={"/Internships/HomePage/InternDetails"}
                   className={`p-3 rounded transition-all duration-300 ${
                     isSidebar ? "pl-10" : "pl-3"
                   } ${
-                    activeLink === "/Internships"
+                    activeLink === "/Internships/HomePage/InternDetails"
                       ? "bg-[#F5CF6B] text-black"
                       : "hover:text-primary hover:text-[#F5CF6B]"
                   }`}
                   onClick={() => {
-                    setActiveLink("/Internships");
+                    setActiveLink("/Internships/HomePage/InternDetails");
                     setIsSidebar(false);
                   }}
                 >
@@ -443,16 +443,16 @@ const Sidebar = () => {
 
                 {/* <<=========================Projects===================>> */}
                 <Link
-                  to={"/Internships/projects"}
+                  to={"/Internships/Homepage"}
                   className={`p-3 rounded transition-all duration-300 ${
                     isSidebar ? "pl-10" : "pl-3"
                   } ${
-                    activeLink === "/Internships/projects"
+                    activeLink === "/Internships/Homepage"
                       ? "bg-[#F5CF6B] text-black"
                       : "hover:text-primary hover:text-[#F5CF6B]"
                   }`}
                   onClick={() => {
-                    setActiveLink("/Internships/projects");
+                    setActiveLink("/Internships/Homepage");
                     setIsSidebar(false);
                   }}
                 >
@@ -462,11 +462,11 @@ const Sidebar = () => {
 
                 {/* <<=========================My Internships===================>> */}
                 <Link
-                  to={"/Internships/"}
+                  to={"/day/:day/"}
                   className={`p-3 rounded transition-all duration-300 ${
                     isSidebar ? "pl-10" : "pl-3"
                   } ${
-                    activeLink === "/Internships/"
+                    activeLink === "/day/:day"
                       ? "bg-[#F5CF6B] text-black"
                       : "hover:text-primary hover:text-[#F5CF6B]"
                   }`}

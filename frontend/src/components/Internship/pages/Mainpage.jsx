@@ -52,8 +52,8 @@ export default function Mainpage() {
           {/*   <li className="flex items-center text-lg">Community</li> */}
            {/*  <li className="flex items-center text-lg">Subscription</li> */}
            {/*  <li className="flex items-center text-lg">Admin Access</li> */}
-            <li className="flex items-center text-lg">Event</li>
-            <li className="flex items-center text-lg">Challenges</li>
+          {/*   <li className="flex items-center text-lg">Event</li>
+            <li className="flex items-center text-lg">Challenges</li> */}
    {/*          <li className="flex items-center text-lg">Offer Include</li> */}
             <li className="flex items-center text-lg">Log Out</li>
           </ul>

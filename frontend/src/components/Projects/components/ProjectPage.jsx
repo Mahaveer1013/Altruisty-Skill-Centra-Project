@@ -4,17 +4,19 @@ import Pricing from "./PricingSection/Pricing";
 import student from "../Images/Male-Student.png";
 import { IoIosArrowBack } from "react-icons/io";
 import head from "../Images/head5.jpg";
-
+import api from "../../../api/api"
 
 import { useState } from "react";
 import RegistorForm from "./RegistorForm";
 
 const ProjectPage = () => {
   const [isFormOpen, SetFormOpen] = useState(false);
+  const [projecets,SetProjects] = useState([])
 
   const openForm = () => {
     SetFormOpen(!isFormOpen);
   };
+ 
 
   return (
     <div className={`overflow-x-hidden `}>
