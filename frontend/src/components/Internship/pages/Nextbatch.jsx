@@ -23,7 +23,7 @@ export default function Nextbatch() {
     <div className="flex flex-row w-full h-full mx-auto">
       {/* Sidebar */}
       <div className="flex flex-col items-center min-h-full bg-dark-blue w-[300px] pt-16">
-        <nav>
+       {/*  <nav>
           <div className="flex justify-center items-center text-light-yellow text-2xl lg:pb-8 font-TimesNewRoman">
             Menu
           </div>
@@ -38,7 +38,7 @@ export default function Nextbatch() {
             <li className="flex items-center text-lg">Offer Include</li>
             <li className="flex items-center text-lg">Log Out</li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
 
       {/* Main Content */}

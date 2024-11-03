@@ -25,9 +25,9 @@ const Header = () => {
           <div className="flex  items-center">
           <Link to={"/Explore"}><h1>{"<"} &nbsp; Back</h1></Link>
           </div>
-          <div>
+         {/*  <div>
           <img src={logo} alt="" className='h-16 '/>
-         </div>
+         </div> */}
       </div>
       </nav>
     </header>

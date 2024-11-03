@@ -9,22 +9,22 @@ const Header = () => {
 
   return (
     <header className="bg-white font-times">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     {/*  <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
           <div>
           <img src={logo} alt="" className='h-16 '/>
          </div>
-          </div>
+          </div> 
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+             <div className="ml-10 flex items-baseline space-x-4">
               <a href="#" className="hover:bg-[#17212E] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Project</a>
               <a href="#" className="hover:bg-[#17212E] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Intern</a>
               <a href="#" className="hover:bg-[#17212E] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Workshop</a>
               <a href="#" className="hover:bg-[#17212E] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Blog</a>
               <button className="bg-[#17212E] text-white px-4 w-20 py-2 rounded">Login</button>
               <button className="bg-[#F5CF6B]   text-[#17212E] w-20 px-4 py-2 rounded">Signup</button>
-            </div>
+            </div> 
           </div>
           <div className="-mr-2 flex md:hidden">
             <button onClick={toggleNavbar} className="bg-[#17212E] inline-flex items-center justify-center p-2 rounded-md text-white ">
@@ -48,7 +48,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       {isOpen && (
         <div className="md:hidden">

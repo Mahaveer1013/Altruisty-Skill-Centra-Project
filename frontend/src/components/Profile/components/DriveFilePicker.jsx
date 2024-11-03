@@ -1,7 +1,7 @@
 import React from 'react'
 import useDrivePicker from 'react-google-drive-picker'
 import gdrive from "../assets/gdrive.webp";
-function DriveFilePicker() {
+function DriveFilePicker({Resume,SetResume}) {
     
   const [openPicker,data,authResponse]=useDrivePicker();
 
@@ -17,8 +17,12 @@ function DriveFilePicker() {
       supportDrives: true,
       multiselect: true,
       callbackFunction: (data) => {
-        if (data.action === 'cancel') {
-          console.log('User clicked cancel/close button')
+        if (data.action === 'picked') {
+          console.log('Files picked:', data.docs);
+          alert(`Selected ${data.docs.length} file(s): ${data.docs.map(doc => doc.name).join(', ')}`);
+          SetResume(data.docs);
+        } else if (data.action === 'cancel') {
+          console.log('User canceled the picker');
         }
         console.log(data)
        

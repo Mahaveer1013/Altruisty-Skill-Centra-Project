@@ -56,7 +56,14 @@ function HomeProfile() {
         formData.append('ProfileBase64', Profile); 
       }
   
+     if(Resume.length > 0)
+     {
       formData.append('Resume', JSON.stringify(Resume)); 
+     }
+     else
+     {
+      console.warn("No resume data found.");
+     }
       // Log formData to check values
       for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
@@ -87,7 +94,7 @@ function HomeProfile() {
       SetLinkedIn(res.data.linkedIn_link);
       setDomain(res.data.Interest);
       SetProfile(res.data.ProfilePicture);
-      SetResume(res.data.Resume);
+      SetResume(res.data.Resume || []);
     } catch (err) {
       console.error("Error fetching profile details:", err);
     }
@@ -134,7 +141,7 @@ function HomeProfile() {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && data.docs) {
       const files = data.docs.map((i) => ({
         name: i.name,
         driveId: i.driveId,
@@ -145,34 +152,7 @@ function HomeProfile() {
       SetResume(files);
     }
   }, [data]);
-  const [projects,setProjects]=useState([
-    {
-      
-      name:"Foot Style",
-      
-      description:"It is an E-commerce website lorem ipsum",
-      githubLink:'https://github.com/user/portfolio',
-      driveLink:'https://github.com/user/portfolio',
-
-    },
-    {
-      
-      name:"Library ManageMent System",
-   
-      description:"It is an E-commerce website lorem ipsum",
-      githubLink:'https://github.com/user/portfolio',
-      driveLink:'https://github.com/user/portfolio',
-    },
-    
-    {
-      
-      name:"Admin Dashboard",
-     
-      description:"It is an E-commerce website lorem ipsum",
-      githubLink:'https://github.com/user/portfolio',
-      driveLink:'https://github.com/user/portfolio',
-    },
-  ]);
+  
   const [newProject, setNewProject] = useState({
     ProjectName: '',
     ProjectDescription: '',
@@ -222,7 +202,7 @@ function HomeProfile() {
           <div className="w-[100%] pb-2 mb-[50px] bg-Yellow relative top-[50px] pt-[50px] rounded-md max-sm:w-[98%]">
             <img
               src={ Profile || profile}
-              className="h-[100px] w-[100px] rounded-full absolute top-[-50px] left-[10px]"
+              className="h-[100px] w-[100px] rounded-full absolute top-[50px] left-[10px]"
             />
             <div className="w-[100%] h-full pl-[150px] max-sm:pl-[100px] max-sm:w-[97%]">
               <div className="max-sm:w-[100%]">
@@ -279,7 +259,7 @@ function HomeProfile() {
                 <div className="flex md:space-x-6 w-full max-sm:flex-col">
                   <span className="w-[50%] flex space-y-2 flex-col text-lg font-semibold text-Darkblue mt-[20px] max-sm:w-full">
                     <h1>Upload your resume</h1>
-                    <DriveFilePicker />
+                    <DriveFilePicker Resume={Resume} SetResume={SetResume} />
                   </span>
                   <span className="w-[50%] flex space-y-2 flex-col text-lg font-semibold text-Darkblue mt-[20px] max-sm:w-full">
                     <h1>Edit your profile</h1>

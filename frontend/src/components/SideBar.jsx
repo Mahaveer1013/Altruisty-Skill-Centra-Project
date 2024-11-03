@@ -198,7 +198,7 @@ const Sidebar = () => {
               {isSidebar && "Certifications"}
             </Link>
             {/* <<=========================Analytics===================>> */}
-            <Link
+          {/*   <Link
               to={"/profile/analytics"}
               className={`p-3 rounded transition-all duration-300 ${
                 isSidebar ? "pl-10" : "pl-3"
@@ -214,7 +214,7 @@ const Sidebar = () => {
             >
               <FontAwesomeIcon className="m-auto" icon={faPieChart} />{" "}
               {isSidebar && "Analytics"}
-            </Link>
+            </Link> */}
           </div>
         </div>
         {/* <<=========================community dropdown===================>> */}
@@ -422,6 +422,24 @@ const Sidebar = () => {
               }`}
             >
               <div className="flex flex-col">
+                 {/* <<=========================My Internships===================>> */}
+                 <Link
+                  to={"/day/:day/"}
+                  className={`p-3 rounded transition-all duration-300 ${
+                    isSidebar ? "pl-10" : "pl-3"
+                  } ${
+                    activeLink === "/day/:day"
+                      ? "bg-[#F5CF6B] text-black"
+                      : "hover:text-primary hover:text-[#F5CF6B]"
+                  }`}
+                  onClick={() => {
+                    setActiveLink("/Internships/");
+                    setIsSidebar(false);
+                  }}
+                >
+                  <FontAwesomeIcon className="m-auto" icon={faCheckCircle} />{" "}
+                  {isSidebar && "My Internships"}
+                </Link>
                 {/* <<=========================Training Internships===================>> */}
                 <Link
                   to={"/Internships/HomePage/InternDetails"}
@@ -460,24 +478,7 @@ const Sidebar = () => {
                   {isSidebar && "Real Time Projects"}
                 </Link>
 
-                {/* <<=========================My Internships===================>> */}
-                <Link
-                  to={"/day/:day/"}
-                  className={`p-3 rounded transition-all duration-300 ${
-                    isSidebar ? "pl-10" : "pl-3"
-                  } ${
-                    activeLink === "/day/:day"
-                      ? "bg-[#F5CF6B] text-black"
-                      : "hover:text-primary hover:text-[#F5CF6B]"
-                  }`}
-                  onClick={() => {
-                    setActiveLink("/Internships/");
-                    setIsSidebar(false);
-                  }}
-                >
-                  <FontAwesomeIcon className="m-auto" icon={faCheckCircle} />{" "}
-                  {isSidebar && "My Internships"}
-                </Link>
+               
                 <Link
             to={"/training"}
             className={`p-3 rounded transition-all duration-300 ${
@@ -494,7 +495,7 @@ const Sidebar = () => {
           <FontAwesomeIcon className="m-auto" icon={faCashRegister} />{" "}
           {isSidebar && "Training"}
           </Link>
-                <Link
+                {/* <Link
                   to={"/courses/"}
                   className={`p-3 rounded transition-all duration-300 ${
                     isSidebar ? "pl-10" : "pl-3"
@@ -511,7 +512,7 @@ const Sidebar = () => {
                   <FontAwesomeIcon className="m-auto" icon={faCheckCircle} />{" "}
                   {isSidebar && "courses"}
                 </Link>
-                
+                 */}
 
               </div>
             </div>
