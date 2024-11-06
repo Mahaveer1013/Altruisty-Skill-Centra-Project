@@ -24,6 +24,7 @@ export default function StudentDetails() {
   const navigate = useNavigate();
   const {id} = useParams();
   const [details,SetDetails] = useState([]);
+  
   useEffect(()=> {
     const getStudentDetails = async()=>
       {
@@ -107,7 +108,7 @@ export default function StudentDetails() {
   return (
     <div className="flex flex-row w-full h-full mx-auto">
       {/* Sidebar */}
-      <div className="flex flex-col items-center bg-dark-blue min-h-full w-[300px] pt-12">
+     {/*  <div className="flex flex-col items-center bg-dark-blue min-h-full w-[300px] pt-12">
         <nav>
           <div className="flex justify-center items-center text-light-yellow text-2xl pb-8 font-TimesNewRoman">
             Menu
@@ -125,7 +126,7 @@ export default function StudentDetails() {
           </ul>
         </nav>
       </div>
-
+ */}
       {/**Main content*/}
       <div className="bg-[#FAF2BE] flex flex-col justify-center items-center mx-auto w-full h-full overflow-hidden p-5">
         <div className="flex flex-row justify-between w-full p-10">

@@ -41,7 +41,7 @@ export default function Mainpage() {
   return (
     <div className="flex flex-row w-full h-full mx-auto">
       {/* Sidebar */}
-      <div className="flex flex-col items-center min-h-full bg-dark-blue w-[300px] pt-16">
+      {/* <div className="flex flex-col items-center min-h-full bg-dark-blue w-[300px] pt-16">
         <nav>
           <div className="flex justify-center items-center text-light-yellow text-2xl lg:pb-8 font-TimesNewRoman">
             Menu
@@ -49,16 +49,16 @@ export default function Mainpage() {
           <ul className="flex flex-col space-y-5 mb-[50px] text-white justify-center items-center">
             <li className="flex items-center text-lg">Dashboard</li>
             <li className="flex items-center text-lg">Job & Intern</li>
-          {/*   <li className="flex items-center text-lg">Community</li> */}
-           {/*  <li className="flex items-center text-lg">Subscription</li> */}
-           {/*  <li className="flex items-center text-lg">Admin Access</li> */}
-          {/*   <li className="flex items-center text-lg">Event</li>
-            <li className="flex items-center text-lg">Challenges</li> */}
-   {/*          <li className="flex items-center text-lg">Offer Include</li> */}
+            <li className="flex items-center text-lg">Community</li>
+            <li className="flex items-center text-lg">Subscription</li>
+            <li className="flex items-center text-lg">Admin Access</li>
+            <li className="flex items-center text-lg">Event</li>
+            <li className="flex items-center text-lg">Challenges</li>
+            <li className="flex items-center text-lg">Offer Include</li>
             <li className="flex items-center text-lg">Log Out</li>
           </ul>
         </nav>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="bg-[#FAF2BE] w-full h-full h-screen pl-5 pr-5 pt-5">

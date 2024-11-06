@@ -479,7 +479,7 @@ const Sidebar = () => {
                 </Link>
 
                
-                <Link
+                {/* <Link
             to={"/training"}
             className={`p-3 rounded transition-all duration-300 ${
                 isSidebar ? "pl-10" : "pl-3"}
@@ -494,7 +494,7 @@ const Sidebar = () => {
         >
           <FontAwesomeIcon className="m-auto" icon={faCashRegister} />{" "}
           {isSidebar && "Training"}
-          </Link>
+          </Link> */}
                 {/* <Link
                   to={"/courses/"}
                   className={`p-3 rounded transition-all duration-300 ${
