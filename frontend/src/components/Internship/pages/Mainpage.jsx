@@ -74,26 +74,8 @@ export default function Mainpage() {
             >
               Internship
             </button>
-            <button
-              className={`${
-                isClick
-                  ? "bg-light-yellow text-dark-blue py-2 px-4 rounded"
-                  : "bg-dark-blue text-white py-2 px-4 rounded"
-              }`}
-              onClick={() => handleCourse()}
-            >
-              Courses
-            </button>
-            <button
-              className={`${
-                isTriggered
-                  ? "bg-light-yellow text-dark-blue py-2 px-4 rounded"
-                  : "bg-dark-blue text-white py-2 px-4 rounded"
-              }`}
-              onClick={() => handleTraining()}
-            >
-              Training
-            </button>
+           
+          
           </div>
           <div className="flex space-x-2">
             <input

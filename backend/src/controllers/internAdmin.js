@@ -175,3 +175,17 @@ export const getdomainStudents = async (req, res) => {
         return res.status(500).json({ msg: "Internal Server Error" });
     }
 };
+
+const handleRejectIntern = async(req,res)=>
+{
+    try
+    {
+        const {id} = req.params;
+        const isUser = await Internship.find({user:id})
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.status(500).json({msg:"Internal Server Error"})
+    }
+}
