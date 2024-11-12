@@ -117,7 +117,7 @@ export default function Paymentdetails() {
       </button>
     )}
     <button
-      /* onClick={() => {handleRemove(payment.id)}} */
+      onClick={() => {handleRemove(payment._id)}}
       className="bg-red-500 text-white px-2 py-1 rounded mr-2 flex"
     >
       Remove

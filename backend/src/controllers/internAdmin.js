@@ -176,12 +176,52 @@ export const getdomainStudents = async (req, res) => {
     }
 };
 
-const handleRejectIntern = async(req,res)=>
+export const handleRejectIntern = async(req,res)=>
 {
     try
     {
         const {id} = req.params;
-        const isUser = await Internship.find({user:id})
+        const isIntern = await Internship.findById(id)
+        .populate('user', 'username email _id')
+        .populate('domain', 'title')
+        if(!isIntern)
+        {
+            return res.status(404).json({msg:"Intern not found"});
+        }
+        if(isIntern.verification === "pending" || isIntern.verification === "accepted")
+        {
+            if (!isIntern.user || !isIntern.user.email) {
+                return res.status(400).json({ msg: "User email not found" });
+            }
+            isIntern.verification = "rejected";
+        }
+        await isIntern.save();
+        let config = {
+            service:"gmail",
+            auth:{
+                user:"rahuljbhuvi@gmail.com",
+                pass:"wged jlsj awgj reip"
+            }
+        }
+        let transporter = nodemailer.createTransport(config);
+        let htmlContent = `
+        <h1>Hi ${isIntern.user.email},</h1>
+                <p>Thanks for registering as an Intern at Altruisty. But some issues you have been rejected as doing Intern at Altruisty. <strong>Kindly contact our team </strong></p>
+
+                
+            `;
+
+            let message = {
+                from:'rahuljbhuvi@gmail.com',
+                to:isIntern.user.email,
+                subject:"Regarding Intern at Altruisty",
+                html:htmlContent
+            }
+            await transporter.sendMail(message);
+            return res.status(201).json({msg:"Intern rejected sucessfully"})
+    
+        
+
     }
     catch(err)
     {

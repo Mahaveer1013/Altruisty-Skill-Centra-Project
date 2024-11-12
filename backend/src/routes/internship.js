@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { loginRequired } from "../middlewares/middleware.js";
-import { getdomainStudents, getInterns, getStudentsDomain, handleAcceptIntern } from "../controllers/internAdmin.js";
+import { getdomainStudents, getInterns, getStudentsDomain, handleAcceptIntern, handleRejectIntern } from "../controllers/internAdmin.js";
 import User from "../models/user.model.js";
 import Internship from "../models/internship.model.js";
 
@@ -264,4 +264,5 @@ router.get('/api/getStudentDomains',loginRequired,getStudentsDomain);
 router.get('/api/getstudents/:id',loginRequired,getdomainStudents)
 router.get('/api/getStudentDetails/:id',loginRequired,getStudentDetails)
 router.get('/api/getMyInternship',loginRequired,getMyInternship)
+router.put('/api/rejectIntern/:id',loginRequired,handleRejectIntern);
 export default router
