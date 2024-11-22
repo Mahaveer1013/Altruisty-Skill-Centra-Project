@@ -98,7 +98,7 @@ export default function Paymentdetails() {
             <tr key={payment._id} className="bg-dark-blue text-white">
               <td className="py-2 px-4 border-b text-center">{index + 1}</td>
               <td className="py-2 px-4 border-b text-center text-justify pl-12"> {payment.user && payment.user.email ? payment.user.email : ''}</td>
-              <td className="py-2 px-4 border-b text-center text-justify pl-16">{payment.user.email}</td>
+              {/* <td className="py-2 px-4 border-b text-center text-justify pl-16">{payment.user.email}</td> */}
               <td className="py-2 px-4 border-b text-center text-justify pl-12">{payment.domain?.title}</td>
               <td className="py-2 px-4 border-b text-center text-light-yellow">
   {payment.internshipType === 1 ? '199' : payment.internshipType === 2 ? '299' : payment.internshipType === 3 ? '399' : '499'}

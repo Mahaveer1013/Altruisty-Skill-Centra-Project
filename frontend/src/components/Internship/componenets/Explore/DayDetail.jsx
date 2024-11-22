@@ -37,11 +37,26 @@ const Header = () => {
 const DayDetail = () => {
   const { day } = useParams();
   const [Day,SetDay] = useState()
+  const getMyInternCourses = async()=>
+  {
+    try
+    {
+      const res = await api.get('/getMyIntern');
+      if(res.status === 201)
+      {
+        console.log(res.data)
+      }
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
+  }
   
   useEffect(() => {
     const getMyIntern = async () => {
       try {
-        const res = await api.get('/getMyInternship');
+        const res = await api.get('/getInternDetails');
         console.log(res);
         if (res.status === 201) {
           SetDay(res.data.msg);  
@@ -52,6 +67,7 @@ const DayDetail = () => {
     };
   
     getMyIntern();  
+    getMyInternCourses()
   }, []); 
   
 

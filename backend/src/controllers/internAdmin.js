@@ -26,121 +26,108 @@ export const getInterns = async (req, res) => {
 
 
 
-export const handleAcceptIntern = async(req,res)=>
-{
-    try
-    {
-        const {id} = req.params;
-        const isIntern = await Internship.findById(id)
-        .populate('user', 'username email _id')
-        .populate('domain', 'title')
-        if(!isIntern)
-        {
-            return res.status(404).json({msg:"Intern not found"});
-        }
-       if(isIntern.verification === "pending" || isIntern.verification === "rejected")
-       {
-        if (!isIntern.user || !isIntern.user.email) {
-            return res.status(400).json({ msg: "User email not found" });
-        }
-        isIntern.verification = "accepted";
-        
 
-        await isIntern.save();
 
-        let config = {
-            service:"gmail",
-            auth:{
-                user:"rahuljbhuvi@gmail.com",
-                pass:"wged jlsj awgj reip"
-            }
-        }
-        let transporter = nodemailer.createTransport(config);
-        let htmlContent = `
-                <h1>Hi ${isIntern.user.email},</h1>
-                <p>Thanks for registering as an Intern at Altruisty. You have successfully registered for the internship in <strong>${isIntern.domain.title}</strong>.</p>
-                <p>Go login and start your internship.</p>
-                <p>If you have any queries, contact +91 1234567890.</p>
-            `;
-
-        let message = {
-            from:'rahuljbhuvi@gmail.com',
-            to:isIntern.user.email,
-            subject:"Thanks for registering Intern at Altruisty",
-            html:htmlContent
-        }
-        const domain = await Domain.findOne({ title: isIntern.domain.title });
-        
-        if (!domain) {
-            console.log('Domain not found');
-            return;
-        }    
-       
-        const data = await Internship.find({user:isIntern._id});
-        if(!data)
-        {
-            return res.status(404).json({msg:"Intern not found"});
-        }
-        if(data.InternshipType === 1)
-        {
-            data.progress.startAt = new Date(); 
-
-            
-            const endAt = new Date(data.progress.startAt); 
-            endAt.setMonth(endAt.getDay() + 15); 
-        
-           
-            data.progress.EndAt = endAt;
-        }
-        else if(data.InternshipType === 2)
-        {
-            data.progress.startAt = new Date(); 
-
-            
-            const endAt = new Date(data.progress.startAt); 
-            endAt.setMonth(endAt.getMonth() + 1); 
-        
-           
-            data.progress.EndAt = endAt;
-        }
-        else if(data.InternshipType === 3)
-        {
-            data.progress.startAt = new Date(); 
-
-            
-            const endAt = new Date(data.progress.startAt); 
-            endAt.setMonth(endAt.getMonth() + 2); 
-        
-           
-            data.progress.EndAt = endAt;
-        }
-        else if(data.InternshipType === 4)
-        {
-            data.progress.startAt = new Date(); 
-
-            
-            const endAt = new Date(data.progress.startAt); 
-            endAt.setMonth(endAt.getMonth() + 3); 
-            data.progress.EndAt = endAt;
-        }
-        await data.save();
-        domain.registered += 1;
-        await domain.save();
-        await transporter.sendMail(message);
-        return res.status(201).json({msg:"Intern accepted successfully"});
-       }
-       else
-       {
-        return res.status(400).json({msg:"Already accepted offer letter"})
-       }
+export const handleAcceptIntern = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const isIntern = await Internship.findById(id)
+      .populate('user', 'username email _id')
+      .populate('domain', 'title');
     
+    if (!isIntern) {
+      return res.status(404).json({ msg: "Intern not found" });
     }
-    catch(err)
-    {
-        console.log(err);
-        return res.status(500).json({msg:"Internal Server Error"})
+
+    if (isIntern.verification === "pending" || isIntern.verification === "rejected") {
+      if (!isIntern.user || !isIntern.user.email) {
+        return res.status(400).json({ msg: "User email not found" });
+      }
+
+      // Change verification status
+      isIntern.verification = "accepted";
+
+      await isIntern.save(); // Save the updated internship
+
+      // Email Configuration
+      const config = {
+        service: "gmail",
+        auth: {
+          user: "rahuljbhuvi@gmail.com",
+          pass: "wged jlsj awgj reip",
+        },
+      };
+
+      const transporter = nodemailer.createTransport(config);
+      const htmlContent = `
+        <h1>Hi ${isIntern.user.email},</h1>
+        <p>Thanks for registering as an Intern at Altruisty. You have successfully registered for the internship in <strong>${isIntern.domain.title}</strong>.</p>
+        <p>Go login and start your internship.</p>
+        <p>If you have any queries, contact +91 1234567890.</p>
+      `;
+
+      const message = {
+        from: 'rahuljbhuvi@gmail.com',
+        to: isIntern.user.email,
+        subject: "Thanks for registering Intern at Altruisty",
+        html: htmlContent,
+      };
+
+      const domain = await Domain.findOne({ title: isIntern.domain.title });
+
+      if (!domain) {
+        console.log('Domain not found');
+        return;
+      }
+
+      // Increase registered count for the domain
+      domain.registered += 1;
+      await domain.save();
+
+      // Calculate internship progress dates
+      const internshipData = await Internship.find({ user: isIntern._id });
+
+      // Loop through each internship and update progress
+      for (let internship of internshipData) {
+        if (internship.internshipType === 1) {
+          internship.progress.startAt = new Date();
+          const endAt = new Date(internship.progress.startAt);
+          endAt.setMonth(endAt.getMonth() + 0.5); // 15 days
+          internship.progress.EndAt = endAt;
+        } else if (internship.internshipType === 2) {
+          internship.progress.startAt = new Date();
+          const endAt = new Date(internship.progress.startAt);
+          endAt.setMonth(endAt.getMonth() + 1); // 1 month
+          internship.progress.EndAt = endAt;
+        } else if (internship.internshipType === 3) {
+          internship.progress.startAt = new Date();
+          const endAt = new Date(internship.progress.startAt);
+          endAt.setMonth(endAt.getMonth() + 2); // 2 months
+          internship.progress.EndAt = endAt;
+        } else if (internship.internshipType === 4) {
+          internship.progress.startAt = new Date();
+          const endAt = new Date(internship.progress.startAt);
+          endAt.setMonth(endAt.getMonth() + 3); // 3 months
+          internship.progress.EndAt = endAt;
+        }
+
+        // Save the updated internship
+        await internship.save();
+      }
+
+      // Send email after successfully updating internship progress and domain registration
+      await transporter.sendMail(message);
+
+      return res.status(201).json({ msg: "Intern accepted successfully" });
+    } else {
+      return res.status(400).json({ msg: "Already accepted offer letter" });
     }
-}
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
 
 export const getStudentsDomain = async(req,res)=>
 {

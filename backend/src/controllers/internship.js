@@ -1,3 +1,4 @@
+import CourseSection from "../models/courseSection.js";
 import Domain from "../models/domain.model.js";
 import Internship from "../models/internship.model.js";
 
@@ -142,3 +143,35 @@ export const progressUpdate = async(req,res)=>
         return res.status(500).json({msg:"Internal server error"})
     }
 }
+
+export const getMyIntern = async (req, res) => {
+    try {
+      const user = req.user;
+  
+      
+      const internships = await Internship.find({ user: user._id });
+  
+      if (!internships || internships.length === 0) {
+        return res.status(400).json({ msg: "Intern not found" });
+      }
+  
+      
+      const userDomain = internships[0].domain;
+      console.log(userDomain);
+   
+      const courses = await CourseSection.find({ domain: userDomain })
+        .populate('sections');  
+  
+      if (!courses || courses.length === 0) {
+        return res.status(404).json({ msg: "No courses found for the domain" });
+      }
+  
+     
+      return res.status(201).json({ msg: "Courses fetched successfully", courses });
+  
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: "Internal Server Error" });
+    }
+  };
+  
