@@ -1,30 +1,35 @@
 import mongoose from 'mongoose'
 
 
-const resourceSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+
+const resourceSchema = new Schema({
   name: { type: String, required: true },
   url: { type: String, required: true },
   author: { type: String }
 });
 
-
-const topicSchema = new mongoose.Schema({
+// Define schema for topics
+const topicSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  keyConcepts: [String], 
-  resources: [resourceSchema] 
+  keyConcepts: [String], // Array of strings
+  resources: [resourceSchema] // Array of resources
 });
 
-
-const sectionSchema = new mongoose.Schema({
-  title: { type: String, required: true }, 
-  topics: [topicSchema] 
+// Define schema for sections
+const sectionSchema = new Schema({
+  title: { type: String, required: true },
+  topics: [topicSchema] // Array of topics
 });
 
-const courseSchema = new mongoose.Schema({
-  title: { type: String, required: true }, 
-  description: { type: String }, 
-  sections: [sectionSchema]
+// Define schema for courses
+const courseSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  domainId: { type: mongoose.Schema.Types.ObjectId, ref: 'Domain' }, // Reference to the Domain model
+  sections: [sectionSchema] // Array of sections
 });
 
 const CourseSection = mongoose.model('Course', courseSchema);

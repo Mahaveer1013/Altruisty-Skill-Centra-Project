@@ -58,7 +58,7 @@ export const insertCourses = async()=>
         const count = await CourseSection.countDocuments();
         if(count === 0)
         {
-            await CourseSection.insertMany(data.sections);
+            await CourseSection.insertMany(data);
             console.log('Static course data inserted successfully');
         }
         else {
@@ -70,3 +70,25 @@ export const insertCourses = async()=>
         console.error('Error inserting static course data:', err);
     }
 }
+
+
+
+export const getCourses = async(req,res)=>
+    {
+        try
+        {
+            const {id} = req.params;
+            const isDomain = await Domain.findById(id);
+            if(!isDomain)
+            {
+                return res.status(404).json({message: 'Domain not found'});
+            }
+            const courses = await CourseSection.find({domain: id});
+            return res.status(201).json({courses})
+        }
+        catch(err)
+        {
+            console.log(err);
+            return res.status(500).json({msg:"Internal Server Error"})
+        }
+    } 
