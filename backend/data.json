@@ -1,0 +1,323 @@
+[
+  {
+    "title": "Full Stack Development",
+    "description": "Learn to build complete web applications, from frontend to backend.",
+
+  "sections": [
+    {
+      "title": "HTML and CSS",
+      "topics": [
+        {
+          "title": "HTML Structure and Tags",
+          "description": "Learn the basic structure of an HTML document and understand common tags.",
+          "keyConcepts": [
+            "HTML document structure (<html>, <head>, <body>)",
+            "Basic tags (<h1>, <p>, <div>, <span>)",
+            "Attributes (e.g., class, id)",
+            "Comments and indentation"
+          ],
+          "resources": [
+            {
+              "name": "HTML Tutorial for Beginners",
+              "url": "https://www.youtube.com/watch?v=qz0aGYrrlhU",
+              "author": "Traversy Media"
+            },
+            {
+              "name": "HTML Crash Course For Absolute Beginners",
+              "url": "https://www.youtube.com/watch?v=UB1O30fR-EE",
+              "author": "Tech With Tim"
+            }
+          ]
+        },
+        {
+          "title": "Lists, Tables, Forms",
+          "description": "Learn how to structure lists, tables, and create forms for user input.",
+          "keyConcepts": [
+            "Lists: <ul>, <ol>, <li>",
+            "Tables: <table>, <tr>, <td>, <th>",
+            "Forms: <form>, <input>, <label>, <select>, <button>",
+            "Form validation and submission"
+          ],
+          "resources": [
+            {
+              "name": "HTML Lists - Unordered, Ordered, Description",
+              "url": "https://www.youtube.com/watch?v=b7KEzrcSyW0",
+              "author": "The Net Ninja"
+            },
+            {
+              "name": "HTML Tables and Forms",
+              "url": "https://www.youtube.com/watch?v=TY5SYu8OvWE",
+              "author": "freeCodeCamp"
+            }
+          ]
+        },
+        {
+          "title": "Semantic HTML",
+          "description": "Understand the importance of semantic HTML for accessibility and SEO.",
+          "keyConcepts": [
+            "Difference between non-semantic vs. semantic tags",
+            "Common semantic tags: <header>, <footer>, <article>, <section>, <nav>",
+            "Accessibility and SEO benefits"
+          ],
+          "resources": [
+            {
+              "name": "HTML Semantic Elements",
+              "url": "https://www.youtube.com/watch?v=HqO29tzBhr8",
+              "author": "Traversy Media"
+            },
+            {
+              "name": "Semantic HTML Crash Course",
+              "url": "https://www.youtube.com/watch?v=82hnvUYY6QA",
+              "author": "Academind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "JavaScript",
+      "topics": [
+        {
+          "title": "Introduction to JavaScript and Variables",
+          "description": "Understand what JavaScript is, how to include it in your project, and how variables work.",
+          "keyConcepts": [
+            "What is JavaScript and where it is used (client-side and server-side)",
+            "How to include JavaScript in HTML (external, inline, and internal)",
+            "Declaring variables (var, let, const)",
+            "Basic syntax and comments"
+          ],
+          "resources": [
+            {
+              "name": "JavaScript Crash Course for Beginners",
+              "url": "https://www.youtube.com/watch?v=hdI2bqOjy3c",
+              "author": "Traversy Media"
+            },
+            {
+              "name": "JavaScript Tutorial for Beginners: Learn JavaScript & Build a Weather App",
+              "url": "https://www.youtube.com/watch?v=ItYye9h_RXg",
+              "author": "Programming with Mosh"
+            }
+          ]
+        },
+        {
+          "title": "Data Types and Operators",
+          "description": "Learn the various data types and how to perform operations on them.",
+          "keyConcepts": [
+            "Primitive data types: String, Number, Boolean, Undefined, Null, Symbol",
+            "Complex data types: Object, Array",
+            "Type coercion and conversion",
+            "Arithmetic, comparison, logical operators"
+          ],
+          "resources": [
+            {
+              "name": "JavaScript Data Types Explained",
+              "url": "https://www.youtube.com/watch?v=bWPMSSsVdPk",
+              "author": "Dev Ed"
+            },
+            {
+              "name": "JavaScript Data Types & Type Conversion",
+              "url": "https://www.youtube.com/watch?v=AQU_9_xe1w8",
+              "author": "Academind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "React",
+      "topics": [
+        {
+          "title": "Introduction to React and JSX",
+          "description": "Learn the basics of React and JSX.",
+          "keyConcepts": [
+            "What is React?",
+            "React's component-based architecture",
+            "Understanding JSX (JavaScript XML)",
+            "React Virtual DOM"
+          ],
+          "resources": [
+            {
+              "name": "ReactJS Crash Course",
+              "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
+              "author": "Traversy Media"
+            }
+          ]
+        },
+        {
+          "title": "State and Lifecycle",
+          "description": "Learn how to manage state and lifecycle methods in React.",
+          "keyConcepts": [
+            "Introduction to React state",
+            "Managing local component state",
+            "Lifecycle methods in class components"
+          ],
+          "resources": [
+            {
+              "name": "React State & Lifecycle Explained",
+              "url": "https://www.youtube.com/watch?v=0riHps91AzE",
+              "author": "Web Dev Simplified"
+            }
+          ]
+        },
+        {
+          "title": "Components and Props",
+          "description": "Learn about functional and class components, breaking the UI into components, and using props for data passing.",
+          "keyConcepts": [
+            "Functional vs. Class components",
+            "Breaking the UI into components",
+            "Passing data to components using props",
+            "Reusability of components"
+          ],
+          "resources": [
+            {
+              "name": "React JS Tutorials for Beginners",
+              "url": "https://www.youtube.com/watch?v=XxVg_s8xAms",
+              "author": "Codevolution"
+            }
+          ]
+        },
+        {
+          "title": "Conditional Rendering and Lists",
+          "description": "Learn how to render components conditionally and display lists dynamically using React.",
+          "keyConcepts": [
+            "Rendering components conditionally using `if`, `else`, `ternary operators`",
+            "Rendering multiple components using `map()`",
+            "React keys and how they work with dynamic lists"
+          ],
+          "resources": [
+            {
+              "name": "Conditional Rendering in React",
+              "url": "https://www.youtube.com/watch?v=6Y1iEdZSTpY",
+              "author": "Codevolution"
+            },
+            {
+              "name": "Rendering Lists in React",
+              "url": "https://www.youtube.com/watch?v=UPCLBZIG-nI",
+              "author": "Codevolution"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "MongoDB",
+      "topics": [
+        {
+          "title": "Introduction to NoSQL Databases",
+          "description": "Understand the basics of NoSQL databases, their types, and use cases.",
+          "keyConcepts": [
+            "What is a database?",
+            "SQL vs NoSQL",
+            "Key-Value, Document, Column, and Graph NoSQL databases",
+            "Use cases of NoSQL"
+          ],
+          "resources": [
+            {
+              "name": "Introduction to NoSQL Databases",
+              "url": "https://www.youtube.com/watch?v=uD3p_rZP0ws",
+              "author": "MongoDB"
+            },
+            {
+              "name": "SQL vs NoSQL Explained",
+              "url": "https://www.youtube.com/watch?v=ZS_kXvOeQ5Y",
+              "author": "Academind"
+            }
+          ]
+        },
+        {
+          "title": "CRUD Operations in MongoDB",
+          "description": "Learn the basic CRUD operations for MongoDB.",
+          "keyConcepts": [
+            "Inserting documents (`insertOne`, `insertMany`)",
+            "Reading documents (`find`, `findOne`)",
+            "Updating documents (`updateOne`, `updateMany`)",
+            "Deleting documents (`deleteOne`, `deleteMany`)"
+          ],
+          "resources": [
+            {
+              "name": "MongoDB CRUD Operations",
+              "url": "https://www.youtube.com/watch?v=excRF-uT2jo",
+              "author": "Traversy Media"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Node.js",
+      "topics": [
+        {
+          "title": "Introduction to Node.js and NPM",
+          "description": "Learn the basics of Node.js and the Node Package Manager.",
+          "keyConcepts": [
+            "What is Node.js?",
+            "Installing Node.js and NPM",
+            "Running JavaScript outside the browser",
+            "Introduction to NPM (Node Package Manager)"
+          ],
+          "resources": [
+            {
+              "name": "Node.js Full Course for Beginners",
+              "url": "https://www.youtube.com/watch?v=f2EqECiTBL8",
+              "author": "Traversy Media"
+            }
+          ]
+        },
+        {
+          "title": "Building a RESTful API in Node.js",
+          "description": "Understand REST principles and how to create RESTful endpoints.",
+          "keyConcepts": [
+            "REST principles",
+            "Creating RESTful endpoints with Node.js and Express.js"
+          ],
+          "resources": [
+            {
+              "name": "RESTful API Tutorial in Node.js",
+              "url": "https://www.youtube.com/watch?v=f2EqECiTBL8",
+              "author": "Traversy Media"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Express.js",
+      "topics": [
+        {
+          "title": "Introduction to Express.js",
+          "description": "Learn about Express.js and how it simplifies server-side development.",
+          "keyConcepts": [
+            "Overview of Node.js and Express.js",
+            "Installation and setting up an Express app",
+            "Running a basic server with Express"
+          ],
+          "resources": [
+            {
+              "name": "Node.js & Express.js Full Course",
+              "url": "https://www.youtube.com/watch?v=Oe421EPjeBE",
+              "author": "Traversy Media"
+            }
+          ]
+        },
+        {
+          "title": "Middleware in Express",
+          "description": "Learn about middleware in Express.js and how to use it effectively.",
+          "keyConcepts": [
+            "What is middleware?",
+            "Using built-in middleware (e.g., `express.json()`)",
+            "Creating custom middleware",
+            "Understanding third-party middleware (e.g., `morgan`)"
+          ],
+          "resources": [
+            {
+              "name": "Middleware in Express.js",
+              "url": "https://www.youtube.com/watch?v=lY6icfhap2o",
+              "author": "Traversy Media"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  }
+]

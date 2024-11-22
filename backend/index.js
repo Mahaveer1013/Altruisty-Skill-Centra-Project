@@ -11,10 +11,11 @@ import http from 'http';
 import { Server } from 'socket.io';
 import socketLoginRequired from './src/middlewares/socketLoginRequired.js';
 import ProfileRoutes from "./src/routes/profile.js"
-import { insertDomains } from './src/controllers/domain.js';
+import { insertCourses, insertDomains } from './src/controllers/domain.js';
 import UserInternRoutes from "./src/routes/userIntern.js"
 import AdminRoutes from "./src/routes/internship.js"
 import ProjectRoutes from "./src/routes/projects.js"
+
 // Initialize environment variables
 dotenv.config();
 
@@ -66,8 +67,9 @@ socketRouter(io);
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    server.listen(5000, () => {
+    server.listen(5000, async() => {
       console.log('Server is running on port http://localhost:5000');
+      insertCourses();
        insertDomains();
     });
   })

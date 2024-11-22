@@ -1,5 +1,9 @@
 
 import Domain from "../models/domain.model.js";
+import CourseSection from "../models/courseSection.js";
+import data from '../../data.json' assert { type: 'json' };
+
+console.log(data);
 
 // Dummy static domain data
 const domains = [
@@ -46,3 +50,23 @@ export const insertDomains = async () => {
         console.error('Error inserting static domain data:', error);
     }
 };
+
+export const insertCourses = async()=>
+{
+    try
+    {
+        const count = await CourseSection.countDocuments();
+        if(count === 0)
+        {
+            await CourseSection.insertMany(data.sections);
+            console.log('Static course data inserted successfully');
+        }
+        else {
+            console.log('Static domain data already exists, skipping insertion');
+        }
+    }
+    catch(err)
+    {
+        console.error('Error inserting static course data:', err);
+    }
+}
