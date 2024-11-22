@@ -121,3 +121,24 @@ export const getInternDetails = async(req,res)=>
     }
 }
 
+export const progressUpdate = async(req,res)=>
+{
+    try
+    {
+        
+       const {link} = req.body;
+       const id = req.user;
+       const internship = await Internship.find({user: user._id});
+       if(!internship)
+       {
+           return res.status(400).json({msg:"intern not found"});
+       }
+       internship.progress.push({link:link});
+
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.status(500).json({msg:"Internal server error"})
+    }
+}
