@@ -122,28 +122,51 @@ export const getInternDetails = async(req,res)=>
     }
 }
 
-export const progressUpdate = async(req,res)=>
-{
-    try
-    {
-        
-       const {link} = req.body;
-       const id = req.user;
-       const internship = await Internship.find({user: user._id});
-       if(!internship)
-       {
-           return res.status(400).json({msg:"intern not found"});
-       }
-       internship.progress.push({link:link});
 
-    }
-    catch(err)
-    {
-        console.log(err);
-        return res.status(500).json({msg:"Internal server error"})
-    }
-}
 
+export const progressUpdate = async (req, res) => {
+    try {
+      const { tasks } = req.body; 
+      console.log(tasks)
+      const userId = req.user._id;
+  
+      // Find the user's internship
+      const internship = await Internship.findOne({ user: userId });
+      console.log(internship)
+      if (!internship) {
+        return res.status(400).json({ msg: "Internship not found" });
+      }
+  
+     
+      const startDate = internship.StartedAt || internship.createdAt; 
+      const currentDate = new Date();
+      const diffTime = Math.abs(currentDate - startDate);
+      const currentDay = Math.ceil(diffTime / (1000 * 3600 * 24)); 
+  
+     
+      const existingProgress = internship.progress.find((entry) => entry.day === currentDay);
+  
+      if (existingProgress) {
+       
+        existingProgress.file = { ...existingProgress.file, ...tasks };
+      } else {
+       
+        internship.progress.push({
+          day: currentDay,
+          file: tasks, 
+        });
+      }
+  
+    
+      await internship.save();
+  
+      return res.status(201).json({ msg: "Progress updated successfully", progress: internship.progress });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: "Internal server error" });
+    }
+  };
+  
 export const getMyIntern = async (req, res) => {
     try {
       const user = req.user;
@@ -173,4 +196,8 @@ export const getMyIntern = async (req, res) => {
       return res.status(500).json({ msg: "Internal Server Error" });
     }
   };
+
+
+
+ 
   

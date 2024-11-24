@@ -8,22 +8,13 @@ export default function StudentDetails() {
   {
     /**student detail json */
   }
-  const users = [
-    { id:1, Title: "Domain", Data: "UI / UX" },
-    { id:2, Title: "Internship Period", Data: "2 Months" },
-    { id:3, Title: "Currently work on", Data: "Day 10" },
-    { id:4, Title: "Joined Date", Data: "10.7.2024" },
-    { id:5, Title: "End Date", Data: "10.8.2024" },
-    { id:6, Title: "Subscription", Data: "1 Month", Button: "View", route:'/Subscription'},
-    { id:7, Title: "Assignment", Data: "5 / 5", Button: "View", route:'/Profileattribute'},
-    { id:8, Title: "Task", Data: "30 / 30", Button: "View", route:'/Profileattribute'},
-    { id:9, Title: "Project", Data: "1 / 3", Button: "View", route:'/Profileattribute'},
-  ];
+ 
 
   {/**router navigation for view button */}
   const navigate = useNavigate();
   const {id} = useParams();
-  const [details,SetDetails] = useState([]);
+  const [details, SetDetails] = useState([]);
+
   
   useEffect(()=> {
     const getStudentDetails = async()=>
@@ -33,6 +24,7 @@ export default function StudentDetails() {
           const res = await api.get(`/getStudentDetails/${id}`);
           console.log(res);
           SetDetails(res.data);
+          console.log("hello"+details)
         
     
         }
@@ -42,7 +34,7 @@ export default function StudentDetails() {
         }
       }
       getStudentDetails();
-  },[])
+  },[id])
   {
     /**Analysis json */
   }
@@ -104,29 +96,13 @@ export default function StudentDetails() {
       color: ["blue", "lightgray"],
     },
   ];
-
+  if (!details.length) {
+    return <div>Loading student details...</div>;
+  }
   return (
     <div className="flex flex-row w-full h-full mx-auto">
       {/* Sidebar */}
-     {/*  <div className="flex flex-col items-center bg-dark-blue min-h-full w-[300px] pt-12">
-        <nav>
-          <div className="flex justify-center items-center text-light-yellow text-2xl pb-8 font-TimesNewRoman">
-            Menu
-          </div>
-          <ul className="flex flex-col space-y-5 text-white justify-center items-center">
-            <li className="flex items-center text-lg">Dashboard</li>
-            <li className="flex items-center text-lg">Job & Intern</li>
-            <li className="flex items-center text-lg">Community</li>
-            <li className="flex items-center text-lg">Subscription</li>
-            <li className="flex items-center text-lg">Admin Access</li>
-            <li className="flex items-center text-lg">Event</li>
-            <li className="flex items-center text-lg">Challenges</li>
-            <li className="flex items-center text-lg">Offer Include</li>
-            <li className="flex items-center text-lg">Log Out</li>
-          </ul>
-        </nav>
-      </div>
- */}
+     
       {/**Main content*/}
       <div className="bg-[#FAF2BE] flex flex-col justify-center items-center mx-auto w-full h-full overflow-hidden p-5">
         <div className="flex flex-row justify-between w-full p-10">
@@ -138,7 +114,7 @@ export default function StudentDetails() {
             />
             <div className="flex flex-col">
               <h2 className="text-xl font-extrabold text-dark-blue">
-                Robert Charlos Fury
+               {details?.user?.email}
               </h2>
               <span className="text-dark-blue">student</span>
             </div>
@@ -161,26 +137,33 @@ export default function StudentDetails() {
             </tr>
           </thead>
           <tbody>
-            {details.map((user) => (
-              <tr
-                key={user._id}
-                className="text-center text-white border-b mx-auto"
-              >
-                <td className="py-2 px-16 text-justify pl-[150px] pr-[100px]">
-                  
-                </td>
-                <td className="py-2 px-16 text-justify pl-[160px]">
-                  {user.Data}{" "}
-                </td>
-                <td className="mr-10">
-                  <button className=" bg-light-yellow text-dark-blue w-10 my-2 mr-6 mx-auto rounded-lg"
-                    onClick={() => navigate(user.route)}
-                  >
-                    {user.Button}
-                  </button>
-                </td>
-              </tr>
-            ))}
+            { Array.isArray(details) ? (
+               details.map((user) => (
+                <tr
+                  key={user._id}
+                  className="text-center text-white border-b mx-auto"
+                >
+                  <td className="py-2 px-16 text-justify pl-[150px] pr-[100px]">
+                    {details?.role}
+                  </td>
+                  <td className="py-2 px-16 text-justify pl-[160px]">
+                    {user.Data}{" "}
+                  </td>
+                  <td className="mr-10">
+                    <button className=" bg-light-yellow text-dark-blue w-10 my-2 mr-6 mx-auto rounded-lg"
+                      onClick={() => navigate(user.route)}
+                    >
+                      {user.Button}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )
+            :(
+              <td colSpan="3">No data available</td>
+            )
+          }
+           
           </tbody>
         </table>
 

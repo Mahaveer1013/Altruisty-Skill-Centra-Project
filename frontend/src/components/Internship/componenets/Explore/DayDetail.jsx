@@ -41,24 +41,20 @@ const DayDetail = () => {
   const [title,SetTitle] = useState("")
   const [selectedSection, setSelectedSection] = useState(null); 
 
-  const getMyInternCourses = async()=>
-  {
-    try
-    {
+  const getMyInternCourses = async () => {
+    try {
       const res = await api.get('/getMyIntern');
-      if(res.status === 201)
-      {
-        console.log(res.data)
-        SetSections(res.data.courses[0]);
-        SetTitle(res.data.courses.title)
-
+      if (res.status === 201) {
+        console.log(res.data);
+        const course = res.data.courses[0]; // Assuming only one course
+        SetSections(course.sections); // Extract sections array
+        SetTitle(course.title); // Set course title
       }
+    } catch (err) {
+      console.error(err);
     }
-    catch(err)
-    {
-      console.log(err);
-    }
-  }
+  };
+  
   
   useEffect(() => {
     const getMyIntern = async () => {
@@ -132,7 +128,7 @@ const DayDetail = () => {
 
       {/* Render section list */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {sections.map((section) => (
+        {sections ? (sections.map((section) => (
           <div
             key={section.id}
             className="p-4 border rounded-lg shadow cursor-pointer hover:bg-gray-100"
@@ -140,7 +136,11 @@ const DayDetail = () => {
           >
             <h2 className="text-xl font-semibold">{section.title}</h2>
           </div>
-        ))}
+        )) 
+      ) : (
+        <p> Loading sections...</p>
+      
+        )}
       </div>
 
       {/* Render selected section details */}
@@ -199,21 +199,7 @@ const DayDetail = () => {
           </button>
         ))}
   
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {currentTask && (
-            <>
-              <h2 className="text-xl font-bold">{currentTask.title}</h2>
-              <p className="mt-2">{currentTask.description}</p>
-              <h3 className="text-lg mt-4">Agenda:</h3>
-              <ul className="list-disc list-inside mt-2">
-                {currentTask.agenda.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-              <p className="mt-4">{currentTask.notes}</p>
-            </>
-          )}
-        </Modal>
+       
       </div>
     );
   };

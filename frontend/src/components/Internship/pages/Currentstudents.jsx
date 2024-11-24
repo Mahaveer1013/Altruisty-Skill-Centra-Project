@@ -4,19 +4,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 
 export default function Currentstudents() {
-
-  const data = [
-    {id:1, title: "UI / UX design", count: 23, route:'/Students'},
-    {id:2, title: "Java developer", count: 25, route:'/Students'},
-    {id:3, title: "UI / UX design", count: 26, route:'/Students'},
-    {id:4, title: "Java developer", count: 24, route:'/Students'},
-    {id:5, title: "UI / UX design", count: 33, route:'/Students'},
-    {id:6, title: "Java developer", count: 24, route:'/Students'},
-    {id:7, title: "UI / UX design", count: 29, route:'/Students'},
-    {id:8, title: "Java developer", count: 33, route:'/Students'},
-    {id:9, title: "UI / UX design", count: 23, route:'/Students'},
-  ];
-
   //for router navigation
   const navigate = useNavigate();
   const [domainData,setDomainData] = useState([])
@@ -41,22 +28,7 @@ export default function Currentstudents() {
     <div className="flex flex-row w-full h-full mx-auto">
       {/* Sidebar */}
       <div className="flex flex-col items-center min-h-full bg-dark-blue w-[300px] pt-16">
-        {/* <nav>
-          <div className="flex justify-center items-center text-light-yellow text-2xl lg:pb-8 font-TimesNewRoman">
-            Menu
-          </div>
-          <ul className="flex flex-col space-y-5 mb-[50px] text-white justify-center items-center">
-            <li className="flex items-center text-lg">Dashboard</li>
-            <li className="flex items-center text-lg">Job & Intern</li>
-            <li className="flex items-center text-lg">Community</li>
-            <li className="flex items-center text-lg">Subscription</li>
-            <li className="flex items-center text-lg">Admin Access</li>
-            <li className="flex items-center text-lg">Event</li>
-            <li className="flex items-center text-lg">Challenges</li>
-            <li className="flex items-center text-lg">Offer Include</li>
-            <li className="flex items-center text-lg">Log Out</li>
-          </ul>
-        </nav> */}
+
       </div>
 
       {/* Main Content */}
