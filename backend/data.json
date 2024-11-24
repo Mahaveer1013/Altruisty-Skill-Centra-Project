@@ -1,7 +1,8 @@
 [
   {
-    "title": "Full Stack Development",
+    "title": "Web Development",
     "description": "Learn to build complete web applications, from frontend to backend.",
+    "domainId":"66cdbba104f6496769cce468",
     "sections": [
       {
         "title": "HTML and CSS",

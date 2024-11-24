@@ -28,7 +28,7 @@ const sectionSchema = new Schema({
 const courseSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
-  domainId: { type: mongoose.Schema.Types.ObjectId, ref: 'Domain' }, // Reference to the Domain model
+  domainId: { type: mongoose.Schema.Types.ObjectId,required:true}, // Reference to the Domain model
   sections: [sectionSchema] // Array of sections
 });
 

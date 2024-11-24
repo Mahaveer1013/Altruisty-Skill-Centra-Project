@@ -37,6 +37,10 @@ const Header = () => {
 const DayDetail = () => {
   const { day } = useParams();
   const [Day,SetDay] = useState()
+  const [sections,SetSections] = useState(null);
+  const [title,SetTitle] = useState("")
+  const [selectedSection, setSelectedSection] = useState(null); 
+
   const getMyInternCourses = async()=>
   {
     try
@@ -45,6 +49,9 @@ const DayDetail = () => {
       if(res.status === 201)
       {
         console.log(res.data)
+        SetSections(res.data.courses[0]);
+        SetTitle(res.data.courses.title)
+
       }
     }
     catch(err)
@@ -69,7 +76,10 @@ const DayDetail = () => {
     getMyIntern();  
     getMyInternCourses()
   }, []); 
-  
+  const handleSectionClick = (sectionId) => {
+    const section = sections.find((sec) => sec.id === sectionId);
+    setSelectedSection(section);
+  };
 
 
   
@@ -117,38 +127,31 @@ const DayDetail = () => {
   
     return (
       <div>
-        <button
-          onClick={openModal}
-        >   <div className='w-[300px] h-12 md:w-[400px] bg-white mb-5 rounded-md'>
-            
-        <div className='text-xl flex p-2 justify-between'>
-        <h1>Brief for day one</h1>
-        <RiVideoFill color='green' size={30} className='rounded-full'/>
-       </div>
-       </div>
-        </button>
-      
-  
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <h2 className="text-xl font-bold">Day 1: Introduction to the Course</h2>
-          <p className="mt-2">
-            Welcome to Day 1 of the online course! Today, we will cover the basics
-            of the course, introduce the key topics, and outline what you can
-            expect in the coming days.
-          </p>
-          <h3 className="text-lg mt-4">Agenda:</h3>
-          <ul className="list-disc list-inside mt-2">
-            <li>Introduction to the course objectives</li>
-            <li>Overview of the course structure</li>
-            <li>Key resources and materials</li>
-            <li>Interactive Q&A session</li>
-          </ul>
-          <p className="mt-4">
-            Make sure to participate in the discussions and ask any questions you
-            may have. Let's get started!
-          </p>
-        </Modal>
+        <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Sections</h1>
+
+      {/* Render section list */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {sections.map((section) => (
+          <div
+            key={section.id}
+            className="p-4 border rounded-lg shadow cursor-pointer hover:bg-gray-100"
+            onClick={() => handleSectionClick(section.id)}
+          >
+            <h2 className="text-xl font-semibold">{section.title}</h2>
+          </div>
+        ))}
       </div>
+
+      {/* Render selected section details */}
+      {selectedSection && (
+        <div className="mt-6 p-6 border rounded-lg shadow-lg bg-gray-50">
+          <h2 className="text-2xl font-bold">{selectedSection.title}</h2>
+          <p className="mt-4">{selectedSection.description}</p>
+        </div>
+      )}
+    </div>
+       </div>
     );
   };
   

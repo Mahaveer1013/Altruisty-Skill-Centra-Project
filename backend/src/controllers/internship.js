@@ -157,10 +157,9 @@ export const getMyIntern = async (req, res) => {
   
       
       const userDomain = internships[0].domain;
-      console.log(userDomain);
-   
-      const courses = await CourseSection.find({ domain: userDomain })
-        .populate('sections');  
+     console.log(userDomain)
+      const courses = await CourseSection.find({ domainId: userDomain })
+        
   
       if (!courses || courses.length === 0) {
         return res.status(404).json({ msg: "No courses found for the domain" });
