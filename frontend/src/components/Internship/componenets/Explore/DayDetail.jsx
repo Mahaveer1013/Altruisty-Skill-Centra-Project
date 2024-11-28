@@ -35,20 +35,21 @@ const Header = () => {
 };
 
 const DayDetail = () => {
-  const { day } = useParams();
-  const [Day,SetDay] = useState()
+
+ 
   const [sections,SetSections] = useState(null);
   const [title,SetTitle] = useState("")
   const [selectedSection, setSelectedSection] = useState(null); 
-
+  const [day,SetDay] = useState(null)
   const getMyInternCourses = async () => {
     try {
       const res = await api.get('/getMyIntern');
       if (res.status === 201) {
         console.log(res.data);
-        const course = res.data.courses[0]; // Assuming only one course
-        SetSections(course.sections); // Extract sections array
-        SetTitle(course.title); // Set course title
+        const course = res.data.courses[0]; 
+        SetSections(course.sections); 
+        SetDay(res.data.currentDay)
+        SetTitle(course.title); 
       }
     } catch (err) {
       console.error(err);
@@ -96,7 +97,7 @@ const DayDetail = () => {
   };
 
   const dayContent = content[day] || {
-    title: `Day ${day}: Content not available`,
+    title: `Day ${day}: Content `,
     description: "No content available for this day.",
     videos: [],
   };
@@ -138,7 +139,7 @@ const DayDetail = () => {
           </div>
         )) 
       ) : (
-        <p> Loading sections...</p>
+        <h1> Your did not registered any training Internship</h1>
       
         )}
       </div>
@@ -157,52 +158,9 @@ const DayDetail = () => {
   
   
   // Example tasks
-  const tasks = [
-    {
-      
-    
-      id: 1,
-      title: "Task 1: Building a Responsive Dashboard with React and Chart.js",
-      description: "Develop a dashboard interface with data visualizations using Chart.js.",
-      agenda: [
-        "Set up a React project with Create React App",
-        "Integrate Chart.js for data visualization",
-        "Design responsive components using Tailwind CSS",
-        "Fetch and display real-time data from an API"
-      ],
-      notes: "Ensure that the dashboard is responsive and performs well on both desktop and mobile devices."
-    },
-    // Add more tasks here as needed
-  ];
+ 
   
-  const ParentComponentTask = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentTask, setCurrentTask] = useState(null);
-  
-    const openModal = (task) => {
-      setCurrentTask(task);
-      setIsModalOpen(true);
-    };
-  
-    const closeModal = () => setIsModalOpen(false);
-  
-    return (
-      <div>
-        {tasks.map((task) => (
-          <button
-            key={task.id}
-            onClick={() => openModal(task)}
-            className="w-[300px] h-12 md:w-[400px] bg-white mb-5 rounded-md flex p-2 justify-between items-center"
-          >
-            <h1 className='text-xl'>Task</h1>
-             <BsFillFileEarmarkTextFill color='red' size={25}/>
-          </button>
-        ))}
-  
-       
-      </div>
-    );
-  };
+ 
   
   
 
@@ -218,7 +176,7 @@ const DayDetail = () => {
         <div className='flex justify-center '>   
             
           
-            <ParentComponent />
+         
         </div>
         <div className='flex justify-center'>   
           {/* <div className='w-[300px] h-10 rounded-md md:w-[400px]  bg-white'>
@@ -228,22 +186,11 @@ const DayDetail = () => {
             </div>
           
           </div> */}
-           <ParentComponentTask />
+           
         </div>
 
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 mt-8'>
-        <div>
-        <h2 className="text-2xl md:text-4xl font-bold ">Videos</h2>
-        <div className='rounded-full'>
-           <img className='p-10  rounded-[50px] h-full w-full' src={Video} alt="" />
-        </div>
-        </div>    
-         <div >
-            <h1 className='text-2xl md:text-4xl font-bold' >Description</h1>
-            <p className='p-10 md:text-2xl'>{dayContent.description}</p>
-         </div>
-      </div>
+      
       {/* <ul className="mt-2">
         {dayContent.videos?.map((video, index) => (
           <li key={index} className="mt-1">
@@ -253,7 +200,9 @@ const DayDetail = () => {
       </ul> */}
       </div>
     </div>
-    <DayUpload />
+    {
+      sections ? <DayUpload /> :""
+    }
     </div>
   );
 };

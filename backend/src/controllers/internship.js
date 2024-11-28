@@ -167,35 +167,65 @@ export const progressUpdate = async (req, res) => {
     }
   };
   
+
+
+  const calculateCurrentDay = (createdAt) => {
+    if (!createdAt || isNaN(new Date(createdAt))) {
+        return { error: "Invalid or missing start date" };
+    }
+
+    const startedAt = new Date(createdAt); 
+    const currentDate = new Date(); 
+
+   
+    const differenceInTime = currentDate - startedAt;
+
+   
+    const currentDay = Math.floor(differenceInTime / (1000 * 60 * 60 * 24)) + 1; 
+    return { currentDay, startedAt, formattedDate: startedAt.toDateString() }; 
+};
+
+
 export const getMyIntern = async (req, res) => {
     try {
-      const user = req.user;
-  
-      
-      const internships = await Internship.find({ user: user._id });
-  
-      if (!internships || internships.length === 0) {
-        return res.status(400).json({ msg: "Intern not found" });
-      }
-  
-      
-      const userDomain = internships[0].domain;
-     console.log(userDomain)
-      const courses = await CourseSection.find({ domainId: userDomain })
-        
-  
-      if (!courses || courses.length === 0) {
-        return res.status(404).json({ msg: "No courses found for the domain" });
-      }
-  
-     
-      return res.status(201).json({ msg: "Courses fetched successfully", courses });
-  
+        const user = req.user;
+
+        // Fetch internships for the user
+        const internships = await Internship.find({ user: user._id });
+
+        if (!internships || internships.length === 0) {
+            return res.status(400).json({ msg: "Intern not found" });
+        }
+
+        const internship = internships[0];
+
+        // Validate and calculate current day
+        const { currentDay, startedAt, formattedDate, error } = calculateCurrentDay(internship.createdAt);
+
+        if (error) {
+            return res.status(400).json({ msg: error });
+        }
+
+        // Fetch courses for the domain
+        const userDomain = internship.domain;
+        const courses = await CourseSection.find({ domainId: userDomain });
+
+        if (!courses || courses.length === 0) {
+            return res.status(404).json({ msg: "No courses found for the domain" });
+        }
+
+        // Return courses and current day
+        return res.status(201).json({
+            msg: "Courses fetched successfully",
+            courses,
+            currentDay,
+            startedAt: formattedDate,
+        });
     } catch (err) {
-      console.log(err);
-      return res.status(500).json({ msg: "Internal Server Error" });
+        console.log(err);
+        return res.status(500).json({ msg: "Internal Server Error" });
     }
-  };
+};
 
 
 
