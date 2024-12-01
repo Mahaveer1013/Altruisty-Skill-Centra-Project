@@ -5,30 +5,14 @@ import image from "./assets/background.png";
 import api from "../../../../api/api";
 import {useAuth} from "../../../../AuthContext"
 const options = [
-  {
-    label: "15 Days",
-    imgSrc: image,
-    price: "199",
-    duration: 1,
-  },
-  {
-    label: "1 Month",
-    imgSrc: image,
-    price: "299",
-    duration: 2,
-  },
+ 
   {
     label: "2 Months",
     imgSrc: image,
     price: "399",
     duration: 3,
   },
-  {
-    label: "3 Months",
-    imgSrc: image,
-    price: "499",
-    duration: 4,
-  },
+  
 ];
 
 const CoursePlans = () => {

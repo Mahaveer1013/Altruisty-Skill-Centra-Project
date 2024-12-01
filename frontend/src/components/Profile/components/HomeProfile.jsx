@@ -59,10 +59,11 @@ function HomeProfile() {
      if(Resume.length > 0)
      {
       formData.append('Resume', JSON.stringify(Resume)); 
+      alert('resume uploaded')
      }
      else
      {
-      console.warn("No resume data found.");
+      alert("No resume data found.");
      }
       // Log formData to check values
       for (let [key, value] of formData.entries()) {
@@ -96,7 +97,11 @@ function HomeProfile() {
       SetProfile(res.data.ProfilePicture);
       SetResume(res.data.Resume || []);
     } catch (err) {
-      console.error("Error fetching profile details:", err);
+     
+        console.error("Error fetching profile details:", err);
+        setFlash(['Unable to fetch profile details. Please try again later.', 'error']);
+      
+      
     }
   };
 
@@ -336,7 +341,10 @@ function HomeProfile() {
                       <button className="bg-White text-Yellow font-bold
                        text-lg border-none ring-2 ring-white 
                        rounded-md w-[20%] h-[30px] max-sm:w-[30%]">
-                          <DriveFilePicker />
+                          <DriveFilePicker 
+                            Resume={Resume}
+                            setResume={SetResume}
+                           />
                        </button>
                     </div>
                     <div className="flex mt-[30px] w-[50%] max-sm:w-full max-sm:mt-[20px] md:ml-[20px] space-x-2 ">
@@ -346,7 +354,10 @@ function HomeProfile() {
                       </span>
                       <button className="bg-White text-Yellow font-bold text-lg border-none ring-2
                        ring-white rounded-md w-[20%] h-[30px] max-sm:w-[30%] flex justify-center items-center">
-                         <DriveFilePicker />
+                        <DriveFilePicker 
+                            Resume={Resume}
+                            setResume={SetResume}
+                           />
                        </button>
                     </div>
                     </div>

@@ -121,53 +121,55 @@ export const getInternDetails = async(req,res)=>
         return res.status(500).json({message:"Error finding intern details"})
     }
 }
-
-
-
 export const progressUpdate = async (req, res) => {
     try {
-      const { tasks } = req.body; 
-      console.log(tasks)
+      const { tasks } = req.body; // Tasks object containing updates
       const userId = req.user._id;
   
       // Find the user's internship
       const internship = await Internship.findOne({ user: userId });
-      console.log(internship)
       if (!internship) {
         return res.status(400).json({ msg: "Internship not found" });
       }
   
-     
-      const startDate = internship.StartedAt || internship.createdAt; 
-      const currentDate = new Date();
-      const diffTime = Math.abs(currentDate - startDate);
-      const currentDay = Math.ceil(diffTime / (1000 * 3600 * 24)); 
+      // Check if there is already an entry in the progress array
+      let progressEntry = internship.progress[0];
   
-     
-      const existingProgress = internship.progress.find((entry) => entry.day === currentDay);
-  
-      if (existingProgress) {
-       
-        existingProgress.file = { ...existingProgress.file, ...tasks };
-      } else {
-       
-        internship.progress.push({
-          day: currentDay,
-          file: tasks, 
-        });
+      if (!progressEntry) {
+        // If no entry exists, create an initial one
+        progressEntry = {
+          day: 1, // Initial placeholder day
+          file: {
+            task1: "",
+            task2: "",
+            task3: "",
+            task4: "",
+            task5: "",
+          },
+        };
+        internship.progress.push(progressEntry);
       }
   
-    
+      // Update only the tasks that are provided in the `tasks` object
+      for (const key in tasks) {
+        if (tasks[key]) {
+          progressEntry.file[key] = tasks[key];
+        }
+      }
+  
+      // Save the updated internship document
       await internship.save();
   
-      return res.status(201).json({ msg: "Progress updated successfully", progress: internship.progress });
+      return res.status(201).json({
+        msg: "Progress updated successfully",
+        progress: internship.progress,
+      });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json({ msg: "Internal server error" });
     }
   };
   
-
 
   const calculateCurrentDay = (createdAt) => {
     if (!createdAt || isNaN(new Date(createdAt))) {

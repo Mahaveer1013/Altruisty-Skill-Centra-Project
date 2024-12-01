@@ -136,7 +136,7 @@ function EditProfile({ editProfile, onClose, handleData1 }) {
                     </div>
                   </div>
 
-                  <div>
+                  {/* <div>
                     <label className="block text-sm font-medium">Change your profile picture</label>
                     <input
                       type="file"
@@ -152,7 +152,7 @@ function EditProfile({ editProfile, onClose, handleData1 }) {
                         />
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
                   <button type="submit" className="w-full bg-Yellow text-Darkblue p-2 rounded-md mt-4">
                     Save Changes

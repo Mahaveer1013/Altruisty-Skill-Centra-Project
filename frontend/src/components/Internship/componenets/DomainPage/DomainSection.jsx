@@ -174,16 +174,17 @@ const DomainSlider = () => {
 
     </div>
   
-    <div className='text-3xl text-center font-bold'>
+    {/* <div className='text-3xl text-center font-bold'>
       <h1>
         Trending Domains
       </h1>
-    </div>
-    <div className='md:p-10'>
+    </div> */}
+    
+    {/* <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -197,11 +198,11 @@ const DomainSlider = () => {
       ))}
     </Slider>
 
-    </div>
+    </div> */}
 
     
     
-    <div className='text-3xl text-center font-bold'>
+    {/* <div className='text-3xl text-center font-bold'>
       <h1>
         Explore Popular Domain
       </h1>
@@ -209,8 +210,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -224,10 +225,10 @@ const DomainSlider = () => {
       ))}
     </Slider>
 
-    </div>
+    </div> */}
 
     
-    <div className='text-3xl text-center font-bold'>
+    {/* <div className='text-3xl text-center font-bold'>
       <h1>
       Featured Domains
       </h1>
@@ -235,8 +236,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -251,9 +252,9 @@ const DomainSlider = () => {
     </Slider>
 
     </div>
-
+ */}
     
-    <div className='text-3xl text-center font-bold'>
+    {/* <div className='text-3xl text-center font-bold'>
       <h1>
       Top Domains to Explore
       </h1>
@@ -261,8 +262,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...settings} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -276,7 +277,7 @@ const DomainSlider = () => {
       ))}
     </Slider>
 
-    </div>
+    </div> */}
 
     </div>
 
@@ -284,15 +285,15 @@ const DomainSlider = () => {
     <div className='md:hidden'>
     
     
-    <div className='text-center p-2'>
+    {/* <div className='text-center p-2'>
         <h1 className='text-3xl font-bold'>In-Demand Domains</h1>
       </div>
       <div className='md:p-10 '>
     
     <Slider {...setting} className="flex items-center ">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -306,9 +307,9 @@ const DomainSlider = () => {
       ))}
     </Slider>
 
-    </div>
+    </div> */}
   
-    <div className='text-3xl p-2 text-center font-bold'>
+    {/* <div className='text-3xl p-2 text-center font-bold'>
       <h1>
         Trending Domains
       </h1>
@@ -316,8 +317,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -343,8 +344,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -369,8 +370,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -395,8 +396,8 @@ const DomainSlider = () => {
     <div className='md:p-10'>
     <Slider {...setting} className="flex items-center">
       {data.map((domain, index) => (
-        <div key={index} className="px-2  mb-10"> {/* Adding padding here controls the gap */}
-          <div className="w-full h-full"> {/* Ensures card maintains its size */}
+        <div key={index} className="px-2  mb-10"> 
+          <div className="w-full h-full"> 
             <DomainCard
              id={domain._id}
               title={domain.title}
@@ -410,7 +411,7 @@ const DomainSlider = () => {
       ))}
     </Slider>
 
-    </div>
+    </div> */}
  
       </div>
       

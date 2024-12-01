@@ -128,7 +128,7 @@ const GmailLogin = () => {
                     <span className="px-2 text-gray-500">Or</span>
                     <hr className="flex-grow border-gray-300" />
                 </div>
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                     <GoogleOAuthProvider clientId='286309906436-1mhnk8b933efuina84sro4q61prji0p4.apps.googleusercontent.com'>
                         <GoogleLogin
                             onSuccess={GoogleAuthSuccess}
@@ -137,7 +137,7 @@ const GmailLogin = () => {
                             }}
                         />
                     </GoogleOAuthProvider>
-                </div>
+                </div> */}
             </div>
         </div>
     );

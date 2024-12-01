@@ -20,9 +20,7 @@ const DomainCard = ({ id, title, description, registered, availableSlots,handleD
           Apply now
         </button>
            
-        <Link to={'/Internships/HomePage/InternDetails/DomainPage/CourseDetails'}><button className="bg-gray-700 text-gray-200 font-semibold py-2 px-4 rounded-md shadow-md">
-          View detail
-        </button></Link>
+        
       </div>
     </div>
   );

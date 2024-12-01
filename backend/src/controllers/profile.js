@@ -9,40 +9,63 @@ export const registerProfile = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const { username,PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, ProfileBase64, Resume } = req.body;
-
-    console.log('Request Body:', req.body);
-
-    // Prepare the fields to update
+    const { username, PhoneNumber, CollegeName, github, LinkedIn, Portfolio, domain, ProfileBase64, Resume } = req.body;
     const updateFields = {};
-    if(username) updateFields.username = username;
+
+    if (username) updateFields.username = username;
     if (PhoneNumber) updateFields.phone_number = PhoneNumber;
     if (CollegeName) updateFields.college = CollegeName;
     if (github) updateFields.github_link = github;
     if (LinkedIn) updateFields.linkedIn_link = LinkedIn;
-    if (Portfolio) updateFields.Portfolio = Portfolio;  // Ensure field names match your schema
+    if (Portfolio) updateFields.Portfolio = Portfolio;
     if (domain) updateFields.Interest = domain;
 
     if (ProfileBase64) {
-      // Handle base64 image data if available
       updateFields.ProfilePicture = ProfileBase64;
     }
 
-    console.log('Update Fields:', updateFields);
-
     const updateOperations = { $set: updateFields };
 
-    // If Resume is provided and is not empty, push it to the Resume array
     if (Resume) {
-      const resumeArray = JSON.parse(Resume); // Parse JSON string to array
-      if (Array.isArray(resumeArray) && resumeArray.length > 0) {
-        updateOperations.$push = { Resume: { $each: resumeArray } };
+      let resumeArray;
+      try {
+        console.log('Incoming Resume Data:', Resume);  // Log incoming Resume data
+    
+        // Parse if Resume is a string, otherwise use it as is
+        resumeArray = Array.isArray(Resume) ? Resume : JSON.parse(Resume);
+      } catch (error) {
+        return res.status(400).json({ message: "Invalid Resume JSON format", error: error.message });
       }
+    
+      // Map the Resume data to match your schema
+      const mappedResumeArray = resumeArray.map(doc => ({
+        name: doc.name,  // Match your schema's 'name'
+        url: doc.url,    // 'url' already matches
+        mimeType: doc.mimeType,  // 'mimeType' matches
+        size: doc.sizeBytes,  // Map 'sizeBytes' to 'size'
+        driveId: doc.id,  // Map 'id' to 'driveId'
+        userId: userId  // Assuming 'userId' comes from the logged-in user
+      }));
+    
+      console.log('Mapped Resume Array:', mappedResumeArray);  // Log mapped Resume array for validation
+    
+      // Ensure the mapped array is valid
+      const isValid = mappedResumeArray.every(doc => {
+        const valid = doc.name && doc.url && doc.mimeType  && doc.driveId ;
+        if (!valid) {
+          console.log('Invalid Resume Object:', doc);  // Log the invalid object for debugging
+        }
+        return valid;
+      });
+    
+      if (!isValid) {
+        return res.status(400).json({ message: "Invalid Resume data" });
+      }
+    
+      updateOperations.$push = { Resume: { $each: mappedResumeArray } };
     }
+    
 
-    console.log('Update Operations:', updateOperations);
-
-    // Update user profile
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       updateOperations,
@@ -58,5 +81,3 @@ export const registerProfile = async (req, res) => {
     return res.status(500).json({ message: "Error updating profile", error: error.message });
   }
 };
-
-

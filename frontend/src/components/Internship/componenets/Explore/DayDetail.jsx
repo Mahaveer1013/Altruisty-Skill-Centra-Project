@@ -45,16 +45,21 @@ const DayDetail = () => {
     try {
       const res = await api.get('/getMyIntern');
       if (res.status === 201) {
-        console.log(res.data);
-        const course = res.data.courses[0]; 
-        SetSections(course.sections); 
-        SetDay(res.data.currentDay)
-        SetTitle(course.title); 
+        console.log(res.data); 
+        const course = res.data.courses?.[0]; 
+        if (course) {
+          SetSections(course.sections); 
+          SetDay(res.data.currentDay);
+          SetTitle(course.title); 
+        } else {
+          console.error("Course data is missing.");
+        }
       }
     } catch (err) {
-      console.error(err);
+      console.error("API call failed:", err);
     }
   };
+  
   
   
   useEffect(() => {
@@ -93,7 +98,7 @@ const DayDetail = () => {
       description: "Welcome to Day 2! Today we will dive deeper...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       videos: ["Video 3", "Video 4"],
     },
-    // Add more days as needed
+
   };
 
   const dayContent = content[day] || {
@@ -128,21 +133,20 @@ const DayDetail = () => {
       <h1 className="text-2xl font-bold mb-4">Sections</h1>
 
       {/* Render section list */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {sections ? (sections.map((section) => (
-          <div
-            key={section.id}
-            className="p-4 border rounded-lg shadow cursor-pointer hover:bg-gray-100"
-            onClick={() => handleSectionClick(section.id)}
-          >
-            <h2 className="text-xl font-semibold">{section.title}</h2>
-          </div>
-        )) 
-      ) : (
-        <h1> Your did not registered any training Internship</h1>
-      
-        )}
-      </div>
+      {sections && sections.length > 0 ? (
+  sections.map((section) => (
+    <div
+      key={section.id}
+      className="p-4 border rounded-lg shadow cursor-pointer hover:bg-gray-100"
+      onClick={() => handleSectionClick(section.id)}
+    >
+      <h2 className="text-xl font-semibold">{section.title}</h2>
+    </div>
+  ))
+) : (
+  <h1>You did not register for any training Internship</h1>
+)}
+
 
       {/* Render selected section details */}
       {selectedSection && (
@@ -151,7 +155,9 @@ const DayDetail = () => {
           <p className="mt-4">{selectedSection.description}</p>
         </div>
       )}
+    
     </div>
+   
        </div>
     );
   };
@@ -199,6 +205,7 @@ const DayDetail = () => {
         ))}
       </ul> */}
       </div>
+      <ParentComponent />
     </div>
     {
       sections ? <DayUpload /> :""
