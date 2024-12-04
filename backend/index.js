@@ -66,7 +66,7 @@ io.use(socketLoginRequired);
 socketRouter(io);
 
 // Connect to MongoDB and start the server
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     server.listen(5000, async() => {
       console.log('Server is running on port http://localhost:5000');

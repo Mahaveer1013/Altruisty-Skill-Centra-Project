@@ -327,8 +327,7 @@ function HomeProfile() {
                         {/* <input type="text" className="outline-none rounded-md w-full" placeholder="Enter your project repo link" /> */}
                       </span>
                       <span className="w-[45%] max-sm:w-[90%]">
-                       <p className="text-white text-lg font-semibold">website Link:</p>
-                       <a href={project.driveLink} className="text-Yellow text-lg font-semibold hover:underline">website-clickMe</a>
+                       
                         {/* <input type="text" className="outline-none rounded-md w-full " placeholder="provide if you have deployed" /> */}
                       </span>
                     </div>
