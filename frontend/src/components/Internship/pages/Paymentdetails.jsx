@@ -67,9 +67,9 @@ export default function Paymentdetails() {
   return (
     <div className="bg-[#FAF2BE] mx-auto h-full h-screen p-10 ">
       <div className="mb-4">
-        <select
+       {/*  <select
           value={filterStatus}
-         /*  onChange={handleStatusChange} */
+         onChange={handleStatusChange} 
           className="p-2 border border-gray-300 rounded"
         >
           <option value="All">All</option>
@@ -77,7 +77,7 @@ export default function Paymentdetails() {
           <option value="Requested">Requested</option>
           <option value="Pending">Pending</option>
           <option value="Completed">Completed</option>
-        </select>
+        </select> */}
       </div>
 
       <table className="w-full h-fit border border-gray-300">
@@ -96,10 +96,12 @@ export default function Paymentdetails() {
         <tbody>
           {filteredServices.map((payment, index) => (
             <tr key={payment._id} className="bg-dark-blue text-white">
-              <td className="py-2 px-4 border-b text-center">{index + 1}</td>
+               <td className="py-2 px-4 border-b text-center">{index + 1}</td>
+               <td className="py-2 px-4 border-b text-center text-justify pl-12"> {payment.user && payment.user.email ? payment.user.email : ''}</td>
+             
               <td className="py-2 px-4 border-b text-center text-justify pl-12"> {payment.user && payment.user.email ? payment.user.email : ''}</td>
               {/* <td className="py-2 px-4 border-b text-center text-justify pl-16">{payment.user.email}</td> */}
-              <td className="py-2 px-4 border-b text-center text-justify pl-12">{payment.domain?.title}</td>
+              <td className="py-2 px-4 border-b text-center text-justify pl-12">{payment.role}</td>
               <td className="py-2 px-4 border-b text-center text-light-yellow">
   {payment.internshipType === 1 ? '199' : payment.internshipType === 2 ? '299' : payment.internshipType === 3 ? '399' : '499'}
 </td>

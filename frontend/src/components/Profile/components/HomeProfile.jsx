@@ -335,30 +335,26 @@ function HomeProfile() {
                     <div className="flex w-full justify-around max-sm:flex-col">
                     <div className="flex w-[50%] mt-[30px] max-sm:mt-[20px] max-sm:w-full md:ml-[20px] space-x-2 ">
                       <span className="flex-col">
-                        <p className="text-white text-lg font-bold">Working Model:{project.ProjectLink}</p>
+                      <p className="text-white text-lg font-bold">
+  Github: <a href={project.ProjectLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+    {project.ProjectLink}
+  </a>
+</p>
                         <p className="text-white">(website video link)</p>
                       </span>
-                      <button className="bg-White text-Yellow font-bold
-                       text-lg border-none ring-2 ring-white 
-                       rounded-md w-[20%] h-[30px] max-sm:w-[30%]">
-                          <DriveFilePicker 
-                            Resume={Resume}
-                            setResume={SetResume}
-                           />
-                       </button>
+                      
                     </div>
                     <div className="flex mt-[30px] w-[50%] max-sm:w-full max-sm:mt-[20px] md:ml-[20px] space-x-2 ">
                       <span className="flex-col">
-                      <p className="text-white text-lg font-bold">Proposal:{project.ProjectGithub}</p>
+                      <p className="text-white text-lg font-bold">
+  Proposal: <a href={project.ProjectGithub} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+    {project.ProjectGithub}
+  </a>
+</p>
+
                       {/* <p className="text-white">(view the pdf)</p> */}
                       </span>
-                      <button className="bg-White text-Yellow font-bold text-lg border-none ring-2
-                       ring-white rounded-md w-[20%] h-[30px] max-sm:w-[30%] flex justify-center items-center">
-                        <DriveFilePicker 
-                            Resume={Resume}
-                            setResume={SetResume}
-                           />
-                       </button>
+                      
                     </div>
                     </div>
                 </div>
