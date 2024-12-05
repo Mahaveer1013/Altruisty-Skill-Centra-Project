@@ -1,7 +1,11 @@
 
 import Domain from "../models/domain.model.js";
 import CourseSection from "../models/courseSection.js";
-import data from '../../data.json' assert { type: 'json' };
+const data = await import('../../data.json', {
+    assert: { type: 'json' }
+  }).then(module => module.default);
+  
+
 
 console.log(data);
 
