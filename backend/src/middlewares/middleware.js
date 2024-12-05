@@ -132,15 +132,16 @@ const encryptResponse = (req, res, next) => {
   res.send = function (body) {
     if (!req.enc && req.is('application/octet-stream')) {
       console.log('response:', body);
-      
+
       try {
         if (body !== null) {
-          try {
-            body= CryptoJS.AES.encrypt(body, SECRET_KEY).toString();
-          } catch (error) {
-            console.error('Error during value encryption:', error);
-            throw new Error('Encryption failed');
+          // Ensure the body is a string before encryption
+          if (typeof body !== 'string') {
+            body = JSON.stringify(body); // Convert non-string data to JSON string
           }
+
+          // Encrypt the body
+          body = CryptoJS.AES.encrypt(body, SECRET_KEY).toString();
         }
         req.enc = true;
       } catch (error) {
@@ -148,10 +149,12 @@ const encryptResponse = (req, res, next) => {
         return res.status(500).json({ message: 'Internal server error' });
       }
     }
+
     return originalSend.call(this, body);
   };
 
   next();
 };
+
 
 export { loginRequired, checkIsAdmin, decryptRequest, encryptResponse };
