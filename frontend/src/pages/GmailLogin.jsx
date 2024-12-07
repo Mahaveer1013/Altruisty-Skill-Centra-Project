@@ -22,43 +22,57 @@ const GmailLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email,password)
+        console.log(email, password);  // For debugging purposes (can be removed later)
+    
+        // Check if it's a signup process
         if (isSignup) {
             if (password !== confirmPassword) {
                 setFlash(['Passwords do not match', 'error']);
                 return;
             }
-            await encryptApi.post('/credential-signup', {
-                email: email,
-                password: password,
-            }).then(() => {
-                setIsSignup(false)
-                setFlash(['Success, Login Now !', 'success']);
-               
-            }).catch((error) => {
-                console.log(error)
-                if (error.message==="Request failed with status code 400")
-                    {
-                   // Server responded with a status other than 2xx
-                   setFlash(["Email Id already exists" || 'An error occurred', 'error']);
-               }
-            })
+    
+            try {
+                await encryptApi.post('/credential-signup', {
+                    email: email,
+                    password: password,
+                });
+                setIsSignup(false);
+                setFlash(['Success, Login Now!', 'success']);
+            } catch (error) {
+                console.error(error);  // Log the error for debugging
+                if (error.response && error.response.status === 400) {
+                    // Handle specific 400 error (Email already exists)
+                    setFlash(['Email ID already exists', 'error']);
+                } else {
+                    // For other errors (network issues, etc.)
+                    setFlash(['An error occurred, please try again later', 'error']);
+                }
+            }
         } else {
-            await encryptApi.post('/credential-login', {
-                email: email,
-                password: password,
-            }).then(() => {
+            // Handle login
+            try {
+                await encryptApi.post('/credential-login', {
+                    email: email,
+                    password: password,
+                });
                 checkUser();
                 setTimeout(() => {
-                    navigate('/profile');
+                    navigate('/profile');  // Redirect to the profile page
                 }, 100);
                 setFlash(['Logged In Successfully', 'success']);
-            }).catch((error) => {
-                
-                setFlash([error.response.data.message, 'error']);
-            })
+            } catch (error) {
+                console.error(error);  // Log the error for debugging
+                // Check if error response is available
+                if (error.response) {
+                    setFlash([error.response.data.message, 'error']);
+                } else {
+                    // Handle errors without a response (network issues, etc.)
+                    setFlash(['An error occurred, please try again later', 'error']);
+                }
+            }
         }
     };
+    
 
     const GoogleAuthSuccess = async (response) => {
         try {
