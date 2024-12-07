@@ -23,8 +23,8 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(encryptResponse);
-app.use(decryptRequest);
+/* app.use(decryptRequest);
+app.use(encryptResponse); */
 
 // CORS configuration for Express
 app.use(cors({

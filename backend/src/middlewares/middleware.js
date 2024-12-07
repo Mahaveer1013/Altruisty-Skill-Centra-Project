@@ -101,28 +101,39 @@ const checkIsAdmin = async (req, res, next) => {
 // Middleware to decrypt request data
 const decryptRequest = (req, res, next) => {
   if (req.is('application/octet-stream')) {
-      let data = '';
-      req.setEncoding('utf8');
-      req.on('data', (chunk) => {
-          data += chunk;
-      });
-      req.on('end', () => {
-          try {
-              const decryptedBytes = CryptoJS.AES.decrypt(data, SECRET_KEY);
-              const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
-              req.body = JSON.parse(decryptedText);
-              next();
-          } catch (error) {
-              res.status(400).json({
-                  success: false,
-                  message: 'Failed to decrypt the value or it might not be encrypted.',
-              });
-          }
-      });
+    let data = '';
+    req.setEncoding('utf8');
+    req.on('data', (chunk) => {
+      data += chunk;
+    });
+    req.on('end', () => {
+      try {
+        // Check if data is valid before decryption
+        if (!data || typeof data !== 'string') {
+          throw new Error('Invalid data format');
+        }
+
+        const decryptedBytes = CryptoJS.AES.decrypt(data, SECRET_KEY);
+        const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
+
+        if (!decryptedText) {
+          throw new Error('Decryption failed');
+        }
+
+        req.body = JSON.parse(decryptedText);
+        next();
+      } catch (error) {
+        res.status(400).json({
+          success: false,
+          message: 'Failed to decrypt the value or it might not be encrypted.',
+        });
+      }
+    });
   } else {
-      next();
+    next();
   }
 };
+
 
 
 // Middleware to encrypt response data
@@ -130,24 +141,17 @@ const encryptResponse = (req, res, next) => {
   const originalSend = res.send;
 
   res.send = function (body) {
-    if (!req.enc && req.is('application/octet-stream')) {
-      console.log('response:', body);
-
-      try {
-        if (body !== null) {
-          // Ensure the body is a string before encryption
-          if (typeof body !== 'string') {
-            body = JSON.stringify(body); // Convert non-string data to JSON string
-          }
-
-          // Encrypt the body
-          body = CryptoJS.AES.encrypt(body, SECRET_KEY).toString();
+    try {
+      if (!req.enc && req.is('application/octet-stream')) {
+        if (typeof body !== 'string') {
+          body = JSON.stringify(body); // Ensure it's a string
         }
-        req.enc = true;
-      } catch (error) {
-        console.error('Error during response encryption:', error);
-        return res.status(500).json({ message: 'Internal server error' });
+
+        body = CryptoJS.AES.encrypt(body, SECRET_KEY).toString();
       }
+    } catch (error) {
+      console.error('Error during response encryption:', error);
+      return originalSend.call(this, JSON.stringify({ message: 'Encryption failed' }));
     }
 
     return originalSend.call(this, body);
@@ -155,6 +159,7 @@ const encryptResponse = (req, res, next) => {
 
   next();
 };
+
 
 
 export { loginRequired, checkIsAdmin, decryptRequest, encryptResponse };

@@ -20,10 +20,11 @@ export const AuthProvider = ({ children }) => {
   }
   
   useEffect(() => {
-    if (!isLoggedIn) {
+   
+    if (document.cookie.includes('accessToken') || document.cookie.includes('refreshToken')) {
       checkUser();
     }
-  }, [isLoggedIn]);
+  }, []);
 
 
   const value = { isLoggedIn, user, setUser, setIsLoggedIn, isSidebar, setIsSidebar, flash, setFlash, checkUser }
