@@ -22,6 +22,7 @@ const GmailLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(email,password)
         if (isSignup) {
             if (password !== confirmPassword) {
                 setFlash(['Passwords do not match', 'error']);
