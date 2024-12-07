@@ -118,11 +118,12 @@ const GmailLogin = () => {
                         <input
                             className="border border-[#697381] p-3 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-[#697381]"
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder="Confirm Password one time"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
+                        
                     )}
                     <button
                         type="submit"
