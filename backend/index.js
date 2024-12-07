@@ -24,6 +24,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 app.use(bodyParser.json())
 /* app.use(decryptRequest);
 app.use(encryptResponse); */
