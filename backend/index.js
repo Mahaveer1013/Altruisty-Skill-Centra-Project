@@ -16,6 +16,7 @@ import UserInternRoutes from "./src/routes/userIntern.js"
 import AdminRoutes from "./src/routes/internship.js"
 import ProjectRoutes from "./src/routes/projects.js"
 import courseRoutes from "./src/routes/course.js"
+import bodyParser from 'body-parser';
 // Initialize environment variables
 dotenv.config();
 
@@ -23,6 +24,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(bodyParser.json())
 /* app.use(decryptRequest);
 app.use(encryptResponse); */
 
