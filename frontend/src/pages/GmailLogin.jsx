@@ -114,6 +114,12 @@ const GmailLogin = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    <input
+                        className="border border-[#697381] p-3 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-[#697381]"
+                        type="password"
+                        placeholder="Password"
+                        
+                    />
                     {isSignup && (
                         <input
                             className="border border-[#697381] p-3 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-[#697381]"
