@@ -22,8 +22,9 @@ const GmailLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('form submitted')
         console.log(email, password);  // For debugging purposes (can be removed later)
-    
+        
         // Check if it's a signup process
         if (isSignup) {
             if (password !== confirmPassword) {
@@ -39,17 +40,17 @@ const GmailLogin = () => {
                 setIsSignup(false);
                 setFlash(['Success, Login Now!', 'success']);
             } catch (error) {
-                console.error(error);  // Log the error for debugging
+                console.error(error);  
                 if (error.response && error.response.status === 400) {
-                    // Handle specific 400 error (Email already exists)
+                    
                     setFlash(['Email ID already exists', 'error']);
                 } else {
-                    // For other errors (network issues, etc.)
+                   
                     setFlash(['An error occurred, please try again later', 'error']);
                 }
             }
         } else {
-            // Handle login
+            
             try {
                 await encryptApi.post('/credential-login', {
                     email: email,
@@ -57,16 +58,16 @@ const GmailLogin = () => {
                 });
                 checkUser();
                 setTimeout(() => {
-                    navigate('/profile');  // Redirect to the profile page
+                    navigate('/profile');  
                 }, 100);
                 setFlash(['Logged In Successfully', 'success']);
             } catch (error) {
-                console.error(error);  // Log the error for debugging
-                // Check if error response is available
+                console.error(error); 
+                
                 if (error.response) {
                     setFlash([error.response.data.message, 'error']);
                 } else {
-                    // Handle errors without a response (network issues, etc.)
+                    
                     setFlash(['An error occurred, please try again later', 'error']);
                 }
             }
